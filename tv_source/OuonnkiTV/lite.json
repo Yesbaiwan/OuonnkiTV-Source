@@ -7,24 +7,10 @@
     "isEnabled": true
   },
   {
-    "id": "U酷影视",
-    "name": "U酷影视",
-    "url": "https://api.ukuapi88.com/api.php/provide/vod",
-    "detailUrl": "https://api.ukuapi88.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
     "id": "量子影视",
     "name": "量子影视",
     "url": "https://cj.lziapi.com/api.php/provide/vod",
     "detailUrl": "https://cj.lziapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "百度云zy",
-    "name": "百度云zy",
-    "url": "https://api.apibdzy.com/api.php/provide/vod",
-    "detailUrl": "https://api.apibdzy.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -42,24 +28,10 @@
     "isEnabled": true
   },
   {
-    "id": "最大点播",
-    "name": "最大点播",
-    "url": "https://zuidazy.me/api.php/provide/vod",
-    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "暴风资源",
-    "name": "暴风资源",
-    "url": "https://bfzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "艾旦影视",
-    "name": "艾旦影视",
-    "url": "https://lovedan.net/api.php/provide/vod",
-    "detailUrl": "https://lovedan.net/api.php/provide/vod",
+    "id": "百度云zy",
+    "name": "百度云zy",
+    "url": "https://api.apibdzy.com/api.php/provide/vod",
+    "detailUrl": "https://api.apibdzy.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -70,6 +42,20 @@
     "isEnabled": true
   },
   {
+    "id": "飘零资源",
+    "name": "飘零资源",
+    "url": "https://p2100.net/api.php/provide/vod",
+    "detailUrl": "https://p2100.net/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "U酷影视",
+    "name": "U酷影视",
+    "url": "https://api.ukuapi88.com/api.php/provide/vod",
+    "detailUrl": "https://api.ukuapi88.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
     "id": "卧龙资源",
     "name": "卧龙资源",
     "url": "https://wolongzyw.com/api.php/provide/vod",
@@ -77,17 +63,10 @@
     "isEnabled": true
   },
   {
-    "id": "红牛资源",
-    "name": "红牛资源",
-    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "飘零资源",
-    "name": "飘零资源",
-    "url": "https://p2100.net/api.php/provide/vod",
-    "detailUrl": "https://p2100.net/api.php/provide/vod",
+    "id": "最大点播",
+    "name": "最大点播",
+    "url": "https://zuidazy.me/api.php/provide/vod",
+    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -98,10 +77,31 @@
     "isEnabled": true
   },
   {
+    "id": "红牛资源",
+    "name": "红牛资源",
+    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
+    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
     "id": "最大资源",
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
     "detailUrl": "https://api.zuidapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "艾旦影视",
+    "name": "艾旦影视",
+    "url": "https://lovedan.net/api.php/provide/vod",
+    "detailUrl": "https://lovedan.net/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "暴风资源",
+    "name": "暴风资源",
+    "url": "https://bfzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
     "isEnabled": true
   }
 ]
