@@ -350,6 +350,7 @@
       "isAdult": true
     },
     "xzytv.com": {
+      "_comment": " 403 Forbidden ",
       "name": "幸资源",
       "api": "https://xzybb2.com/api.php/provide/vod",
       "detail": "https://xzytv.com",
