@@ -205,7 +205,7 @@
       "isAdult": false
     },
     "1080zyk4.com": {
-      "_comment": "JSON 里所有中文字符为 Unicode 编码",
+      "_comment": "无法搜索",
       "name": "优质资源",
       "api": "https://api.yzzy-api.com/inc/apijson.php",
       "detail": "https://1080zyk4.com",
@@ -349,13 +349,6 @@
       "detail": "https://shayuapi.com",
       "isAdult": true
     },
-    "xzytv.com": {
-      "_comment": " 403 Forbidden ",
-      "name": "幸资源",
-      "api": "https://xzybb2.com/api.php/provide/vod",
-      "detail": "https://xzytv.com",
-      "isAdult": true
-    },
     "doudouzy.com": {
       "_comment": " 不稳定 ",
       "name": "豆豆资源",
@@ -421,21 +414,21 @@
       "isAdult": true
     },
     "www.msnii.com": {
-      "_comment": "JSON 里所有中文字符为 Unicode 编码",
+      "_comment": "无法搜索",
       "name": "美少女",
       "api": "https://www.msnii.com/api/json.php",
       "detail": "https://www.msnii.com",
       "isAdult": true
     },
     "www.pgxdy.com": {
-      "_comment": "JSON 里所有中文字符为 Unicode 编码",
+      "_comment": "无法搜索",
       "name": "黄AVZY",
       "api": "https://www.pgxdy.com/api/json.php",
       "detail": "https://www.pgxdy.com",
       "isAdult": true
     },
     "www.kxgav.com": {
-      "_comment": "JSON 里所有中文字符为 Unicode 编码",
+      "_comment": "无法搜索",
       "name": "白嫖资源",
       "api": "https://www.kxgav.com/api/json.php",
       "detail": "https://www.kxgav.com",
@@ -456,7 +449,7 @@
       "isAdult": true
     },
     "semaozy1.com": {
-      "_comment": "JSON 里所有中文字符为 Unicode 编码",
+      "_comment": "无法搜索",
       "name": "色猫资源",
       "api": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
       "detail": "https://semaozy1.com",
