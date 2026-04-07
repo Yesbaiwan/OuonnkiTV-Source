@@ -7,17 +7,17 @@
     "isEnabled": true
   },
   {
-    "id": "www-hongniuzy-com",
-    "name": "红牛资源",
-    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
     "id": "wujinzy-com",
     "name": "无尽影视",
     "url": "https://api.wujinapi.com/api.php/provide/vod",
     "detailUrl": "https://api.wujinapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "www-hongniuzy-com",
+    "name": "红牛资源",
+    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
+    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -28,66 +28,10 @@
     "isEnabled": true
   },
   {
-    "id": "didizy-com",
-    "name": "滴滴资源",
-    "url": "https://api.ddapi.cc/api.php/provide/vod",
-    "detailUrl": "https://api.ddapi.cc/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
     "id": "www-pgxdy-com",
     "name": "黄AVZY",
     "url": "https://www.pgxdy.com/api/json.php",
     "detailUrl": "https://www.pgxdy.com/api/json.php",
-    "isEnabled": true
-  },
-  {
-    "id": "zy-jinchancaiji-com",
-    "name": "金蝉影视",
-    "url": "https://zy.jinchancaiji.com/api.php/provide/vod",
-    "detailUrl": "https://zy.jinchancaiji.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "shayuapi-com",
-    "name": "鲨鱼资源",
-    "url": "https://shayuapi.com/api.php/provide/vod",
-    "detailUrl": "https://shayuapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "www-ryzyw-com",
-    "name": "如意资源",
-    "url": "https://cj.rycjapi.com/api.php/provide/vod",
-    "detailUrl": "https://cj.rycjapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "souavzyw-com",
-    "name": "souavZY",
-    "url": "https://api.souavzyw.net/api.php/provide/vod",
-    "detailUrl": "https://api.souavzyw.net/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "lovedan-net",
-    "name": "艾旦影视",
-    "url": "https://lovedan.net/api.php/provide/vod",
-    "detailUrl": "https://lovedan.net/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "doudouzy-com",
-    "name": "豆豆资源",
-    "url": "https://api.douapi.cc/api.php/provide/vod",
-    "detailUrl": "https://api.douapi.cc/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "91md-me",
-    "name": "麻豆视频",
-    "url": "https://91md.me/api.php/provide/vod",
-    "detailUrl": "https://91md.me/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -98,87 +42,10 @@
     "isEnabled": true
   },
   {
-    "id": "jszyapi-com",
-    "name": "极速资源",
-    "url": "https://jszyapi.com/api.php/provide/vod",
-    "detailUrl": "https://jszyapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "semaozy1-com",
-    "name": "色猫资源",
-    "url": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
-    "detailUrl": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "lbapi9-com",
-    "name": "乐播资源",
-    "url": "https://lbapi9.com/api.php/provide/vod",
-    "detailUrl": "https://lbapi9.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "www-maoyanzy-com",
-    "name": "猫眼资源",
-    "url": "https://api.maoyanapi.top/api.php/provide/vod",
-    "detailUrl": "https://api.maoyanapi.top/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "aosikazy-com",
-    "name": "奥斯卡",
-    "url": "https://aosikazy.com/api.php/provide/vod",
-    "detailUrl": "https://aosikazy.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "api-bwzym3u8-com",
-    "name": "百万资源",
-    "url": "https://api.bwzyz.com/api.php/provide/vod",
-    "detailUrl": "https://api.bwzyz.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
     "id": "ikunzy-com",
     "name": "iKun资源",
     "url": "https://ikunzyapi.com/api.php/provide/vod",
     "detailUrl": "https://ikunzyapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "apiyutu-com",
-    "name": "玉兔资源",
-    "url": "https://apiyutu.com/api.php/provide/vod",
-    "detailUrl": "https://apiyutu.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "heiliaozy-cc",
-    "name": "黑料资源",
-    "url": "https://www.heiliaozyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.heiliaozyapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "xingba111-com",
-    "name": "杏吧资源",
-    "url": "https://xingba222.com/api.php/provide/vod",
-    "detailUrl": "https://xingba222.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "p2100-net",
-    "name": "飘零资源",
-    "url": "https://p2100.net/api.php/provide/vod",
-    "detailUrl": "https://p2100.net/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "xiaojizy-live",
-    "name": "小鸡资源",
-    "url": "https://api.xiaojizy.live/provide/vod",
-    "detailUrl": "https://api.xiaojizy.live/provide/vod",
     "isEnabled": true
   },
   {
@@ -189,59 +56,17 @@
     "isEnabled": true
   },
   {
-    "id": "www-jingpinx-com",
-    "name": "精品资源",
-    "url": "https://www.jingpinx.com/api.php/provide/vod",
-    "detailUrl": "https://www.jingpinx.com/api.php/provide/vod",
+    "id": "p2100-net",
+    "name": "飘零资源",
+    "url": "https://p2100.net/api.php/provide/vod",
+    "detailUrl": "https://p2100.net/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "zuidazy-co",
-    "name": "最大点播",
-    "url": "https://zuidazy.me/api.php/provide/vod",
-    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "bdzy1-com",
-    "name": "百度云zy",
-    "url": "https://api.apibdzy.com/api.php/provide/vod",
-    "detailUrl": "https://api.apibdzy.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "fhapi9-com",
-    "name": "番号资源",
-    "url": "http://fhapi9.com/api.php/provide/vod",
-    "detailUrl": "http://fhapi9.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "www-huyaapi-com",
-    "name": "虎牙资源",
-    "url": "https://www.huyaapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.huyaapi.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "www-subozy-com",
-    "name": "速播资源",
-    "url": "https://subocaiji.com/api.php/provide/vod",
-    "detailUrl": "https://subocaiji.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "lbapiby-com",
-    "name": "AIvin",
-    "url": "http://lbapiby.com/api.php/provide/vod",
-    "detailUrl": "http://lbapiby.com/api.php/provide/vod",
-    "isEnabled": true
-  },
-  {
-    "id": "apilj-com",
-    "name": "辣椒资源",
-    "url": "https://apilj.com/api.php/provide/vod",
-    "detailUrl": "https://apilj.com/api.php/provide/vod",
+    "id": "didizy-com",
+    "name": "滴滴资源",
+    "url": "https://api.ddapi.cc/api.php/provide/vod",
+    "detailUrl": "https://api.ddapi.cc/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -252,24 +77,66 @@
     "isEnabled": true
   },
   {
-    "id": "bfzy-tv",
-    "name": "暴风资源",
-    "url": "https://bfzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
+    "id": "xiaojizy-live",
+    "name": "小鸡资源",
+    "url": "https://api.xiaojizy.live/provide/vod",
+    "detailUrl": "https://api.xiaojizy.live/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "1080zyk4-com",
-    "name": "优质资源",
-    "url": "https://api.yzzy-api.com/inc/apijson.php",
-    "detailUrl": "https://api.yzzy-api.com/inc/apijson.php",
+    "id": "doudouzy-com",
+    "name": "豆豆资源",
+    "url": "https://api.douapi.cc/api.php/provide/vod",
+    "detailUrl": "https://api.douapi.cc/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "155zy2-com",
-    "name": "155-资源",
-    "url": "https://155api.com/api.php/provide/vod",
-    "detailUrl": "https://155api.com/api.php/provide/vod",
+    "id": "jszyapi-com",
+    "name": "极速资源",
+    "url": "https://jszyapi.com/api.php/provide/vod",
+    "detailUrl": "https://jszyapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "apilsbzy1-com",
+    "name": "老色逼",
+    "url": "https://apilsbzy1.com/api.php/provide/vod",
+    "detailUrl": "https://apilsbzy1.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "www-jingpinx-com",
+    "name": "精品资源",
+    "url": "https://www.jingpinx.com/api.php/provide/vod",
+    "detailUrl": "https://www.jingpinx.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "91md-me",
+    "name": "麻豆视频",
+    "url": "https://91md.me/api.php/provide/vod",
+    "detailUrl": "https://91md.me/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "souavzyw-com",
+    "name": "souavZY",
+    "url": "https://api.souavzyw.net/api.php/provide/vod",
+    "detailUrl": "https://api.souavzyw.net/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "apiyutu-com",
+    "name": "玉兔资源",
+    "url": "https://apiyutu.com/api.php/provide/vod",
+    "detailUrl": "https://apiyutu.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "semaozy1-com",
+    "name": "色猫资源",
+    "url": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
+    "detailUrl": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -280,17 +147,17 @@
     "isEnabled": true
   },
   {
-    "id": "thzy8-me",
-    "name": "桃花资源",
-    "url": "https://thzy1.me/api.php/provide/vod",
-    "detailUrl": "https://thzy1.me/api.php/provide/vod",
+    "id": "bdzy1-com",
+    "name": "百度云zy",
+    "url": "https://api.apibdzy.com/api.php/provide/vod",
+    "detailUrl": "https://api.apibdzy.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "mtzy-me",
-    "name": "茅台资源",
-    "url": "https://caiji.maotaizy.cc/api.php/provide/vod",
-    "detailUrl": "https://caiji.maotaizy.cc/api.php/provide/vod",
+    "id": "bfzy-tv",
+    "name": "暴风资源",
+    "url": "https://bfzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -301,6 +168,20 @@
     "isEnabled": true
   },
   {
+    "id": "api-bwzym3u8-com",
+    "name": "百万资源",
+    "url": "https://api.bwzyz.com/api.php/provide/vod",
+    "detailUrl": "https://api.bwzyz.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "www-maoyanzy-com",
+    "name": "猫眼资源",
+    "url": "https://api.maoyanapi.top/api.php/provide/vod",
+    "detailUrl": "https://api.maoyanapi.top/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
     "id": "cj-lzcaiji-com",
     "name": "量子资源",
     "url": "https://cj.lzcaiji.com/api.php/provide/vod",
@@ -308,31 +189,73 @@
     "isEnabled": true
   },
   {
-    "id": "hsckzy-xyz",
-    "name": "黄色仓库",
-    "url": "https://hsckzy.xyz/api.php/provide/vod",
-    "detailUrl": "https://hsckzy.xyz/api.php/provide/vod",
+    "id": "lovedan-net",
+    "name": "艾旦影视",
+    "url": "https://lovedan.net/api.php/provide/vod",
+    "detailUrl": "https://lovedan.net/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "iqiyizyapi-com",
-    "name": "爱奇艺",
-    "url": "https://iqiyizyapi.com/api.php/provide/vod",
-    "detailUrl": "https://iqiyizyapi.com/api.php/provide/vod",
+    "id": "zuidazy-co",
+    "name": "最大点播",
+    "url": "https://zuidazy.me/api.php/provide/vod",
+    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "Naixxzy-com",
-    "name": "奶香资源",
-    "url": "https://Naixxzy.com/api.php/provide/vod",
-    "detailUrl": "https://Naixxzy.com/api.php/provide/vod",
+    "id": "www-moduzy-net",
+    "name": "魔都资源",
+    "url": "https://www.mdzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.mdzyapi.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
-    "id": "slapibf-com",
-    "name": "森林资源",
-    "url": "https://beiyong.slapibf.com/api.php/provide/vod",
-    "detailUrl": "https://beiyong.slapibf.com/api.php/provide/vod",
+    "id": "shayuapi-com",
+    "name": "鲨鱼资源",
+    "url": "https://shayuapi.com/api.php/provide/vod",
+    "detailUrl": "https://shayuapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "apilj-com",
+    "name": "辣椒资源",
+    "url": "https://apilj.com/api.php/provide/vod",
+    "detailUrl": "https://apilj.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "thzy8-me",
+    "name": "桃花资源",
+    "url": "https://thzy1.me/api.php/provide/vod",
+    "detailUrl": "https://thzy1.me/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "xingba111-com",
+    "name": "杏吧资源",
+    "url": "https://xingba222.com/api.php/provide/vod",
+    "detailUrl": "https://xingba222.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "www-ryzyw-com",
+    "name": "如意资源",
+    "url": "https://cj.rycjapi.com/api.php/provide/vod",
+    "detailUrl": "https://cj.rycjapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "lbapi9-com",
+    "name": "乐播资源",
+    "url": "https://lbapi9.com/api.php/provide/vod",
+    "detailUrl": "https://lbapi9.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "fhapi9-com",
+    "name": "番号资源",
+    "url": "http://fhapi9.com/api.php/provide/vod",
+    "detailUrl": "http://fhapi9.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -343,10 +266,38 @@
     "isEnabled": true
   },
   {
-    "id": "xinlangapi-com",
-    "name": "新浪资源",
-    "url": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
-    "detailUrl": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+    "id": "www-subozy-com",
+    "name": "速播资源",
+    "url": "https://subocaiji.com/api.php/provide/vod",
+    "detailUrl": "https://subocaiji.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "aosikazy-com",
+    "name": "奥斯卡",
+    "url": "https://aosikazy.com/api.php/provide/vod",
+    "detailUrl": "https://aosikazy.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "1080zyk4-com",
+    "name": "优质资源",
+    "url": "https://api.yzzy-api.com/inc/apijson.php",
+    "detailUrl": "https://api.yzzy-api.com/inc/apijson.php",
+    "isEnabled": true
+  },
+  {
+    "id": "heiliaozy-cc",
+    "name": "黑料资源",
+    "url": "https://www.heiliaozyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.heiliaozyapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "zy-jinchancaiji-com",
+    "name": "金蝉影视",
+    "url": "https://zy.jinchancaiji.com/api.php/provide/vod",
+    "detailUrl": "https://zy.jinchancaiji.com/api.php/provide/vod",
     "isEnabled": true
   },
   {
@@ -357,6 +308,62 @@
     "isEnabled": true
   },
   {
+    "id": "hsckzy-xyz",
+    "name": "黄色仓库",
+    "url": "https://hsckzy.xyz/api.php/provide/vod",
+    "detailUrl": "https://hsckzy.xyz/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "mtzy-me",
+    "name": "茅台资源",
+    "url": "https://caiji.maotaizy.cc/api.php/provide/vod",
+    "detailUrl": "https://caiji.maotaizy.cc/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "www-huyaapi-com",
+    "name": "虎牙资源",
+    "url": "https://www.huyaapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.huyaapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "slapibf-com",
+    "name": "森林资源",
+    "url": "https://beiyong.slapibf.com/api.php/provide/vod",
+    "detailUrl": "https://beiyong.slapibf.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "155zy2-com",
+    "name": "155-资源",
+    "url": "https://155api.com/api.php/provide/vod",
+    "detailUrl": "https://155api.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "xinlangapi-com",
+    "name": "新浪资源",
+    "url": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+    "detailUrl": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "lbapiby-com",
+    "name": "AIvin",
+    "url": "http://lbapiby.com/api.php/provide/vod",
+    "detailUrl": "http://lbapiby.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
+    "id": "iqiyizyapi-com",
+    "name": "爱奇艺",
+    "url": "https://iqiyizyapi.com/api.php/provide/vod",
+    "detailUrl": "https://iqiyizyapi.com/api.php/provide/vod",
+    "isEnabled": true
+  },
+  {
     "id": "jkunzyapi-com",
     "name": "jkun资源",
     "url": "https://jkunzyapi.com/api.php/provide/vod",
@@ -364,10 +371,10 @@
     "isEnabled": true
   },
   {
-    "id": "www-moduzy-net",
-    "name": "魔都资源",
-    "url": "https://www.mdzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.mdzyapi.com/api.php/provide/vod",
+    "id": "Naixxzy-com",
+    "name": "奶香资源",
+    "url": "https://Naixxzy.com/api.php/provide/vod",
+    "detailUrl": "https://Naixxzy.com/api.php/provide/vod",
     "isEnabled": true
   }
 ]
