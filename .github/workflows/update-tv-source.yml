@@ -2,7 +2,7 @@ name: Update TV Source
 
 on:
   schedule:
-    - cron: "0 22 * * *" # 每天北京时间早上6点运行 (UTC 22点)
+    - cron: '0 22 * * *' # 每天北京时间早上6点运行 (UTC 22点)
   workflow_dispatch: # 支持手动触发
   push:
     branches:
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: '24'
 
       # 3️⃣ 安装依赖
       - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
       - name: Commit and push changes
         run: |
           # 检查是否有文件变化
-          if [ -z "$(git status --porcelain tv_source/)" ]; then
+          if [ -z "$(git status --porcelain tv_source/ log.txt)" ]; then
             echo "✅ 数据源没有变化，无需提交"
             exit 0
           fi
@@ -49,7 +49,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # 添加所有生成的文件
-          git add tv_source/
+          git add tv_source/ log.txt
 
           # 提交更新
           git commit -m "自动更新 TV 源数据 ($(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S CST'))"

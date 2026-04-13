@@ -4,11 +4,11 @@
   "description": "为 OuonnkiTV 提供视频源配置",
   "scripts": {
     "start": "node start.js",
-    "format": "npx prettier --write .",
-    "format:check": "npx prettier --check ."
+    "format": "npx prettier --write scripts/ config.js",
+    "format:check": "npx prettier --check scripts/ config.js"
   },
   "dependencies": {
-    "axios": "^1.13.5",
+    "axios": "1.15.0",
     "cli-table3": "^0.6.5"
   }
 }

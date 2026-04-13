@@ -1,16 +1,9 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const inputFile = path.join(__dirname, "..", "tv_source", "LunaTV", "LunaTV-check-result.json");
-const outputDir = path.join(__dirname, "..", "tv_source", "OuonnkiTV");
+const inputFile = path.join(__dirname, '..', 'tv_source', 'LunaTV', 'LunaTV-check-result.json');
+const outputDir = path.join(__dirname, '..', 'tv_source', 'OuonnkiTV');
 const LITE_LIMIT = 15;
-
-const outputs = [
-  { name: "full.json", filter: (r) => r },
-  { name: "full-noadult.json", filter: (r) => r.filter((x) => !x.isAdult) },
-  { name: "lite.json", filter: (r) => r.filter((x) => !x.isAdult).slice(0, LITE_LIMIT) },
-  { name: "adult.json", filter: (r) => r.filter((x) => x.isAdult) },
-];
 
 function convertRecord(r) {
   return { id: r.id, name: r.name, url: r.api, detailUrl: r.detail || r.api, isEnabled: true };
@@ -18,8 +11,22 @@ function convertRecord(r) {
 
 function saveJson(filename, records) {
   const data = records.map(convertRecord);
-  fs.writeFileSync(path.join(outputDir, filename), JSON.stringify(data, null, 2), "utf8");
+  fs.writeFileSync(path.join(outputDir, filename), JSON.stringify(data, null, 2), 'utf8');
   return data.length;
+}
+
+function getQualified(results) {
+  return results.filter((r) => r.status === 'available');
+}
+
+function getTopFastest(records, limit) {
+  return [...records]
+    .sort((a, b) =>
+      a.play.avgSpeed != null
+        ? b.play.avgSpeed - a.play.avgSpeed
+        : (a.search.duration || Infinity) - (b.search.duration || Infinity)
+    )
+    .slice(0, limit);
 }
 
 (async () => {
@@ -30,13 +37,24 @@ function saveJson(filename, records) {
     }
     if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-    const results = JSON.parse(fs.readFileSync(inputFile, "utf8")).results;
-    const sorted = results
-      .filter((r) => r.searchStatus === "success")
-      .sort((a, b) => (a.searchDuration || Infinity) - (b.searchDuration || Infinity));
+    const inputData = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+    const playSpeedTestEnabled = inputData.playSpeedTestEnabled || false;
+    console.log(`模式: ${playSpeedTestEnabled ? '搜索+测速' : '仅搜索'}`);
 
-    for (const { name, filter } of outputs) {
-      const count = saveJson(name, filter(sorted));
+    const qualified = getQualified(inputData.results);
+    const nonAdult = qualified.filter((x) => !x.isAdult);
+    const adult = qualified.filter((x) => x.isAdult);
+    const topFastest = getTopFastest(nonAdult, LITE_LIMIT);
+
+    const outputs = [
+      { name: 'full.json', data: qualified },
+      { name: 'full-noadult.json', data: nonAdult },
+      { name: 'lite.json', data: topFastest },
+      { name: 'adult.json', data: adult },
+    ];
+
+    for (const { name, data } of outputs) {
+      const count = saveJson(name, data);
       console.log(`✓ 已生成: ${name} (${count} 个视频源)`);
     }
   } catch (error) {

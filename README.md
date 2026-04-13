@@ -38,19 +38,31 @@ node start.js
 
 ```javascript
 module.exports = {
+  skipSslVerification: false,  // 是否跳过 SSL 证书验证
+  logToFile: true,             // 是否记录详细日志到文件
+
   proxy: {
-    url: "",                              // 代理 URL，用于下载和检测视频源（已内置）
-    download: true,                       // 下载视频源时使用代理（默认开启）
-    check: true,                         // 检测视频源时使用代理（默认开启）
+    url: "",        // 代理 URL，留空不启用
+    download: true, // 下载视频源时使用代理
+    check: true,    // 搜索检测时使用代理
+    play: false,    // 播放测速时使用代理
   },
+
   check: {
     timeout: 5000,        // 请求超时时间（毫秒）
-    concurrent: 30,       // 并发检测数量
+    concurrent: 20,       // 搜索并发数
     maxRetry: 2,          // 失败重试次数
     retryDelay: 1000,     // 重试间隔（毫秒）
-    keyword: "斗罗大陆",   // 检测用的搜索关键词（正常视频源）
-    adultKeyword: "三上悠", // 检测用的搜索关键词（成人视频源），留空则使用 keyword
+    keyword: "斗罗大陆",   // 搜索关键词（正常视频源）
+    adultKeyword: "三上悠", // 搜索关键词（成人视频源），留空则使用 keyword
     headers: { ... },     // HTTP 请求头
+  },
+
+  playSpeedTest: {
+    enable: true,       // 是否启用播放测速（false 时仅搜索检测）
+    episodeCount: 3,    // 每个视频源测试的最大集数
+    duration: 5000,     // 每次测速持续时间（毫秒）
+    concurrent: 3,      // 测速并发数
   },
 };
 ```

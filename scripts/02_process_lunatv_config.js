@@ -1,26 +1,26 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const inputFile = path.join(__dirname, "..", "tv_source", "LunaTV", "LunaTV-config.json");
-const outputFile = path.join(__dirname, "..", "tv_source", "LunaTV", "LunaTV-processed.json");
+const inputFile = path.join(__dirname, '..', 'tv_source', 'LunaTV', 'LunaTV-config.json');
+const outputFile = path.join(__dirname, '..', 'tv_source', 'LunaTV', 'LunaTV-processed.json');
 
 function isAdultContent(name) {
-  return name.includes("🔞");
+  return name.includes('🔞');
 }
 
 function cleanName(name) {
   return name
-    .replace(/🔞/g, "")
-    .replace(/🎬/g, "")
+    .replace(/🔞/g, '')
+    .replace(/🎬/g, '')
     .trim()
-    .replace(/^-+|-+$/g, "")
+    .replace(/^-+|-+$/g, '')
     .trim();
 }
 
 function cleanApiUrl(url) {
   const proxyPattern = /^https?:\/\/[^\/]+\/\?url=/;
   if (proxyPattern.test(url)) {
-    return url.replace(proxyPattern, "");
+    return url.replace(proxyPattern, '');
   }
   return url;
 }
@@ -36,7 +36,7 @@ function processConfig(config) {
     const isAdult = isAdultContent(originalName);
     const cleanedName = cleanName(originalName);
     const cleanedApi = cleanApiUrl(value.api);
-    const domainId = key.replace(/\./g, "-");
+    const domainId = key.replace(/\./g, '-');
 
     result.api_site[key] = {
       ...value,
@@ -57,10 +57,10 @@ function processConfig(config) {
       process.exit(1);
     }
 
-    const config = JSON.parse(fs.readFileSync(inputFile, "utf8"));
+    const config = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
     const processed = processConfig(config);
 
-    fs.writeFileSync(outputFile, JSON.stringify(processed, null, 2), "utf8");
+    fs.writeFileSync(outputFile, JSON.stringify(processed, null, 2), 'utf8');
 
     const adultCount = Object.values(processed.api_site).filter((site) => site.isAdult).length;
     const normalCount = Object.values(processed.api_site).filter((site) => !site.isAdult).length;
