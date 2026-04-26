@@ -180,5 +180,12 @@
     "url": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
     "detailUrl": "https://semaozy1.com",
     "isEnabled": true
+  },
+  {
+    "id": "siwazyw-tv",
+    "name": "丝袜资源",
+    "url": "https://siwazyw.tv/api.php/provide/vod",
+    "detailUrl": "https://siwazyw.tv",
+    "isEnabled": true
   }
 ]
