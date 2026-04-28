@@ -182,13 +182,6 @@
     "isEnabled": true
   },
   {
-    "id": "aosikazy-com",
-    "name": "奥斯卡",
-    "url": "https://aosikazy.com/api.php/provide/vod",
-    "detailUrl": "https://aosikazy.com",
-    "isEnabled": true
-  },
-  {
     "id": "siwazyw-tv",
     "name": "丝袜资源",
     "url": "https://siwazyw.tv/api.php/provide/vod",
