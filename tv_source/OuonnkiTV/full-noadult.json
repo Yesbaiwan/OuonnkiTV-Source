@@ -1,5 +1,12 @@
 [
   {
+    "id": "iqiyizyapi-com",
+    "name": "爱奇艺",
+    "url": "https://iqiyizyapi.com/api.php/provide/vod",
+    "detailUrl": "https://iqiyizyapi.com",
+    "isEnabled": true
+  },
+  {
     "id": "dbzy-tv",
     "name": "豆瓣资源",
     "url": "https://caiji.dbzy5.com/api.php/provide/vod",
@@ -28,13 +35,6 @@
     "isEnabled": true
   },
   {
-    "id": "cj-lzcaiji-com",
-    "name": "量子资源",
-    "url": "https://cj.lzcaiji.com/api.php/provide/vod",
-    "detailUrl": "https://cj.lzcaiji.com",
-    "isEnabled": true
-  },
-  {
     "id": "360zy-com",
     "name": "360 资源",
     "url": "https://360zyzz.com/api.php/provide/vod",
@@ -46,13 +46,6 @@
     "name": "魔都资源",
     "url": "https://www.mdzyapi.com/api.php/provide/vod",
     "detailUrl": "https://www.moduzy.net",
-    "isEnabled": true
-  },
-  {
-    "id": "bfzy-tv",
-    "name": "暴风资源",
-    "url": "https://bfzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://bfzy.tv",
     "isEnabled": true
   },
   {
@@ -95,27 +88,6 @@
     "name": "如意资源",
     "url": "https://cj.rycjapi.com/api.php/provide/vod",
     "detailUrl": "https://www.ryzyw.com",
-    "isEnabled": true
-  },
-  {
-    "id": "bdzy1-com",
-    "name": "百度云zy",
-    "url": "https://api.apibdzy.com/api.php/provide/vod",
-    "detailUrl": "https://bdzy1.com",
-    "isEnabled": true
-  },
-  {
-    "id": "lzizy-net",
-    "name": "量子影视",
-    "url": "https://cj.lziapi.com/api.php/provide/vod",
-    "detailUrl": "https://lzizy.net",
-    "isEnabled": true
-  },
-  {
-    "id": "1080zyk4-com",
-    "name": "优质资源",
-    "url": "https://api.yzzy-api.com/inc/apijson.php",
-    "detailUrl": "https://1080zyk4.com",
     "isEnabled": true
   },
   {
