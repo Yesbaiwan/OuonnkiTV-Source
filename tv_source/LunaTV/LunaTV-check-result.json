@@ -1,0 +1,1985 @@
+{
+  "date": "2026/05/19 02:49",
+  "playSpeedTestEnabled": true,
+  "keyword": "斗罗大陆",
+  "adultKeyword": "三上悠",
+  "proxyUrl": "https://kuayu.hellow.eu.org",
+  "useProxy": {
+    "search": true,
+    "play": false
+  },
+  "duration": "75.1s",
+  "stats": {
+    "total": 73,
+    "searchOk": 60,
+    "playOk": 40
+  },
+  "results": [
+    {
+      "id": "iqiyizyapi-com",
+      "name": "爱奇艺",
+      "api": "https://iqiyizyapi.com/api.php/provide/vod",
+      "detail": "https://iqiyizyapi.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 3306
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 552,
+            "speed": 26355.072463768112
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 485,
+            "speed": 30449.484536082477
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 374,
+            "speed": 39251.33689839572
+          }
+        ],
+        "avgSpeed": 32018.63129941544
+      }
+    },
+    {
+      "id": "dbzy-tv",
+      "name": "豆瓣资源",
+      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
+      "detail": "https://dbzy.tv",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 2692
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 771,
+            "speed": 154.3450064850843
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 481,
+            "speed": 247.40124740124742
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 326,
+            "speed": 365.03067484662574
+          }
+        ],
+        "avgSpeed": 255.5923095776525
+      }
+    },
+    {
+      "id": "mtzy-me",
+      "name": "茅台资源",
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+      "detail": "https://mtzy.me",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 2687
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 1145,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 878,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 624,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "wolongzyw-com",
+      "name": "卧龙资源",
+      "api": "https://wolongzyw.com/api.php/provide/vod",
+      "detail": "https://wolongzyw.com",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "failed",
+        "duration": null
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "ikunzy-com",
+      "name": "iKun资源",
+      "api": "https://ikunzyapi.com/api.php/provide/vod",
+      "detail": "https://ikunzy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 465
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 429,
+            "speed": 230.76923076923077
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 513,
+            "speed": 192.98245614035088
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 980,
+            "speed": 101.0204081632653
+          }
+        ],
+        "avgSpeed": 174.92403169094896
+      }
+    },
+    {
+      "id": "dyttzyapi-com",
+      "name": "电影天堂",
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod",
+      "detail": "http://caiji.dyttzyapi.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 774
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 2244,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 2272,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 1816,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "www-maoyanzy-com",
+      "name": "猫眼资源",
+      "api": "https://api.maoyanapi.top/api.php/provide/vod",
+      "detail": "https://www.maoyanzy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1422
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第001集",
+            "success": true,
+            "duration": 879,
+            "speed": 125.14220705346985
+          },
+          {
+            "episode": "第002集",
+            "success": true,
+            "duration": 794,
+            "speed": 138.5390428211587
+          },
+          {
+            "episode": "第003集",
+            "success": true,
+            "duration": 505,
+            "speed": 217.82178217821783
+          }
+        ],
+        "avgSpeed": 160.50101068428214
+      }
+    },
+    {
+      "id": "cj-lzcaiji-com",
+      "name": "量子资源",
+      "api": "https://cj.lzcaiji.com/api.php/provide/vod",
+      "detail": "https://cj.lzcaiji.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1071
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 840,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 498,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 518,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "360zy-com",
+      "name": "360 资源",
+      "api": "https://360zyzz.com/api.php/provide/vod",
+      "detail": "https://360zy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 547
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 588,
+            "speed": 202.38095238095238
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 307,
+            "speed": 387.6221498371336
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 219,
+            "speed": 543.37899543379
+          }
+        ],
+        "avgSpeed": 377.79403255062533
+      }
+    },
+    {
+      "id": "jszyapi-com",
+      "name": "极速资源",
+      "api": "https://jszyapi.com/api.php/provide/vod",
+      "detail": "https://jszyapi.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 233
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 453,
+            "error": "connect ECONNREFUSED 127.0.0.1:443",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 129,
+            "error": "connect ECONNREFUSED 127.0.0.1:443",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 175,
+            "error": "connect ECONNREFUSED 127.0.0.1:443",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "www-moduzy-net",
+      "name": "魔都资源",
+      "api": "https://www.mdzyapi.com/api.php/provide/vod",
+      "detail": "https://www.moduzy.net",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1345
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 627,
+            "speed": 188.19776714513557
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 300,
+            "speed": 393.33333333333337
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 402,
+            "speed": 296.0199004975124
+          }
+        ],
+        "avgSpeed": 292.51700032532716
+      }
+    },
+    {
+      "id": "ffzyapi-com",
+      "name": "非凡资源",
+      "api": "https://api.ffzyapi.com/api.php/provide/vod",
+      "detail": "https://cj.ffzyapi.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 2340
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 2035,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 1445,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 1750,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "bfzy-tv",
+      "name": "暴风资源",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "detail": "https://bfzy.tv",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 208
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": false,
+            "duration": 1118,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "zuida-xyz",
+      "name": "最大资源",
+      "api": "https://api.zuidapi.com/api.php/provide/vod",
+      "detail": "https://zuida.xyz",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 796
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 570,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 461,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 190,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "wujinzy-me",
+      "name": "无尽资源",
+      "api": "https://api.wujinapi.me/api.php/provide/vod",
+      "detail": "https://wujinzy.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1330
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 667,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 266,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 188,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "xinlangapi-com",
+      "name": "新浪资源",
+      "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+      "detail": "https://xinlangapi.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1968
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 207,
+            "speed": 521.7391304347826
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 205,
+            "speed": 526.829268292683
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 167,
+            "speed": 646.7065868263472
+          }
+        ],
+        "avgSpeed": 565.0916618512709
+      }
+    },
+    {
+      "id": "api-wwzy-tv",
+      "name": "旺旺资源",
+      "api": "https://api.wwzy.tv/api.php/provide/vod",
+      "detail": "https://api.wwzy.tv",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 445
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "www-subozy-com",
+      "name": "速播资源",
+      "api": "https://subocaiji.com/api.php/provide/vod",
+      "detail": "https://www.subozy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1494
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 132,
+            "speed": 818.1818181818181
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 159,
+            "speed": 679.2452830188679
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 129,
+            "speed": 837.2093023255813
+          }
+        ],
+        "avgSpeed": 778.2121345087559
+      }
+    },
+    {
+      "id": "jinyingzy-com",
+      "name": "金鹰点播",
+      "api": "https://jinyingzy.com/api.php/provide/vod",
+      "detail": "https://jinyingzy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1664
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 438,
+            "speed": 246.57534246575344
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 229,
+            "speed": 471.61572052401743
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 218,
+            "speed": 495.41284403669727
+          }
+        ],
+        "avgSpeed": 404.5346356754894
+      }
+    },
+    {
+      "id": "p2100-net",
+      "name": "飘零资源",
+      "api": "https://p2100.net/api.php/provide/vod",
+      "detail": "https://p2100.net",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 662
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 468,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 327,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 386,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "api-ukuapi88-com",
+      "name": "U酷影视",
+      "api": "https://api.ukuapi88.com/api.php/provide/vod",
+      "detail": "https://www.ukuzy.com",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "failed",
+        "duration": null
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "api-guangsuapi-com",
+      "name": "光速资源",
+      "api": "https://api.guangsuapi.com/api.php/provide/vod",
+      "detail": "https://api.guangsuapi.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1706
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 235,
+            "speed": 459.5744680851064
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 130,
+            "speed": 830.7692307692307
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 156,
+            "speed": 692.3076923076923
+          }
+        ],
+        "avgSpeed": 660.8837970540098
+      }
+    },
+    {
+      "id": "www-hongniuzy-com",
+      "name": "红牛资源",
+      "api": "https://www.hongniuzy2.com/api.php/provide/vod",
+      "detail": "https://www.hongniuzy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 384
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 2509,
+            "speed": 42.646472698286175
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 958,
+            "speed": 111.6910229645094
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 1241,
+            "speed": 86.2207896857373
+          }
+        ],
+        "avgSpeed": 80.18609511617763
+      }
+    },
+    {
+      "id": "caiji-moduapi-cc",
+      "name": "魔都动漫",
+      "api": "https://caiji.moduapi.cc/api.php/provide/vod",
+      "detail": "https://caiji.moduapi.cc",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1241
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 273,
+            "speed": 432.2344322344322
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 308,
+            "speed": 383.1168831168831
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 305,
+            "speed": 390.1639344262295
+          }
+        ],
+        "avgSpeed": 401.83841659251493
+      }
+    },
+    {
+      "id": "www-ryzyw-com",
+      "name": "如意资源",
+      "api": "https://cj.rycjapi.com/api.php/provide/vod",
+      "detail": "https://www.ryzyw.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 3333
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 1069,
+            "speed": 89.80355472404116
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 510,
+            "speed": 188.23529411764704
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 483,
+            "speed": 198.75776397515529
+          }
+        ],
+        "avgSpeed": 158.93220427228115
+      }
+    },
+    {
+      "id": "www-haohuazy-com",
+      "name": "豪华资源",
+      "api": "https://hhzyapi.com/api.php/provide/vod",
+      "detail": "https://www.haohuazy.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 875
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 166,
+            "speed": 650.6024096385541
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 208,
+            "speed": 519.2307692307693
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 161,
+            "speed": 670.8074534161491
+          }
+        ],
+        "avgSpeed": 613.5468774284909
+      }
+    },
+    {
+      "id": "bdzy1-com",
+      "name": "百度云zy",
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
+      "detail": "https://bdzy1.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 646
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 1238,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 1216,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 1283,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "lovedan-net",
+      "name": "艾旦影视",
+      "api": "https://lovedan.net/api.php/provide/vod",
+      "detail": "https://lovedan.net",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1341
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 261,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 407,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 267,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "lzizy-net",
+      "name": "量子影视",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "detail": "https://lzizy.net",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1071
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 496,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 358,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 363,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "zuidazy-co",
+      "name": "最大点播",
+      "api": "https://zuidazy.me/api.php/provide/vod",
+      "detail": "https://zuidazy.co",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1032
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 356,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 305,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 326,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "wujinzy-com",
+      "name": "无尽影视",
+      "api": "https://api.wujinapi.com/api.php/provide/vod",
+      "detail": "https://wujinzy.com",
+      "isAdult": false,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 267
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": false,
+            "duration": 225,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第02集",
+            "success": false,
+            "duration": 193,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          },
+          {
+            "episode": "第03集",
+            "success": false,
+            "duration": 184,
+            "error": "Request failed with status code 403",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "wwzy-tv",
+      "name": "旺旺短剧",
+      "api": "https://wwzy.tv/api.php/provide/vod",
+      "detail": "https://wwzy.tv",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 492
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "1080zyk4-com",
+      "name": "优质资源",
+      "api": "https://api.yzzy-api.com/inc/apijson.php",
+      "detail": "https://1080zyk4.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 2764
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 1229,
+            "speed": 78.92595606183889
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 438,
+            "speed": 221.46118721461187
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 1558,
+            "speed": 62.25930680359435
+          }
+        ],
+        "avgSpeed": 120.8821500266817
+      }
+    },
+    {
+      "id": "www-huyaapi-com",
+      "name": "虎牙资源",
+      "api": "https://www.huyaapi.com/api.php/provide/vod",
+      "detail": "https://www.huyaapi.com",
+      "isAdult": false,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1790
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第01集",
+            "success": true,
+            "duration": 250,
+            "speed": 432
+          },
+          {
+            "episode": "第02集",
+            "success": true,
+            "duration": 295,
+            "speed": 366.10169491525426
+          },
+          {
+            "episode": "第03集",
+            "success": true,
+            "duration": 214,
+            "speed": 504.6728971962617
+          }
+        ],
+        "avgSpeed": 434.25819737050534
+      }
+    },
+    {
+      "id": "yayazy3-com",
+      "name": "鸭鸭资源",
+      "api": "https://cj.yayazy.net/api.php/provide/vod",
+      "detail": "https://yayazy3.com",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 240
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "suonizy-net",
+      "name": "索尼资源",
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "detail": "https://suonizy.net",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 228
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "kuaichezy-com",
+      "name": "快车资源",
+      "api": "https://caiji.kuaichezy.org/api.php/provide/vod",
+      "detail": "https://kuaichezy.com",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 294
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "shandianzy-com",
+      "name": "闪电资源",
+      "api": "https://xsd.sdzyapi.com/api.php/provide/vod",
+      "detail": "https://shandianzy.com",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 221
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "yhzy-cc",
+      "name": "樱花资源",
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod",
+      "detail": "https://yhzy.cc",
+      "isAdult": false,
+      "status": "search_failed",
+      "search": {
+        "status": "failed",
+        "duration": null
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "91md-me",
+      "name": "麻豆视频",
+      "api": "https://91md.me/api.php/provide/vod",
+      "detail": "https://91md.me",
+      "isAdult": true,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 913
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "lbapiby-com",
+      "name": "AIvin",
+      "api": "http://lbapiby.com/api.php/provide/vod",
+      "detail": "http://lbapiby.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 2367
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "在线播放",
+            "success": true,
+            "duration": 396,
+            "speed": 297.979797979798
+          }
+        ],
+        "avgSpeed": 297.979797979798
+      }
+    },
+    {
+      "id": "155zy2-com",
+      "name": "155-资源",
+      "api": "https://155api.com/api.php/provide/vod",
+      "detail": "https://155zy2.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1114
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": true,
+            "duration": 398,
+            "speed": 296.4824120603015
+          }
+        ],
+        "avgSpeed": 296.4824120603015
+      }
+    },
+    {
+      "id": "apiyutu-com",
+      "name": "玉兔资源",
+      "api": "https://apiyutu.com/api.php/provide/vod",
+      "detail": "https://apiyutu.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 808
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": true,
+            "duration": 448,
+            "speed": 263.3928571428571
+          }
+        ],
+        "avgSpeed": 263.3928571428571
+      }
+    },
+    {
+      "id": "fhapi9-com",
+      "name": "番号资源",
+      "api": "http://fhapi9.com/api.php/provide/vod",
+      "detail": "http://fhapi9.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1443
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 486,
+            "speed": 242.79835390946502
+          }
+        ],
+        "avgSpeed": 242.79835390946502
+      }
+    },
+    {
+      "id": "apilsbzy1-com",
+      "name": "老色逼",
+      "api": "https://apilsbzy1.com/api.php/provide/vod",
+      "detail": "https://apilsbzy1.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 143
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": true,
+            "duration": 197,
+            "speed": 598.984771573604
+          }
+        ],
+        "avgSpeed": 598.984771573604
+      }
+    },
+    {
+      "id": "www-yytv4-cc",
+      "name": "优优资源",
+      "api": "https://www.yytv4.cc/api.php/provide/vod",
+      "detail": "https://www.yytv4.cc",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 521
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 1456,
+            "speed": 165526.0989010989
+          }
+        ],
+        "avgSpeed": 165526.0989010989
+      }
+    },
+    {
+      "id": "xiaojizy-live",
+      "name": "小鸡资源",
+      "api": "https://api.xiaojizy.live/provide/vod",
+      "detail": "https://xiaojizy.live",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 857
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "全集",
+            "success": true,
+            "duration": 110,
+            "speed": 1955490.9090909092
+          }
+        ],
+        "avgSpeed": 1955490.9090909092
+      }
+    },
+    {
+      "id": "hsckzy-xyz",
+      "name": "黄色仓库",
+      "api": "https://hsckzy.xyz/api.php/provide/vod",
+      "detail": "https://hsckzy.xyz",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 1836
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "apidanaizi-com",
+      "name": "大奶子",
+      "api": "https://apidanaizi.com/api.php/provide/vod",
+      "detail": "https://apidanaizi.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 452
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "正片",
+            "success": true,
+            "duration": 550,
+            "speed": 527783.6363636364
+          }
+        ],
+        "avgSpeed": 527783.6363636364
+      }
+    },
+    {
+      "id": "jkunzyapi-com",
+      "name": "jkun资源",
+      "api": "https://jkunzyapi.com/api.php/provide/vod",
+      "detail": "https://jkunzyapi.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 763
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "高清",
+            "success": true,
+            "duration": 233,
+            "speed": 420.6008583690987
+          }
+        ],
+        "avgSpeed": 420.6008583690987
+      }
+    },
+    {
+      "id": "lbapi9-com",
+      "name": "乐播资源",
+      "api": "https://lbapi9.com/api.php/provide/vod",
+      "detail": "https://lbapi9.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 4039
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "在线播放",
+            "success": true,
+            "duration": 280,
+            "speed": 421.4285714285714
+          }
+        ],
+        "avgSpeed": 421.4285714285714
+      }
+    },
+    {
+      "id": "Naixxzy-com",
+      "name": "奶香资源",
+      "api": "https://Naixxzy.com/api.php/provide/vod",
+      "detail": "https://Naixxzy.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 3663
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": true,
+            "duration": 498,
+            "speed": 236.94779116465864
+          }
+        ],
+        "avgSpeed": 236.94779116465864
+      }
+    },
+    {
+      "id": "slapibf-com",
+      "name": "森林资源",
+      "api": "https://beiyong.slapibf.com/api.php/provide/vod",
+      "detail": "https://slapibf.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1935
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "在线播放",
+            "success": true,
+            "duration": 442,
+            "speed": 266.9683257918552
+          }
+        ],
+        "avgSpeed": 266.9683257918552
+      }
+    },
+    {
+      "id": "apilj-com",
+      "name": "辣椒资源",
+      "api": "https://apilj.com/api.php/provide/vod",
+      "detail": "https://apilj.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1071
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 322,
+            "speed": 366.45962732919253
+          }
+        ],
+        "avgSpeed": 366.45962732919253
+      }
+    },
+    {
+      "id": "shayuapi-com",
+      "name": "鲨鱼资源",
+      "api": "https://shayuapi.com/api.php/provide/vod",
+      "detail": "https://shayuapi.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1485
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "在线播放",
+            "success": true,
+            "duration": 395,
+            "speed": 298.73417721518985
+          }
+        ],
+        "avgSpeed": 298.73417721518985
+      }
+    },
+    {
+      "id": "doudouzy-com",
+      "name": "豆豆资源",
+      "api": "https://api.douapi.cc/api.php/provide/vod",
+      "detail": "https://doudouzy.com",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 380
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": false,
+            "duration": 924,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "didizy-com",
+      "name": "滴滴资源",
+      "api": "https://api.ddapi.cc/api.php/provide/vod",
+      "detail": "https://didizy.com",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 290
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": false,
+            "duration": 5008,
+            "error": "timeout of 5000ms exceeded",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "heiliaozy-cc",
+      "name": "黑料资源",
+      "api": "https://www.heiliaozyapi.com/api.php/provide/vod",
+      "detail": "https://heiliaozy.cc",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1726
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "高清",
+            "success": true,
+            "duration": 880,
+            "speed": 29534.090909090908
+          }
+        ],
+        "avgSpeed": 29534.090909090908
+      }
+    },
+    {
+      "id": "api-bwzym3u8-com",
+      "name": "百万资源",
+      "api": "https://api.bwzyz.com/api.php/provide/vod",
+      "detail": "https://api.bwzym3u8.com",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 406
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": false,
+            "duration": 5001,
+            "error": "timeout of 5000ms exceeded",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "thzy8-me",
+      "name": "桃花资源",
+      "api": "https://thzy1.me/api.php/provide/vod",
+      "detail": "https://thzy8.me",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 717
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": false,
+            "duration": 228,
+            "error": "Request failed with status code 404",
+            "speed": 0
+          }
+        ],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "www-jingpinx-com",
+      "name": "精品资源",
+      "api": "https://www.jingpinx.com/api.php/provide/vod",
+      "detail": "https://www.jingpinx.com",
+      "isAdult": true,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 1634
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "ckzy-me",
+      "name": "CK-资源",
+      "api": "https://ckzy.me/api.php/provide/vod",
+      "detail": "https://ckzy.me",
+      "isAdult": true,
+      "status": "search_failed",
+      "search": {
+        "status": "no_results",
+        "duration": 253
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "souavzyw-com",
+      "name": "souavZY",
+      "api": "https://api.souavzyw.net/api.php/provide/vod",
+      "detail": "https://api.souavzyw.net",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 872
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 364,
+            "speed": 277.4725274725275
+          }
+        ],
+        "avgSpeed": 277.4725274725275
+      }
+    },
+    {
+      "id": "www-xxibaozyw-com",
+      "name": "细胞资源",
+      "api": "https://www.xxibaozyw.com/api.php/provide/vod",
+      "detail": "https://www.xxibaozyw.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 609
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "播放链接",
+            "success": true,
+            "duration": 144,
+            "speed": 888013.888888889
+          }
+        ],
+        "avgSpeed": 888013.888888889
+      }
+    },
+    {
+      "id": "xiangjiaozyw-com",
+      "name": "香蕉资源",
+      "api": "https://www.xiangjiaozyw.com/api.php/provide/vod",
+      "detail": "https://www.xiangjiaozyw.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 1315
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "播放链接",
+            "success": true,
+            "duration": 386,
+            "speed": 331279.79274611396
+          }
+        ],
+        "avgSpeed": 331279.79274611396
+      }
+    },
+    {
+      "id": "www-msnii-com",
+      "name": "美少女",
+      "api": "https://www.msnii.com/api/json.php",
+      "detail": "https://www.msnii.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 384
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "播放链接",
+            "success": true,
+            "duration": 457,
+            "speed": 125654.2669584245
+          }
+        ],
+        "avgSpeed": 125654.2669584245
+      }
+    },
+    {
+      "id": "www-pgxdy-com",
+      "name": "黄AVZY",
+      "api": "https://www.pgxdy.com/api/json.php",
+      "detail": "https://www.pgxdy.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 392
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "播放链接",
+            "success": true,
+            "duration": 165,
+            "speed": 278012.1212121212
+          }
+        ],
+        "avgSpeed": 278012.1212121212
+      }
+    },
+    {
+      "id": "www-kxgav-com",
+      "name": "白嫖资源",
+      "api": "https://www.kxgav.com/api/json.php",
+      "detail": "https://www.kxgav.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 451
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "播放链接",
+            "success": true,
+            "duration": 450,
+            "speed": 111751.11111111111
+          }
+        ],
+        "avgSpeed": 111751.11111111111
+      }
+    },
+    {
+      "id": "xingba111-com",
+      "name": "杏吧资源",
+      "api": "https://xingba222.com/api.php/provide/vod",
+      "detail": "https://xingba111.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 245
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 659,
+            "speed": 168.4370257966616
+          }
+        ],
+        "avgSpeed": 168.4370257966616
+      }
+    },
+    {
+      "id": "dadizy11-com",
+      "name": "大地资源",
+      "api": "https://dadiapi.com/feifei",
+      "detail": "https://dadizy11.com",
+      "isAdult": true,
+      "status": "play_failed",
+      "search": {
+        "status": "success",
+        "duration": 900
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    },
+    {
+      "id": "semaozy1-com",
+      "name": "色猫资源",
+      "api": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
+      "detail": "https://semaozy1.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 680
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "HD",
+            "success": true,
+            "duration": 287,
+            "speed": 351.91637630662024
+          }
+        ],
+        "avgSpeed": 351.91637630662024
+      }
+    },
+    {
+      "id": "aosikazy-com",
+      "name": "奥斯卡",
+      "api": "https://aosikazy.com/api.php/provide/vod",
+      "detail": "https://aosikazy.com",
+      "isAdult": true,
+      "status": "available",
+      "search": {
+        "status": "success",
+        "duration": 2815
+      },
+      "play": {
+        "tests": [
+          {
+            "episode": "第1集",
+            "success": true,
+            "duration": 501,
+            "speed": 235.52894211576847
+          }
+        ],
+        "avgSpeed": 235.52894211576847
+      }
+    },
+    {
+      "id": "siwazyw-tv",
+      "name": "丝袜资源",
+      "api": "https://siwazyw.tv/api.php/provide/vod",
+      "detail": "https://siwazyw.tv",
+      "isAdult": true,
+      "status": "search_failed",
+      "search": {
+        "status": "failed",
+        "duration": null
+      },
+      "play": {
+        "tests": [],
+        "avgSpeed": null
+      }
+    }
+  ]
+}
