@@ -98,6 +98,13 @@
     "isEnabled": true
   },
   {
+    "id": "api-bwzym3u8-com",
+    "name": "百万资源",
+    "url": "https://api.bwzyz.com/api.php/provide/vod",
+    "detailUrl": "https://api.bwzym3u8.com",
+    "isEnabled": true
+  },
+  {
     "id": "thzy8-me",
     "name": "桃花资源",
     "url": "https://thzy1.me/api.php/provide/vod",
