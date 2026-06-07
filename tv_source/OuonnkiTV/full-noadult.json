@@ -14,13 +14,6 @@
     "isEnabled": true
   },
   {
-    "id": "mtzy-me",
-    "name": "茅台资源",
-    "url": "https://caiji.maotaizy.cc/api.php/provide/vod",
-    "detailUrl": "https://mtzy.me",
-    "isEnabled": true
-  },
-  {
     "id": "ikunzy-com",
     "name": "iKun资源",
     "url": "https://ikunzyapi.com/api.php/provide/vod",
@@ -39,13 +32,6 @@
     "name": "360 资源",
     "url": "https://360zyzz.com/api.php/provide/vod",
     "detailUrl": "https://360zy.com",
-    "isEnabled": true
-  },
-  {
-    "id": "www-moduzy-net",
-    "name": "魔都资源",
-    "url": "https://www.mdzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.moduzy.net",
     "isEnabled": true
   },
   {
