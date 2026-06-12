@@ -105,13 +105,6 @@
     "isEnabled": true
   },
   {
-    "id": "www-jingpinx-com",
-    "name": "精品资源",
-    "url": "https://www.jingpinx.com/api.php/provide/vod",
-    "detailUrl": "https://www.jingpinx.com",
-    "isEnabled": true
-  },
-  {
     "id": "souavzyw-com",
     "name": "souavZY",
     "url": "https://api.souavzyw.net/api.php/provide/vod",
