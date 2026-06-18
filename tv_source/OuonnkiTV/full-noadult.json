@@ -1,23 +1,9 @@
 [
   {
-    "id": "iqiyizyapi-com",
-    "name": "爱奇艺",
-    "url": "https://iqiyizyapi.com/api.php/provide/vod",
-    "detailUrl": "https://iqiyizyapi.com",
-    "isEnabled": true
-  },
-  {
     "id": "dbzy-tv",
     "name": "豆瓣资源",
     "url": "https://caiji.dbzy5.com/api.php/provide/vod",
     "detailUrl": "https://dbzy.tv",
-    "isEnabled": true
-  },
-  {
-    "id": "mtzy-me",
-    "name": "茅台资源",
-    "url": "https://caiji.maotaizy.cc/api.php/provide/vod",
-    "detailUrl": "https://mtzy.me",
     "isEnabled": true
   },
   {
