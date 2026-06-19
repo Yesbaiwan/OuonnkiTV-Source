@@ -42,6 +42,13 @@
     "isEnabled": true
   },
   {
+    "id": "hsckzy-xyz",
+    "name": "黄色仓库",
+    "url": "https://hsckzy.xyz/api.php/provide/vod",
+    "detailUrl": "https://hsckzy.xyz",
+    "isEnabled": true
+  },
+  {
     "id": "apidanaizi-com",
     "name": "大奶子",
     "url": "https://apidanaizi.com/api.php/provide/vod",
@@ -60,6 +67,13 @@
     "name": "乐播资源",
     "url": "https://lbapi9.com/api.php/provide/vod",
     "detailUrl": "https://lbapi9.com",
+    "isEnabled": true
+  },
+  {
+    "id": "Naixxzy-com",
+    "name": "奶香资源",
+    "url": "https://Naixxzy.com/api.php/provide/vod",
+    "detailUrl": "https://Naixxzy.com",
     "isEnabled": true
   },
   {
@@ -109,6 +123,13 @@
     "name": "细胞资源",
     "url": "https://www.xxibaozyw.com/api.php/provide/vod",
     "detailUrl": "https://www.xxibaozyw.com",
+    "isEnabled": true
+  },
+  {
+    "id": "xiangjiaozyw-com",
+    "name": "香蕉资源",
+    "url": "https://www.xiangjiaozyw.com/api.php/provide/vod",
+    "detailUrl": "https://www.xiangjiaozyw.com",
     "isEnabled": true
   },
   {
