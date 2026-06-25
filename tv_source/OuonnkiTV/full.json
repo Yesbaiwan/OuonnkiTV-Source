@@ -98,13 +98,6 @@
     "isEnabled": true
   },
   {
-    "id": "155zy2-com",
-    "name": "155-资源",
-    "url": "https://155api.com/api.php/provide/vod",
-    "detailUrl": "https://155zy2.com",
-    "isEnabled": true
-  },
-  {
     "id": "apiyutu-com",
     "name": "玉兔资源",
     "url": "https://apiyutu.com/api.php/provide/vod",
@@ -165,6 +158,13 @@
     "name": "奶香资源",
     "url": "https://Naixxzy.com/api.php/provide/vod",
     "detailUrl": "https://Naixxzy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "apilj-com",
+    "name": "辣椒资源",
+    "url": "https://apilj.com/api.php/provide/vod",
+    "detailUrl": "https://apilj.com",
     "isEnabled": true
   },
   {
