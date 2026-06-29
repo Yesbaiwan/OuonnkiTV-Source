@@ -130,7 +130,7 @@
     },
     "jinyingzy.com": {
       "name": "金鹰点播",
-      "api": "https://jinyingzy.com/api.php/provide/vod",
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingyun/at/json",
       "detail": "https://jinyingzy.com",
       "id": "jinyingzy-com",
       "isAdult": false
@@ -326,13 +326,6 @@
       "api": "https://apilsbzy1.com/api.php/provide/vod",
       "detail": "https://apilsbzy1.com",
       "id": "apilsbzy1-com",
-      "isAdult": true
-    },
-    "www.yytv4.cc": {
-      "name": "优优资源",
-      "api": "https://www.yytv4.cc/api.php/provide/vod",
-      "detail": "https://www.yytv4.cc",
-      "id": "www-yytv4-cc",
       "isAdult": true
     },
     "xiaojizy.live": {

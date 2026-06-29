@@ -94,7 +94,7 @@
     },
     "jinyingzy.com": {
       "name": "🎬金鹰点播",
-      "api": "https://jinyingzy.com/api.php/provide/vod",
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingyun/at/json",
       "detail": "https://jinyingzy.com"
     },
     "p2100.net": {
@@ -124,12 +124,12 @@
     },
     "www.ryzyw.com": {
       "name": "🎬如意资源",
-      "api": "https://pz.v88.qzz.io/?url=https://cj.rycjapi.com/api.php/provide/vod",
+      "api": "https://cj.rycjapi.com/api.php/provide/vod",
       "detail": "https://www.ryzyw.com"
     },
     "www.haohuazy.com": {
       "name": "🎬豪华资源",
-      "api": "https://pz.v88.qzz.io/?url=https://hhzyapi.com/api.php/provide/vod",
+      "api": "https://hhzyapi.com/api.php/provide/vod",
       "detail": "https://www.haohuazy.com"
     },
     "bdzy1.com": {
@@ -238,11 +238,6 @@
       "api": "https://apilsbzy1.com/api.php/provide/vod",
       "detail": "https://apilsbzy1.com"
     },
-    "www.yytv4.cc": {
-      "name": "🔞优优资源",
-      "api": "https://www.yytv4.cc/api.php/provide/vod",
-      "detail": "https://www.yytv4.cc"
-    },
     "xiaojizy.live": {
       "name": "🔞小鸡资源",
       "api": "https://api.xiaojizy.live/provide/vod",
@@ -280,7 +275,7 @@
     },
     "apilj.com": {
       "name": "🔞辣椒资源",
-      "api": "https://pz.v88.qzz.io/?url=https://apilj.com/api.php/provide/vod",
+      "api": "https://apilj.com/api.php/provide/vod",
       "detail": "https://apilj.com"
     },
     "shayuapi.com": {
