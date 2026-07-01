@@ -14,6 +14,13 @@
     "isEnabled": true
   },
   {
+    "id": "fhapi9-com",
+    "name": "番号资源",
+    "url": "http://fhapi9.com/api.php/provide/vod",
+    "detailUrl": "http://fhapi9.com",
+    "isEnabled": true
+  },
+  {
     "id": "apilsbzy1-com",
     "name": "老色逼",
     "url": "https://apilsbzy1.com/api.php/provide/vod",
@@ -60,6 +67,20 @@
     "name": "奶香资源",
     "url": "https://Naixxzy.com/api.php/provide/vod",
     "detailUrl": "https://Naixxzy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "apilj-com",
+    "name": "辣椒资源",
+    "url": "https://apilj.com/api.php/provide/vod",
+    "detailUrl": "https://apilj.com",
+    "isEnabled": true
+  },
+  {
+    "id": "shayuapi-com",
+    "name": "鲨鱼资源",
+    "url": "https://shayuapi.com/api.php/provide/vod",
+    "detailUrl": "https://shayuapi.com",
     "isEnabled": true
   },
   {
