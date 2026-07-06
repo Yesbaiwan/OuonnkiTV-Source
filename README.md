@@ -79,7 +79,13 @@ module.exports = {
 };
 ```
 
-代理 URL 填写后将按照 `https://{proxy.url}/原始URL` 进行请求，请注意代理 URL 满足此用法，留空表示不启用。
+> [!NOTE]
+> **关于代理 & `PROXY_URL` 环境变量**
+>
+> - 代理 URL 填写后将按照 `https://{proxy.url}/原始URL` 进行请求，请确保你的代理支持此格式，留空/未添加环境变量则不启用代理。
+> - 本仓库的 GitHub Actions 已内置代理地址（存储在 Secrets 中，未公开），Fork 后该变量不可用。
+> - **本地运行**：在项目根目录创建 `.env` 文件，写入 `PROXY_URL={your_proxy_url}` 或编辑 `config.js` 中的 `proxy.url`。
+> - **GitHub Actions**：在仓库 Settings → Secrets and variables → Actions → Repository secrets 中自行添加 `PROXY_URL` 变量。
 
 ## 自动更新
 

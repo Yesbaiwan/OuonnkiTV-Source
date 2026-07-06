@@ -34,6 +34,8 @@ jobs:
       # 4️⃣ 运行一键脚本
       - name: Run start script
         run: node start.js
+        env:
+          PROXY_URL: ${{ secrets.PROXY_URL }}
 
       # 5️⃣ 提交并推送生成的文件
       - name: Commit and push changes

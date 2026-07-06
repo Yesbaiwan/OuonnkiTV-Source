@@ -82,7 +82,13 @@ module.exports = {
 };
 ```
 
-After filling in the proxy URL, requests will be made using `https://{proxy.url}/originalURL`. Please ensure the proxy URL supports this format. Leave empty to disable.
+> [!NOTE]
+> **About Proxy & the `PROXY_URL` Environment Variable**
+>
+> - After filling in the proxy URL, requests will be made using `https://{proxy.url}/originalURL`. Make sure your proxy supports this format. Leave empty or unset to disable proxying.
+> - This repository's GitHub Actions has a built-in proxy address (stored in Secrets, not publicly exposed). When you fork this repo, the variable won't be available.
+> - **Local development**: Create a `.env` file in the project root with `PROXY_URL={your_proxy_url}`, or edit `proxy.url` in `config.js`.
+> - **GitHub Actions**: Add your own `PROXY_URL` in repository Settings → Secrets and variables → Actions → Repository secrets.
 
 ## Automatic Updates
 

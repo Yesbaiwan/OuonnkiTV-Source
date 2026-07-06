@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   // 全局 HTTP 请求配置（搜索、详情、测速、下载共用）
   http: {
@@ -27,7 +29,7 @@ module.exports = {
   // search: 搜索检测/详情请求时是否使用代理
   // play: 播放测速时是否使用代理
   proxy: {
-    url: 'https://proxy.223347.xyz',
+    url: process.env.PROXY_URL || '',
     download: true,
     search: true,
     play: false,
