@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const config = require('../config.js');
+const config = require('./config.js');
 
 const url = 'https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/LunaTV-config.json';
 const targetDir = path.join(__dirname, '..', 'tv_source', 'LunaTV');

@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 const path = require('path');
-const config = require('./config.js');
+const config = require('./src/config.js');
 
 const scripts = [
   '01_download_lunatv_config.js',
@@ -9,7 +9,7 @@ const scripts = [
   '04_convert_ouonnkitv.js',
 ];
 
-const scriptsDir = path.join(__dirname, 'scripts');
+const scriptsDir = path.join(__dirname, 'src');
 
 const yn = (v) => (v ? '是' : '否');
 

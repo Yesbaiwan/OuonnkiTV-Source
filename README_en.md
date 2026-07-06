@@ -39,7 +39,7 @@ Step-by-step execution requires running each script in the following order:
 
 ### Configuration Guide
 
-Edit `config.js` to customize the following settings:
+Edit `src/config.js` to customize the following settings:
 
 ```javascript
 module.exports = {
@@ -77,18 +77,18 @@ module.exports = {
     enable: true,       // Whether to enable playback speed test (false means search check only)
     episodeCount: 3,    // Maximum number of episodes to test per video source
     duration: 5000,     // Duration of each speed test (milliseconds)
-    concurrent: 3,      // Total concurrency in search + speed test mode
+    concurrent: 3,      // Total concurrency in search + speed test mode (overrides search.concurrent when enable=true)
   },
 };
 ```
 
 > [!NOTE]
-> **About Proxy & the `PROXY_URL` Environment Variable**
+> **About the `PROXY_URL` Environment Variable**
 >
-> - After filling in the proxy URL, requests will be made using `https://{proxy.url}/originalURL`. Make sure your proxy supports this format. Leave empty or unset to disable proxying.
-> - This repository's GitHub Actions has a built-in proxy address (stored in Secrets, not publicly exposed). When you fork this repo, the variable won't be available.
-> - **Local development**: Create a `.env` file in the project root with `PROXY_URL={your_proxy_url}`, or edit `proxy.url` in `config.js`.
-> - **GitHub Actions**: Add your own `PROXY_URL` in repository Settings → Secrets and variables → Actions → Repository secrets.
+> - `PROXY_URL` is the proxy address. Requests will be made as `{PROXY_URL}/{originalURL}`, e.g., `PROXY_URL=https://proxy.example.com`. Leave empty to disable proxying.
+> - This repository's GitHub Actions has a built-in proxy address (Secrets), not available after forking.
+> - **Local**: Set `PROXY_URL=https://proxy.example.com` in `src/.env`, or edit `proxy.url` in `src/config.js`.
+> - **GitHub Actions**: Add `PROXY_URL` in Settings → Secrets and variables → Actions → Repository secrets.
 
 ## Automatic Updates
 

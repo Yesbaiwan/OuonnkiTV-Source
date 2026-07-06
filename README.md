@@ -36,7 +36,7 @@ node start.js
 
 ### 配置说明
 
-编辑 `config.js` 可自定义以下配置：
+编辑 `src/config.js` 可自定义以下配置：
 
 ```javascript
 module.exports = {
@@ -74,18 +74,18 @@ module.exports = {
     enable: true,       // 是否启用播放测速（false 时仅搜索检测）
     episodeCount: 3,    // 每个视频源测试的最大集数
     duration: 5000,     // 每次测速持续时间（毫秒）
-    concurrent: 3,      // 搜索+测速模式下的总并发数
+    concurrent: 3,      // 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
   },
 };
 ```
 
 > [!NOTE]
-> **关于代理 & `PROXY_URL` 环境变量**
+> **关于 `PROXY_URL` 环境变量**
 >
-> - 代理 URL 填写后将按照 `https://{proxy.url}/原始URL` 进行请求，请确保你的代理支持此格式，留空/未添加环境变量则不启用代理。
-> - 本仓库的 GitHub Actions 已内置代理地址（存储在 Secrets 中，未公开），Fork 后该变量不可用。
-> - **本地运行**：在项目根目录创建 `.env` 文件，写入 `PROXY_URL={your_proxy_url}` 或编辑 `config.js` 中的 `proxy.url`。
-> - **GitHub Actions**：在仓库 Settings → Secrets and variables → Actions → Repository secrets 中自行添加 `PROXY_URL` 变量。
+> - `PROXY_URL` 值为代理地址，请求时拼接为 `{PROXY_URL}/{原始URL}`，例如 `PROXY_URL=https://proxy.example.com`。留空则不启用代理。
+> - 本仓库的 GitHub Actions 已内置代理地址（Secrets），Fork 后该变量不可用。
+> - **本地**：在 `src/.env` 中写入 `PROXY_URL=https://proxy.example.com`，或编辑 `src/config.js` 的 `proxy.url`。
+> - **GitHub Actions**：在 Settings → Secrets and variables → Actions → Repository secrets 中添加 `PROXY_URL`。
 
 ## 自动更新
 

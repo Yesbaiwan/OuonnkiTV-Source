@@ -4,8 +4,8 @@
   "description": "为 OuonnkiTV 提供视频源配置",
   "scripts": {
     "start": "node start.js",
-    "format": "npx prettier --write scripts/ config.js start.js",
-    "format:check": "npx prettier --check scripts/ config.js start.js"
+    "format": "npx prettier --write src/ start.js",
+    "format:check": "npx prettier --check src/ start.js"
   },
   "dependencies": {
     "axios": "1.18.1",

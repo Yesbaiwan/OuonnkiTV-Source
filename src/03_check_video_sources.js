@@ -3,7 +3,7 @@ const path = require('path');
 const https = require('https');
 const Table = require('cli-table3');
 const axios = require('axios');
-const config = require('../config');
+const config = require('./config.js');
 
 const SEARCH_STATUS = { SUCCESS: 'success', NO_RESULTS: 'no_results', FAILED: 'failed' };
 
