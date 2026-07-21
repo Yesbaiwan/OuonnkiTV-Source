@@ -73,7 +73,7 @@ module.exports = {
   // duration: 每次测速持续时间（毫秒）
   // concurrent: 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
   playSpeedTest: {
-    enable: false,
+    enable: true,
     duration: 5000,
     concurrent: 6,
   },

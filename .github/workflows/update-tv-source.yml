@@ -41,7 +41,7 @@ jobs:
       - name: Commit and push changes
         run: |
           # 检查是否有文件变化
-          if [ -z "$(git status --porcelain tv_source/ log.txt)" ]; then
+          if [ -z "$(git status --porcelain tv_source/)" ]; then
             echo "✅ 数据源没有变化，无需提交"
             exit 0
           fi
@@ -51,7 +51,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # 添加所有生成的文件
-          git add tv_source/ log.txt
+          git add tv_source/
 
           # 提交更新
           git commit -m "自动更新 TV 源数据 ($(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S CST'))"
