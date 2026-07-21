@@ -26,17 +26,13 @@ const requestConfig = {
     console.log('正在下载: LunaTV-config.json');
 
     let response;
-    try {
-      response = await axios.get(url, requestConfig);
-      console.log('✓ 直接下载成功');
-    } catch (error) {
-      if (!useProxy) {
-        throw error;
-      }
-      console.log('直接下载失败，尝试使用代理...');
+    if (useProxy) {
       const proxiedUrl = `${config.proxy.url}/${url}`;
       response = await axios.get(proxiedUrl, requestConfig);
       console.log('✓ 代理下载成功');
+    } else {
+      response = await axios.get(url, requestConfig);
+      console.log('✓ 直接下载成功');
     }
 
     fs.writeFileSync(filepath, response.data, 'utf8');

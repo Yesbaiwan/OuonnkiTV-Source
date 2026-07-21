@@ -35,8 +35,8 @@ function printConfig() {
     ['下载使用代理', yn(p.url && p.download)],
     ['搜索使用代理', yn(p.url && p.search)],
     ['测速使用代理', yn(p.url && p.play)],
-    ['搜索关键词', s.keyword],
-    ['成人搜索关键词', s.adultKeyword || s.keyword],
+    ['搜索关键词', s.keywords.join(', ')],
+    ['成人搜索关键词', s.adultKeywords.join(', ')],
     ['请求超时', `${h.timeout}ms`],
     ['搜索并发', s.concurrent],
     ['最大重试', `${s.maxRetry} 次`],
@@ -47,7 +47,7 @@ function printConfig() {
   ];
 
   if (t.enable) {
-    items.push(['测速集数', t.episodeCount], ['测速时长', `${t.duration}ms`], ['测速并发', t.concurrent]);
+    items.push(['测速时长', `${t.duration}ms`], ['测速并发', t.concurrent]);
   }
 
   console.log('当前配置:');
@@ -72,10 +72,10 @@ function printConfig() {
 
     try {
       execSync(`node "${scriptPath}"`, { stdio: 'inherit', cwd: process.cwd() });
-      console.log(`\n>>> [成功] ${script} 执行完成\n`);
+      console.log(`\n✓ ${script} 完成\n`);
     } catch (error) {
-      console.error(`\n>>> [失败] ${script} 执行出错`);
-      console.error('错误:', error.message);
+      console.error(`\n✗ ${script} 失败`);
+      console.error('  错误:', error.message);
       process.exit(1);
     }
   }
