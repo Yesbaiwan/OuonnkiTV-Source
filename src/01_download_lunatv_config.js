@@ -25,9 +25,17 @@ const requestConfig = {
 
     console.log('正在下载: LunaTV-config.json');
 
+    const blockedHosts = /^(localhost|127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|169\.254\.)/;
+    const validateUrl = (urlStr) => {
+      const parsed = new URL(urlStr);
+      if (parsed.protocol !== 'https:') throw new Error(`Blocked non-HTTPS URL: ${urlStr}`);
+      if (blockedHosts.test(parsed.hostname)) throw new Error(`Blocked internal URL: ${urlStr}`);
+    };
+
     let response;
     if (useProxy) {
       const proxiedUrl = `${config.proxy.url}/${url}`;
+      validateUrl(proxiedUrl);
       response = await axios.get(proxiedUrl, requestConfig);
       console.log('✓ 代理下载成功');
     } else {
