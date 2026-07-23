@@ -54,28 +54,31 @@ module.exports = {
   },
 
   // 代理配置
+  //   url: 代理地址，优先级：环境变量 PROXY_URL > 此处默认值
+  //   download/search=true → 始终走代理
+  //   play=false → 先直连（含1次重试），失败后自动回退代理
+  //   注意：以上仅当 url 有值时生效；url 为空时全部直连
   proxy: {
-    url: "",        // 代理 URL，留空不启用
-    download: true, // 下载视频源时使用代理
-    search: true,   // 搜索检测/详情请求时使用代理
-    play: false,    // 播放测速时使用代理
+    url: process.env.PROXY_URL || '',
+    download: true,
+    search: true,
+    play: false,
   },
 
   // 搜索检测配置
   search: {
-    concurrent: 20,         // 仅搜索模式时的并发数
-    maxRetry: 2,            // 失败重试次数
-    retryDelay: 1000,       // 重试间隔（毫秒）
-    keyword: "斗罗大陆",     // 搜索关键词（正常视频源）
-    adultKeyword: "三上悠",  // 搜索关键词（成人视频源），留空则使用 keyword
+    concurrent: 20,             // 仅搜索模式时的并发数
+    maxRetry: 1,                // 每个关键词失败重试次数（多关键词本身相当于重试）
+    retryDelay: 1000,           // 重试间隔（毫秒）
+    keywords: ['哈哈哈哈', '斗破苍穹', '甄嬛传'],    // 普通视频搜索关键词列表
+    adultKeywords: ['三上悠亚', ...],  // 成人视频搜索关键词列表
   },
 
   // 播放测速配置
   playSpeedTest: {
-    enable: true,       // 是否启用播放测速（false 时仅搜索检测）
-    episodeCount: 3,    // 每个视频源测试的最大集数
-    duration: 5000,     // 每次测速持续时间（毫秒）
-    concurrent: 3,      // 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
+    enable: true,               // 是否启用播放测速（false 时仅搜索检测）
+    duration: 5000,             // 每次测速持续时间（毫秒）
+    concurrent: 6,              // 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
   },
 };
 ```

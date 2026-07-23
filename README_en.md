@@ -57,28 +57,31 @@ module.exports = {
   },
 
   // Proxy config
+  //   url: Proxy address, priority: PROXY_URL env var > default value here
+  //   download/search=true → always use proxy
+  //   play=false → try direct first (with 1 retry), fallback to proxy on failure
+  //   Note: only takes effect when url is set; all direct when url is empty
   proxy: {
-    url: "",        // Proxy URL, leave empty to disable
-    download: true, // Use proxy when downloading video sources
-    search: true,   // Use proxy when searching/fetching details
-    play: false,    // Use proxy when testing playback speed
+    url: process.env.PROXY_URL || '',
+    download: true,
+    search: true,
+    play: false,
   },
 
   // Search detection config
   search: {
-    concurrent: 20,         // Concurrent search requests (search-only mode)
-    maxRetry: 2,            // Number of retries on failure
-    retryDelay: 1000,       // Retry interval (milliseconds)
-    keyword: "斗罗大陆",     // Search keyword (normal video sources)
-    adultKeyword: "三上悠",  // Search keyword (adult video sources), leave empty to use keyword
+    concurrent: 20,             // Concurrent search requests (search-only mode)
+    maxRetry: 1,                // Retry count per keyword (multiple keywords already act as retries)
+    retryDelay: 1000,           // Retry interval (milliseconds)
+    keywords: ['哈哈哈哈', '斗破苍穹', '甄嬛传'],    // Search keywords for normal sources
+    adultKeywords: ['三上悠亚', ...],  // Search keywords for adult sources
   },
 
   // Playback speed test config
   playSpeedTest: {
-    enable: true,       // Whether to enable playback speed test (false means search check only)
-    episodeCount: 3,    // Maximum number of episodes to test per video source
-    duration: 5000,     // Duration of each speed test (milliseconds)
-    concurrent: 3,      // Total concurrency in search + speed test mode (overrides search.concurrent when enable=true)
+    enable: true,               // Whether to enable playback speed test (false means search check only)
+    duration: 5000,             // Duration of each speed test (milliseconds)
+    concurrent: 6,              // Total concurrency in search + speed test mode
   },
 };
 ```
