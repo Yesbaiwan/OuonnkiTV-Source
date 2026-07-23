@@ -15,6 +15,7 @@ Convert MoonTV/LunaTV video source configuration to [OuonnkiTV](https://github.c
 | full-noadult.json | Full clean version: Filtered video sources (no adult content)                     | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) |
 | full.json         | Full version: Filtered video sources (includes adult content)                     | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         |
 | adult.json        | Adult version: Adult content video sources only                                   | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        |
+| raw.json          | Raw version: All sources converted without any filtering/detection                | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         |
 
 ## Running Locally
 
@@ -35,7 +36,7 @@ Step-by-step execution requires running each script in the following order:
 | 01_download_lunatv_config.js | Download LunaTV original config | LunaTV-config.json                                  |
 | 02_process_lunatv_config.js  | Clean configuration data        | LunaTV-processed.json                               |
 | 03_check_video_sources.js    | Check source availability       | LunaTV-check-result.json                            |
-| 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format     | full.json, full-noadult.json, lite.json, adult.json |
+| 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format     | raw.json, full.json, full-noadult.json, lite.json, adult.json |
 
 ### Configuration Guide
 

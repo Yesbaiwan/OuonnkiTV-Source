@@ -12,6 +12,7 @@
 | full-noadult.json | 完整纯净版：筛选后的视频源（不含成人内容）                       | [原始链接](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [加速链接 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [加速链接 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) |
 | full.json         | 完整版：筛选后的视频源（包含成人内容）                           | [原始链接](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [加速链接 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [加速链接 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         |
 | adult.json        | 成人版：仅成人内容视频源                                         | [原始链接](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [加速链接 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [加速链接 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        |
+| raw.json          | 原始版：所有视频源未经检测的原始转换                             | [原始链接](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [加速链接 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [加速链接 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         |
 
 ## 本地运行
 
@@ -32,7 +33,7 @@ node start.js
 | 01_download_lunatv_config.js | 下载 LunaTV 原始配置  | LunaTV-config.json                                  |
 | 02_process_lunatv_config.js  | 清理配置数据          | LunaTV-processed.json                               |
 | 03_check_video_sources.js    | 检测源可用性          | LunaTV-check-result.json                            |
-| 04_convert_ouonnkitv.js      | 转换为 OuonnkiTV 格式 | full.json, full-noadult.json, lite.json, adult.json |
+| 04_convert_ouonnkitv.js      | 转换为 OuonnkiTV 格式 | raw.json, full.json, full-noadult.json, lite.json, adult.json |
 
 ### 配置说明
 
