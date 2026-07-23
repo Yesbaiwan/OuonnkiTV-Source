@@ -49,13 +49,6 @@
     "isEnabled": true
   },
   {
-    "id": "hsckzy-xyz",
-    "name": "黄色仓库",
-    "url": "https://hsckzy.xyz/api.php/provide/vod",
-    "detailUrl": "https://hsckzy.xyz",
-    "isEnabled": true
-  },
-  {
     "id": "apidanaizi-com",
     "name": "大奶子",
     "url": "https://apidanaizi.com/api.php/provide/vod",
@@ -137,20 +130,6 @@
     "name": "CK-资源",
     "url": "https://ckzy.me/api.php/provide/vod",
     "detailUrl": "https://ckzy.me",
-    "isEnabled": true
-  },
-  {
-    "id": "www-xxibaozyw-com",
-    "name": "细胞资源",
-    "url": "https://www.xxibaozyw.com/api.php/provide/vod",
-    "detailUrl": "https://www.xxibaozyw.com",
-    "isEnabled": true
-  },
-  {
-    "id": "xiangjiaozyw-com",
-    "name": "香蕉资源",
-    "url": "https://www.xiangjiaozyw.com/api.php/provide/vod",
-    "detailUrl": "https://www.xiangjiaozyw.com",
     "isEnabled": true
   },
   {
