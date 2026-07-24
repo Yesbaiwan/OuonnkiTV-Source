@@ -28,13 +28,6 @@
     "isEnabled": true
   },
   {
-    "id": "jszyapi-com",
-    "name": "极速资源",
-    "url": "https://jszyapi.com/api.php/provide/vod",
-    "detailUrl": "https://jszyapi.com",
-    "isEnabled": true
-  },
-  {
     "id": "www-moduzy-net",
     "name": "魔都资源",
     "url": "https://www.mdzyapi.com/api.php/provide/vod",
@@ -53,13 +46,6 @@
     "name": "速播资源",
     "url": "https://subocaiji.com/api.php/provide/vod",
     "detailUrl": "https://www.subozy.com",
-    "isEnabled": true
-  },
-  {
-    "id": "api-guangsuapi-com",
-    "name": "光速资源",
-    "url": "https://api.guangsuapi.com/api.php/provide/vod",
-    "detailUrl": "https://api.guangsuapi.com",
     "isEnabled": true
   },
   {
@@ -88,13 +74,6 @@
     "name": "豪华资源",
     "url": "https://hhzyapi.com/api.php/provide/vod",
     "detailUrl": "https://www.haohuazy.com",
-    "isEnabled": true
-  },
-  {
-    "id": "www-huyaapi-com",
-    "name": "虎牙资源",
-    "url": "https://www.huyaapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.huyaapi.com",
     "isEnabled": true
   },
   {
@@ -144,6 +123,13 @@
     "name": "小鸡资源",
     "url": "https://api.xiaojizy.live/provide/vod",
     "detailUrl": "https://xiaojizy.live",
+    "isEnabled": true
+  },
+  {
+    "id": "hsckzy-xyz",
+    "name": "黄色仓库",
+    "url": "https://hsckzy.xyz/api.php/provide/vod",
+    "detailUrl": "https://hsckzy.xyz",
     "isEnabled": true
   },
   {
@@ -228,6 +214,20 @@
     "name": "CK-资源",
     "url": "https://ckzy.me/api.php/provide/vod",
     "detailUrl": "https://ckzy.me",
+    "isEnabled": true
+  },
+  {
+    "id": "www-xxibaozyw-com",
+    "name": "细胞资源",
+    "url": "https://www.xxibaozyw.com/api.php/provide/vod",
+    "detailUrl": "https://www.xxibaozyw.com",
+    "isEnabled": true
+  },
+  {
+    "id": "xiangjiaozyw-com",
+    "name": "香蕉资源",
+    "url": "https://www.xiangjiaozyw.com/api.php/provide/vod",
+    "detailUrl": "https://www.xiangjiaozyw.com",
     "isEnabled": true
   },
   {
