@@ -3,11 +3,10 @@
  *
  * 检测流程：
  * 1. 多关键词搜索（按 config 配置的关键词列表依次尝试）
- * 2. 无关键词兜底（部分源不支持关键词搜索但 ac=list 可返回列表）
- * 3. 获取详情 → 解析播放链接
- * 4. 验证 M3U8 链（自动追踪 Master Playlist → Media Playlist）
- * 5. 验证视频分片内容（支持 MPEG-TS / AES-128 加密 / PNG/JPEG 伪装）
- * 6. 真实视频分片测速（5s 下载测速）
+ * 2. 获取详情 → 解析播放链接
+ * 3. 验证 M3U8 链（自动追踪 Master Playlist → Media Playlist）
+ * 4. 验证视频分片内容（支持 MPEG-TS / AES-128 加密 / PNG/JPEG 伪装）
+ * 5. 真实视频分片测速（5s 下载测速）
  */
 
 const fs = require('fs');
@@ -48,34 +47,36 @@ const clearLine = () => process.stdout.write('\r\x1b[K');
  *   - 如果 config.proxy.play = false 且配置了代理 → 先直连(重试1次)，失败回退代理
  *   - 如果没有配置代理（url 为空）→ 直连，不回退
  *
- * @param {string} url - 请求URL
  * @param {function(useProxy: boolean): Promise} requestFn - 实际请求函数，接收 useProxy 参数
  * @param {string} label - 日志标签
+ * @returns {Promise<object>} 请求结果，附加 usedProxy 字段标记本次是否走了代理
  */
-async function withProxyFallback(url, requestFn, label = '') {
-  const hasProxy = !!config.proxy.url;
-
+async function withProxyFallback(requestFn, label = '') {
   // 场景1: 配置了用代理 → 直接用，不回退
   if (config.proxy.play) {
-    return requestFn(true);
+    return { ...(await requestFn(true)), usedProxy: true };
   }
 
   // 场景2: 配置了不用代理，但有代理可用 → 先直连(重试1次)，失败回退代理
-  if (hasProxy) {
+  if (config.proxy.url) {
     let result = await requestFn(false);
-    if (result.success) return result;
+    if (result.success) return { ...result, usedProxy: false };
     log(`${label} 直连失败(${result.error || '?'})，重试中...`);
     result = await requestFn(false);
-    if (result.success) return result;
+    if (result.success) return { ...result, usedProxy: false };
     log(`${label} 直连重试仍失败，回退代理`);
-    return requestFn(true);
+    return { ...(await requestFn(true)), usedProxy: true };
   }
 
   // 场景3: 没有代理可用 → 直连
-  return requestFn(false);
+  return { ...(await requestFn(false)), usedProxy: false };
 }
 
 const proxyUrl = (url, use) => (use && config.proxy.url ? `${config.proxy.url}/${url}` : url);
+
+// 请求超时：走代理或没配代理时放宽到 2 倍（上限 10s）；直连试探用默认超时（失败还可回退代理）
+const requestTimeout = (useProxy) =>
+  useProxy || !config.proxy.url ? Math.min(config.http.timeout * 2, 10000) : config.http.timeout;
 
 // ==================== 日志 ====================
 
@@ -100,8 +101,8 @@ function saveLog() {
  * 从 M3U8 中正确解析引用 URL
  * M3U8 中的引用可能以三种形式出现：
  *   - http://...    → 绝对 URL
- *   /path/file     → 绝对路径（基于原域名）
- *   relative/file  → 相对路径（基于父 M3U8 所在目录）
+ *   - /path/file    → 绝对路径（基于原域名）
+ *   - relative/file → 相对路径（基于父 M3U8 所在目录）
  */
 function resolveM3U8Url(m3u8Url, ref) {
   if (ref.startsWith('http')) return ref;
@@ -109,8 +110,9 @@ function resolveM3U8Url(m3u8Url, ref) {
   if (ref.startsWith('/')) {
     try {
       const u = new URL(m3u8Url);
-      u.pathname = ref;
-      u.search = '';
+      const qIdx = ref.indexOf('?');
+      u.pathname = qIdx >= 0 ? ref.slice(0, qIdx) : ref;
+      u.search = qIdx >= 0 ? ref.slice(qIdx) : '';
       return u.href;
     } catch {
       const idx = m3u8Url.indexOf('/', 8);
@@ -139,7 +141,7 @@ function loadSources() {
 
 // ==================== 并发控制 ====================
 
-async function runWithLimit(tasks, limit, onProgress) {
+async function runWithLimit(tasks, limit) {
   const results = new Array(tasks.length);
   let index = 0;
   if (limit < 1) limit = 1;
@@ -147,7 +149,6 @@ async function runWithLimit(tasks, limit, onProgress) {
     const i = index++;
     if (i >= tasks.length) return;
     results[i] = await tasks[i]();
-    if (onProgress) onProgress(i, results[i]);
     await runNext();
   }
   await Promise.all(Array(Math.min(limit, tasks.length)).fill().map(runNext));
@@ -157,7 +158,7 @@ async function runWithLimit(tasks, limit, onProgress) {
 // ==================== 阶段 1：多关键词搜索 ====================
 
 async function checkSearch(api, keywords) {
-  // 策略 1: 按顺序尝试每个关键词
+  // 按顺序尝试每个关键词，命中即返回第一个视频
   for (const kw of keywords) {
     if (!kw) continue;
     for (let retry = 1; retry <= config.search.maxRetry; retry++) {
@@ -186,30 +187,6 @@ async function checkSearch(api, keywords) {
       }
     }
     await delay(200);
-  }
-
-  // 策略 2: 无关键词列表，不标记为搜索成功（这些源不支持关键词搜索）
-  for (let retry = 1; retry <= config.search.maxRetry; retry++) {
-    try {
-      const url = proxyUrl(`${api}?ac=list&pg=1`, config.proxy.search);
-      const res = await axiosInstance.get(url, {
-        timeout: config.http.timeout,
-        headers: config.http.headers,
-      });
-      const list = res.data?.list || [];
-      if (list.length > 0) {
-        return {
-          status: SEARCH_STATUS.FAILED,
-          duration: null,
-          firstVideo: null,
-          keyword: keywords[0] || '',
-          fallbackList: list,
-          fallbackReason: '不支持关键词搜索(仅列表可用)',
-        };
-      }
-    } catch {
-      /* 忽略 */
-    }
   }
 
   return { status: SEARCH_STATUS.FAILED, duration: null, firstVideo: null, keyword: keywords[0] || '' };
@@ -256,14 +233,11 @@ function extractM3U8Url(vodPlayUrl, vodPlayFrom) {
 // ==================== 阶段 3：验证 M3U8 并获取分片 URL ====================
 
 async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
-  if (depth > 3) return { success: false, reason: 'max_depth', chain: [] };
-  const chain = [];
+  if (depth > 3) return { success: false, reason: 'max_depth' };
 
   const fetchM3U8 = async (useProxy) => {
     const testUrl = proxyUrl(m3u8Url, useProxy);
-    // 统一用全局超时，最长不超过 10s
-    const hasProxy = !!config.proxy.url;
-    const timeout = (useProxy || !hasProxy) ? Math.min(config.http.timeout * 2, 10000) : config.http.timeout;
+    const timeout = requestTimeout(useProxy);
     try {
       const res = await axiosInstance({
         method: 'get',
@@ -272,18 +246,19 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
         timeout,
         headers: config.http.headers,
       });
-      return { success: true, data: res.data, headers: res.headers };
+      return { success: true, data: res.data };
     } catch (err) {
       return { success: false, error: err.code || err.message };
     }
   };
 
-  const m3u8Result = await withProxyFallback(m3u8Url, fetchM3U8, 'M3U8');
-  if (!m3u8Result.success) return { success: false, reason: `m3u8_error: ${m3u8Result.error}`, chain };
+  const m3u8Result = await withProxyFallback(fetchM3U8, 'M3U8');
+  if (!m3u8Result.success)
+    return { success: false, reason: `m3u8_error: ${m3u8Result.error}`, usedProxy: m3u8Result.usedProxy };
 
   const body = m3u8Result.data;
-  chain.push({ url: m3u8Url, size: body.length, contentType: m3u8Result.headers?.['content-type'] });
-  if (!body.startsWith('#EXTM3U')) return { success: false, reason: 'not_m3u8', chain };
+  if (!body.startsWith('#EXTM3U'))
+    return { success: false, reason: 'not_m3u8', usedProxy: m3u8Result.usedProxy };
 
   const lines = body.split('\n');
   const tags = [];
@@ -298,32 +273,33 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
     else if (!t.startsWith('#')) refs.push(t);
   }
 
+  // Master Playlist → 递归追踪第一个子流
   if (tags.includes('stream_inf') && !tags.includes('extinf')) {
-    if (refs.length === 0) return { success: false, reason: 'master_no_children', chain };
+    if (refs.length === 0) return { success: false, reason: 'master_no_children', usedProxy: m3u8Result.usedProxy };
     const childUrl = resolveM3U8Url(m3u8Url, refs[0]);
     const childResult = await verifyM3U8AndGetSegment(childUrl, depth + 1);
-    chain.push(...childResult.chain);
     return {
       success: childResult.success,
       reason: childResult.reason,
-      chain,
       segmentUrl: childResult.segmentUrl,
       hasEncryption: childResult.hasEncryption,
+      usedProxy: childResult.usedProxy ?? m3u8Result.usedProxy,
     };
   }
 
+  // Media Playlist → 取第一个分片
   if (tags.includes('extinf') && refs.length > 0) {
     const segmentUrl = resolveM3U8Url(m3u8Url, refs[0]);
     return {
       success: true,
       reason: hasEncryption ? 'media_playlist_encrypted' : 'media_playlist',
-      chain,
       segmentUrl,
       hasEncryption,
+      usedProxy: m3u8Result.usedProxy,
     };
   }
 
-  return { success: false, reason: 'unknown_m3u8_format', chain };
+  return { success: false, reason: 'unknown_m3u8_format', usedProxy: m3u8Result.usedProxy };
 }
 
 // ==================== 阶段 4：验证分片内容 ====================
@@ -340,11 +316,52 @@ function hasTSSyncAtOffset(buf, maxOffset = 500) {
   return { found: false };
 }
 
+// 分片文件格式魔数：各容器/编码文件的固定头部字节
+const SEG_MAGIC = {
+  TS_SYNC: 0x47,    // MPEG-TS 包同步字节（每 188 字节包首字节）
+  MP4: '66747970',  // "ftyp" box，MP4/ISO-BMFF 容器
+  WEBM: '1a45dfa3', // EBML 头，Matroska/WebM 容器
+  PNG: '89504e47',  // PNG 签名
+  JPEG: 'ffd8',     // JPEG 起始标记
+};
+
+// 根据分片字节判断真实类型（纯函数，便于单测）
+function classifySegment(chunk, hasEncryption) {
+  const len = chunk.length;
+  const firstBytesHex = len >= 4 ? chunk.slice(0, 4).toString('hex') : 'too_short';
+  const header = chunk.toString('utf8', 0, Math.min(512, len));
+
+  let segType = null;
+  let error = null;
+  if (chunk[0] === SEG_MAGIC.TS_SYNC) segType = 'MPEG-TS';
+  else if (firstBytesHex === SEG_MAGIC.MP4) segType = 'MP4';
+  else if (firstBytesHex === SEG_MAGIC.WEBM) segType = 'WebM';
+  else if (header.startsWith('#EXTM3U')) segType = 'M3U8 (nested)';
+  else if (len >= 512) {
+    const tsCheck = hasTSSyncAtOffset(chunk);
+    if (tsCheck.found) segType = `MPEG-TS (offset=${tsCheck.offset})`;
+  }
+
+  if (!segType) {
+    if (hasEncryption && len > 50000) segType = 'AES-128 encrypted';
+    else if (len > 100000 && (header.match(/[\x20-\x7E]/g) || []).length / header.length < 0.05)
+      segType = 'likely_encrypted_video';
+    else if (header.includes('<html') || header.includes('<!DOCTYP')) { segType = 'HTML'; error = 'HTML'; }
+    else if (header.startsWith('{') || header.startsWith('[')) { segType = 'JSON'; error = 'JSON'; }
+    else if (len < 50000 && (firstBytesHex === SEG_MAGIC.PNG || firstBytesHex.startsWith(SEG_MAGIC.JPEG))) {
+      segType = firstBytesHex === SEG_MAGIC.PNG ? 'PNG' : 'JPEG';
+      error = '纯图片';
+    } else if (len > 100000) segType = `unknown_but_large(${firstBytesHex})`;
+    else { segType = `Unknown (${firstBytesHex})`; error = '无法识别'; }
+  }
+
+  return { success: !error, segType, ...(error ? { error } : {}) };
+}
+
 async function verifySegment(segmentUrl, m3u8Info = {}) {
   const fetchChunk = async (useProxy) => {
     const testUrl = proxyUrl(segmentUrl, useProxy);
-    const hasProxy = !!config.proxy.url;
-    const timeout = (useProxy || !hasProxy) ? Math.min(config.http.timeout * 2, 10000) : config.http.timeout;
+    const timeout = requestTimeout(useProxy);
     try {
       const res = await axiosInstance({
         method: 'get',
@@ -358,7 +375,7 @@ async function verifySegment(segmentUrl, m3u8Info = {}) {
         const stream = res.data;
         stream.on('data', (d) => {
           data = Buffer.concat([data, d]);
-          if (data.length >= 65536) {
+          if (data.length >= 131072) {
             stream.destroy();
             resolve(data);
           }
@@ -372,52 +389,17 @@ async function verifySegment(segmentUrl, m3u8Info = {}) {
     }
   };
 
-  const result = await withProxyFallback(segmentUrl, fetchChunk, '分片');
-  if (!result.success) return { success: false, segType: 'error', error: result.error };
+  const result = await withProxyFallback(fetchChunk, '分片');
+  if (!result.success)
+    return { success: false, segType: 'error', error: result.error, usedProxy: result.usedProxy };
 
-  const chunk = result.data;
-  const len = chunk.length;
-  const firstBytesHex = len >= 4 ? chunk.slice(0, 4).toString('hex') : 'too_short';
-  const httpStatus = result.status;
-  const header = chunk.toString('utf8', 0, Math.min(512, len));
-
-  if (chunk[0] === 0x47) return { success: true, segType: 'MPEG-TS', bytesRead: len, httpStatus };
-  if (firstBytesHex === '66747970') return { success: true, segType: 'MP4', bytesRead: len, httpStatus };
-  if (firstBytesHex === '1a45dfa3') return { success: true, segType: 'WebM', bytesRead: len, httpStatus };
-  if (header.startsWith('#EXTM3U')) return { success: true, segType: 'M3U8 (nested)', bytesRead: len, httpStatus };
-  if (header.includes('EXT-X-KEY') && len < 5000)
-    return { success: true, segType: 'M3U8_with_key', bytesRead: len, httpStatus };
-
-  if (len >= 512) {
-    const tsCheck = hasTSSyncAtOffset(chunk);
-    if (tsCheck.found)
-      return { success: true, segType: `MPEG-TS (offset=${tsCheck.offset})`, bytesRead: len, httpStatus };
-  }
-
-  if (m3u8Info.hasEncryption && len > 50000)
-    return { success: true, segType: 'AES-128 encrypted', bytesRead: len, httpStatus };
-
-  if (len >= 512) {
-    const textRatio = (header.match(/[\x20-\x7E]/g) || []).length / header.length;
-    if (textRatio < 0.05 && len > 100000)
-      return { success: true, segType: 'likely_encrypted_video', bytesRead: len, httpStatus };
-  }
-
-  if (header.includes('<html') || header.includes('<!DOCTYP'))
-    return { success: false, segType: 'HTML', bytesRead: len, httpStatus, error: 'HTML' };
-  if (header.startsWith('{') || header.startsWith('['))
-    return { success: false, segType: 'JSON', bytesRead: len, httpStatus, error: 'JSON' };
-  if (len < 50000 && (firstBytesHex === '89504e47' || firstBytesHex.startsWith('ffd8')))
-    return {
-      success: false,
-      segType: firstBytesHex === '89504e47' ? 'PNG' : 'JPEG',
-      bytesRead: len,
-      httpStatus,
-      error: '纯图片',
-    };
-  if (len > 100000)
-    return { success: true, segType: `unknown_but_large(${firstBytesHex})`, bytesRead: len, httpStatus };
-  return { success: false, segType: `Unknown (${firstBytesHex})`, bytesRead: len, httpStatus, error: '无法识别' };
+  const classified = classifySegment(result.data, m3u8Info.hasEncryption);
+  return {
+    ...classified,
+    bytesRead: result.data.length,
+    httpStatus: result.status,
+    usedProxy: result.usedProxy,
+  };
 }
 
 // ==================== 阶段 5：分片测速 ====================
@@ -427,12 +409,18 @@ async function testSegmentSpeed(segmentUrl) {
     const testUrl = proxyUrl(segmentUrl, useProxy);
     const startTime = Date.now();
     let downloadedBytes = 0;
+    const speedOf = (elapsed) => ({
+      success: true,
+      duration: elapsed,
+      speedBytesPerSec: elapsed > 0 ? downloadedBytes / (elapsed / 1000) : 0,
+      bytesTotal: downloadedBytes,
+    });
     try {
       const res = await axiosInstance({
         method: 'get',
         url: testUrl,
         responseType: 'stream',
-        timeout: Math.min(config.http.timeout * 2, 10000),
+        timeout: requestTimeout(useProxy),
         headers: config.http.headers,
       });
       return new Promise((resolve) => {
@@ -440,23 +428,11 @@ async function testSegmentSpeed(segmentUrl) {
         stream.on('data', (chunk) => (downloadedBytes += chunk.length));
         const timeout = setTimeout(() => {
           stream.destroy();
-          const elapsed = Date.now() - startTime;
-          resolve({
-            success: true,
-            duration: elapsed,
-            speedBytesPerSec: elapsed > 0 ? downloadedBytes / (elapsed / 1000) : 0,
-            bytesTotal: downloadedBytes,
-          });
+          resolve(speedOf(Date.now() - startTime));
         }, config.playSpeedTest.duration);
         stream.on('end', () => {
           clearTimeout(timeout);
-          const elapsed = Date.now() - startTime;
-          resolve({
-            success: true,
-            duration: elapsed,
-            speedBytesPerSec: elapsed > 0 ? downloadedBytes / (elapsed / 1000) : 0,
-            bytesTotal: downloadedBytes,
-          });
+          resolve(speedOf(Date.now() - startTime));
         });
         stream.on('error', (err) => {
           clearTimeout(timeout);
@@ -479,7 +455,7 @@ async function testSegmentSpeed(segmentUrl) {
       };
     }
   };
-  return withProxyFallback(segmentUrl, doSpeedTest, '测速');
+  return withProxyFallback(doSpeedTest, '测速');
 }
 
 // ==================== 完整检测一个源 ====================
@@ -501,6 +477,7 @@ async function testSource(source) {
     usedKeyword: null,
     segmentType: null,
     speedBytesPerSec: null,
+    usedProxy: null,
     errorDetail: null,
     totalTime: null,
   };
@@ -545,6 +522,7 @@ async function testSource(source) {
   if (!m3u8Segment.success || !m3u8Segment.segmentUrl) {
     result.status = SOURCE_STATUS.M3U8_INVALID;
     result.errorDetail = m3u8Segment.reason;
+    result.usedProxy = m3u8Segment.usedProxy ?? null;
     result.totalTime = Date.now() - tStart;
     log(`M3U8 验证失败: ${m3u8Segment.reason}`, source.name);
     return result;
@@ -559,6 +537,7 @@ async function testSource(source) {
   if (!segResult.success) {
     result.status = SOURCE_STATUS.SEGMENT_INVALID;
     result.errorDetail = `分片内容无效: ${segResult.segType}`;
+    result.usedProxy = segResult.usedProxy ?? null;
     result.totalTime = Date.now() - tStart;
     log(`分片无效: ${segResult.segType}`, source.name);
     return result;
@@ -566,8 +545,9 @@ async function testSource(source) {
   log(`分片内容验证通过: ${segResult.segType}`, source.name);
 
   // ---- 阶段 6：测速 ----
+  let speedResult = null;
   if (config.playSpeedTest.enable) {
-    const speedResult = await testSegmentSpeed(m3u8Segment.segmentUrl);
+    speedResult = await testSegmentSpeed(m3u8Segment.segmentUrl);
     result.speedBytesPerSec = speedResult.speedBytesPerSec;
     log(
       speedResult.success
@@ -576,6 +556,8 @@ async function testSource(source) {
       source.name
     );
   }
+  // 任一步骤（M3U8 / 分片 / 测速）走过代理即记为 true
+  result.usedProxy = speedResult?.usedProxy || segResult.usedProxy || m3u8Segment.usedProxy || false;
 
   result.totalTime = Date.now() - tStart;
   result.status = SOURCE_STATUS.AVAILABLE;
@@ -655,7 +637,7 @@ function saveResults(results, duration) {
     isAdult: r.isAdult,
     status: r.status,
     search: { duration: r.searchDuration || null, usedKeyword: r.usedKeyword },
-    play: { avgSpeed: r.speedBytesPerSec || null, segmentType: r.segmentType },
+    play: { avgSpeed: r.speedBytesPerSec || null, segmentType: r.segmentType, usedProxy: r.usedProxy ?? null },
     errorDetail: r.errorDetail,
   }));
 
@@ -676,7 +658,6 @@ function saveResults(results, duration) {
     duration: `${duration}s`,
     stats: { total: results.length, available: results.filter((r) => r.status === SOURCE_STATUS.AVAILABLE).length },
     results: compatibleResults,
-    rawResults: results,
   };
 
   const dir = path.dirname(OUTPUT_FILE);
@@ -711,8 +692,10 @@ async function main() {
       const pct = Math.round((completedCount / totalCount) * 100);
       const bar = '█'.repeat(Math.floor(pct / 5)) + '░'.repeat(20 - Math.floor(pct / 5));
       clearLine();
-      const speedInfo = r.status === SOURCE_STATUS.AVAILABLE && r.speedBytesPerSec
-        ? ` ${(r.speedBytesPerSec / 1024).toFixed(0)}KB/s` : '';
+      const speedInfo =
+        r.status === SOURCE_STATUS.AVAILABLE && r.speedBytesPerSec
+          ? ` ${(r.speedBytesPerSec / 1024).toFixed(0)}KB/s`
+          : '';
       process.stdout.write(
         `[${bar}] ${pct}% (${completedCount}/${totalCount}) ${r.status === SOURCE_STATUS.AVAILABLE ? '✓' : '✗'} ${r.name}${speedInfo}`
       );
@@ -728,4 +711,7 @@ async function main() {
   console.log(`\n[完成] 耗时 ${duration}s`);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
