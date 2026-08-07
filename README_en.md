@@ -15,7 +15,7 @@ Convert MoonTV/LunaTV video source configuration to [OuonnkiTV](https://github.c
 | full-noadult.json | Full clean version: Filtered video sources (no adult content)                     | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full-noadult.json) |
 | full.json         | Full version: Filtered video sources (includes adult content)                     | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/full.json)         |
 | adult.json        | Adult version: Adult content video sources only                                   | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/adult.json)        |
-| raw.json          | Raw version: All sources converted without any filtering/detection                | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)         |
+| raw.json          | Raw version: All sources converted without any filtering/detection                | [Original](https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)          | [Mirror 1](https://gh-proxy.org/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)          | [Mirror 2](https://git.yylx.win/https://raw.githubusercontent.com/Yesbaiwan/OuonnkiTV-Source/main/tv_source/OuonnkiTV/raw.json)          |
 
 ## Running Locally
 
@@ -31,11 +31,11 @@ Execute all processing steps in one go: Download → Process → Check → Conve
 
 Step-by-step execution requires running each script in the following order:
 
-| Script                       | Function                        | Output                                              |
-| ---------------------------- | ------------------------------- | --------------------------------------------------- |
-| 01_download_lunatv_config.js | Download LunaTV original config | LunaTV-config.json                                  |
-| 02_process_lunatv_config.js  | Clean configuration data        | LunaTV-processed.json                               |
-| 03_check_video_sources.js    | Check source availability       | LunaTV-check-result.json                            |
+| Script                       | Function                        | Output                                                        |
+| ---------------------------- | ------------------------------- | ------------------------------------------------------------- |
+| 01_download_lunatv_config.js | Download LunaTV original config | LunaTV-config.json                                            |
+| 02_process_lunatv_config.js  | Clean configuration data        | LunaTV-processed.json                                         |
+| 03_check_video_sources.js    | Check source availability       | LunaTV-check-result.json                                      |
 | 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format     | raw.json, full.json, full-noadult.json, lite.json, adult.json |
 
 ### Configuration Guide
@@ -60,7 +60,7 @@ module.exports = {
   //   url: Proxy address, priority: PROXY_URL env var > default value here
   //   download/search=true → always use proxy
   //   play=false → try direct first (with 1 retry), fallback to proxy on failure
-  //   Note: only takes effect when url is set; all direct when url is empty
+  //   Note: only takes effect when url is set; all requests go direct when url is empty
   proxy: {
     url: process.env.PROXY_URL || '',
     download: true,
@@ -70,11 +70,11 @@ module.exports = {
 
   // Search detection config
   search: {
-    concurrent: 20,             // Concurrent search requests (search-only mode)
+    concurrent: 20,             // Concurrency for search-only mode
     maxRetry: 1,                // Retry count per keyword (multiple keywords already act as retries)
     retryDelay: 1000,           // Retry interval (milliseconds)
-    keywords: ['哈哈哈哈', '斗破苍穹', '甄嬛传'],    // Search keywords for normal sources
-    adultKeywords: ['三上悠亚', ...],  // Search keywords for adult sources
+    keywords: ['哈哈哈哈', '斗破苍穹', '甄嬛传'],    // Keywords for normal video sources
+    adultKeywords: ['三上悠亚', ...],  // Keywords for adult video sources
   },
 
   // Playback speed test config

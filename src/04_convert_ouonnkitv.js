@@ -45,12 +45,14 @@ function bySpeed(a, b) {
 
     const available = results.filter((r) => r.status === 'available');
     const normal = available.filter((r) => !r.isAdult);
+    const adult = available.filter((r) => r.isAdult);
 
+    // raw 从检测结果文件生成仅为转换方便，语义等同原始全量源（含失效源）
     const rows = [
       ['raw.json', saveJson('raw.json', results)],
       ['full.json', saveJson('full.json', available)],
       ['full-noadult.json', saveJson('full-noadult.json', normal)],
-      ['adult.json', saveJson('adult.json', available.filter((r) => r.isAdult))],
+      ['adult.json', saveJson('adult.json', adult)],
       ['lite.json', saveJson('lite.json', [...normal].sort(bySpeed).slice(0, LITE_LIMIT))],
     ];
 

@@ -157,9 +157,10 @@ async function runWithLimit(tasks, limit) {
 
 // ==================== 阶段 1：多关键词搜索 ====================
 
-async function checkSearch(api, keywords) {
+async function checkSearch(api, keywords, name) {
   // 按顺序尝试每个关键词，命中即返回第一个视频
-  for (const kw of keywords) {
+  for (let i = 0; i < keywords.length; i++) {
+    const kw = keywords[i];
     if (!kw) continue;
     for (let retry = 1; retry <= config.search.maxRetry; retry++) {
       try {
@@ -180,12 +181,16 @@ async function checkSearch(api, keywords) {
             resultCount: list.length,
           };
         }
+        log(`关键词 "${kw}" 无搜索结果`, name);
         break;
       } catch (err) {
-        log(`搜索失败 (${kw}, 重试${retry}/${config.search.maxRetry}): ${err.message}`);
+        log(`搜索失败 (关键词 "${kw}", 重试${retry}/${config.search.maxRetry}): ${err.message}`, name);
         if (retry < config.search.maxRetry) await delay(config.search.retryDelay);
       }
     }
+    // 当前关键词失败且还有剩余关键词时，明确记录换词重试
+    const next = keywords.slice(i + 1).find((k) => k);
+    if (next) log(`换下一个关键词 "${next}" 继续搜索`, name);
     await delay(200);
   }
 
@@ -257,8 +262,7 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
     return { success: false, reason: `m3u8_error: ${m3u8Result.error}`, usedProxy: m3u8Result.usedProxy };
 
   const body = m3u8Result.data;
-  if (!body.startsWith('#EXTM3U'))
-    return { success: false, reason: 'not_m3u8', usedProxy: m3u8Result.usedProxy };
+  if (!body.startsWith('#EXTM3U')) return { success: false, reason: 'not_m3u8', usedProxy: m3u8Result.usedProxy };
 
   const lines = body.split('\n');
   const tags = [];
@@ -318,11 +322,11 @@ function hasTSSyncAtOffset(buf, maxOffset = 500) {
 
 // 分片文件格式魔数：各容器/编码文件的固定头部字节
 const SEG_MAGIC = {
-  TS_SYNC: 0x47,    // MPEG-TS 包同步字节（每 188 字节包首字节）
-  MP4: '66747970',  // "ftyp" box，MP4/ISO-BMFF 容器
+  TS_SYNC: 0x47, // MPEG-TS 包同步字节（每 188 字节包首字节）
+  MP4: '66747970', // "ftyp" box，MP4/ISO-BMFF 容器
   WEBM: '1a45dfa3', // EBML 头，Matroska/WebM 容器
-  PNG: '89504e47',  // PNG 签名
-  JPEG: 'ffd8',     // JPEG 起始标记
+  PNG: '89504e47', // PNG 签名
+  JPEG: 'ffd8', // JPEG 起始标记
 };
 
 // 根据分片字节判断真实类型（纯函数，便于单测）
@@ -346,13 +350,20 @@ function classifySegment(chunk, hasEncryption) {
     if (hasEncryption && len > 50000) segType = 'AES-128 encrypted';
     else if (len > 100000 && (header.match(/[\x20-\x7E]/g) || []).length / header.length < 0.05)
       segType = 'likely_encrypted_video';
-    else if (header.includes('<html') || header.includes('<!DOCTYP')) { segType = 'HTML'; error = 'HTML'; }
-    else if (header.startsWith('{') || header.startsWith('[')) { segType = 'JSON'; error = 'JSON'; }
-    else if (len < 50000 && (firstBytesHex === SEG_MAGIC.PNG || firstBytesHex.startsWith(SEG_MAGIC.JPEG))) {
+    else if (header.includes('<html') || header.includes('<!DOCTYP')) {
+      segType = 'HTML';
+      error = 'HTML';
+    } else if (header.startsWith('{') || header.startsWith('[')) {
+      segType = 'JSON';
+      error = 'JSON';
+    } else if (len < 50000 && (firstBytesHex === SEG_MAGIC.PNG || firstBytesHex.startsWith(SEG_MAGIC.JPEG))) {
       segType = firstBytesHex === SEG_MAGIC.PNG ? 'PNG' : 'JPEG';
       error = '纯图片';
     } else if (len > 100000) segType = `unknown_but_large(${firstBytesHex})`;
-    else { segType = `Unknown (${firstBytesHex})`; error = '无法识别'; }
+    else {
+      segType = `Unknown (${firstBytesHex})`;
+      error = '无法识别';
+    }
   }
 
   return { success: !error, segType, ...(error ? { error } : {}) };
@@ -390,8 +401,7 @@ async function verifySegment(segmentUrl, m3u8Info = {}) {
   };
 
   const result = await withProxyFallback(fetchChunk, '分片');
-  if (!result.success)
-    return { success: false, segType: 'error', error: result.error, usedProxy: result.usedProxy };
+  if (!result.success) return { success: false, segType: 'error', error: result.error, usedProxy: result.usedProxy };
 
   const classified = classifySegment(result.data, m3u8Info.hasEncryption);
   return {
@@ -483,7 +493,7 @@ async function testSource(source) {
   };
 
   // ---- 阶段 1：多关键词搜索 ----
-  const searchResult = await checkSearch(source.api, searchKeywords);
+  const searchResult = await checkSearch(source.api, searchKeywords, source.name);
   result.searchDuration = searchResult.duration;
   result.usedKeyword = searchResult.keyword;
   if (searchResult.status !== SEARCH_STATUS.SUCCESS) {
@@ -653,7 +663,7 @@ function saveResults(results, duration) {
     }),
     playSpeedTestEnabled: config.playSpeedTest.enable,
     keywords: { normal: config.search.keywords, adult: config.search.adultKeywords },
-    proxyUrl: config.proxy.url,
+    // 不写入代理地址，避免提交到公开仓库泄露
     useProxy: { search: config.proxy.search, play: config.proxy.play },
     duration: `${duration}s`,
     stats: { total: results.length, available: results.filter((r) => r.status === SOURCE_STATUS.AVAILABLE).length },
