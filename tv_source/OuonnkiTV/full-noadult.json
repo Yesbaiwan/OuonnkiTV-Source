@@ -1,0 +1,44 @@
+[
+  {
+    "id": "iqiyizyapi-com",
+    "name": "爱奇艺",
+    "url": "https://iqiyizyapi.com/api.php/provide/vod",
+    "detailUrl": "https://iqiyizyapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "ikunzy-com",
+    "name": "iKun资源",
+    "url": "https://ikunzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://ikunzy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "cj-lzcaiji-com",
+    "name": "量子资源",
+    "url": "https://cj.lzcaiji.com/api.php/provide/vod",
+    "detailUrl": "https://cj.lzcaiji.com",
+    "isEnabled": true
+  },
+  {
+    "id": "jszyapi-com",
+    "name": "极速资源",
+    "url": "https://jszyapi.com/api.php/provide/vod",
+    "detailUrl": "https://jszyapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "www-moduzy-net",
+    "name": "魔都资源",
+    "url": "https://www.mdzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.moduzy.net",
+    "isEnabled": true
+  },
+  {
+    "id": "www-subozy-com",
+    "name": "速播资源",
+    "url": "https://subocaiji.com/api.php/provide/vod",
+    "detailUrl": "https://www.subozy.com",
+    "isEnabled": true
+  }
+]

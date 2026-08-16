@@ -1,0 +1,51 @@
+[
+  {
+    "id": "apilsbzy1-com",
+    "name": "老色逼",
+    "url": "https://apilsbzy1.com/api.php/provide/vod",
+    "detailUrl": "https://apilsbzy1.com",
+    "isEnabled": true
+  },
+  {
+    "id": "xiaojizy-live",
+    "name": "小鸡资源",
+    "url": "https://api.xiaojizy.live/provide/vod",
+    "detailUrl": "https://xiaojizy.live",
+    "isEnabled": true
+  },
+  {
+    "id": "apidanaizi-com",
+    "name": "大奶子",
+    "url": "https://apidanaizi.com/api.php/provide/vod",
+    "detailUrl": "https://apidanaizi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "doudouzy-com",
+    "name": "豆豆资源",
+    "url": "https://api.douapi.cc/api.php/provide/vod",
+    "detailUrl": "https://doudouzy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "didizy-com",
+    "name": "滴滴资源",
+    "url": "https://api.ddapi.cc/api.php/provide/vod",
+    "detailUrl": "https://didizy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "www-pgxdy-com",
+    "name": "黄AVZY",
+    "url": "https://www.pgxdy.com/api/json.php",
+    "detailUrl": "https://www.pgxdy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "xingba111-com",
+    "name": "杏吧资源",
+    "url": "https://xingba222.com/api.php/provide/vod",
+    "detailUrl": "https://xingba111.com",
+    "isEnabled": true
+  }
+]
