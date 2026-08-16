@@ -25,7 +25,7 @@ Convert MoonTV/LunaTV video source configuration to [OuonnkiTV](https://github.c
 node start.js
 ```
 
-Execute all processing steps in one go: Download → Process → Check → Convert.
+Execute all processing steps in one go: Download → Process → Check → Convert → Notify.
 
 ### Step-by-Step Execution
 
@@ -37,6 +37,7 @@ Step-by-step execution requires running each script in the following order:
 | 02_process_lunatv_config.js  | Clean configuration data        | LunaTV-processed.json                                         |
 | 03_check_video_sources.js    | Check source availability       | LunaTV-check-result.json                                      |
 | 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format     | raw.json, full.json, full-noadult.json, lite.json, adult.json |
+| 05_notify.js                 | Send Telegram notification (opt)| Telegram message notification                                  |
 
 ### Configuration Guide
 
@@ -86,13 +87,20 @@ module.exports = {
 };
 ```
 
-> [!NOTE]
-> **About the `PROXY_URL` Environment Variable**
->
-> - `PROXY_URL` is the proxy address. Requests will be made as `{PROXY_URL}/{originalURL}`, e.g., `PROXY_URL=https://proxy.example.com`. Leave empty to disable proxying.
-> - This repository's GitHub Actions has a built-in proxy address (Secrets), not available after forking.
-> - **Local**: Set `PROXY_URL=https://proxy.example.com` in `src/.env`, or edit `proxy.url` in `src/config.js`.
-> - **GitHub Actions**: Add `PROXY_URL` in Settings → Secrets and variables → Actions → Repository secrets.
+<details>
+<summary>Environment Variables</summary>
+
+Description:
+
+- `PROXY_URL`: Requests are made as `{PROXY_URL}/{originalURL}`. Make sure your proxy URL follows this format. Leave empty to disable proxying.
+- `TG_BOT_TOKEN` and `TG_CHAT_ID`: Optional. Fill in to enable script 05 to send notifications after daily detection.
+
+Configuration:
+
+- **Local**: Write to `src/.env`, or edit `src/config.js`
+- **GitHub Actions**: Add in Settings → Secrets and variables → Actions → Repository secrets (requires manual setup after forking)
+
+</details>
 
 ## Automatic Updates
 

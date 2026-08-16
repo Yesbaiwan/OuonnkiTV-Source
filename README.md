@@ -22,18 +22,19 @@
 node start.js
 ```
 
-一键执行所有处理步骤：下载 → 处理 → 检测 → 转换。
+一键执行所有处理步骤：下载 → 处理 → 检测 → 转换 → 通知。
 
 ### 分步运行
 
 分步运行需要按照以下顺序执行每个脚本：
 
-| 脚本                         | 功能                  | 输出                                                          |
-| ---------------------------- | --------------------- | ------------------------------------------------------------- |
-| 01_download_lunatv_config.js | 下载 LunaTV 原始配置  | LunaTV-config.json                                            |
-| 02_process_lunatv_config.js  | 清理配置数据          | LunaTV-processed.json                                         |
-| 03_check_video_sources.js    | 检测源可用性          | LunaTV-check-result.json                                      |
-| 04_convert_ouonnkitv.js      | 转换为 OuonnkiTV 格式 | raw.json, full.json, full-noadult.json, lite.json, adult.json |
+| 脚本                         | 功能                       | 输出                                                          |
+| ---------------------------- | -------------------------- | ------------------------------------------------------------- |
+| 01_download_lunatv_config.js | 下载 LunaTV 原始配置       | LunaTV-config.json                                            |
+| 02_process_lunatv_config.js  | 清理配置数据               | LunaTV-processed.json                                         |
+| 03_check_video_sources.js    | 检测源可用性               | LunaTV-check-result.json                                      |
+| 04_convert_ouonnkitv.js      | 转换为 OuonnkiTV 格式      | raw.json, full.json, full-noadult.json, lite.json, adult.json |
+| 05_notify.js                 | 发送 Telegram 通知（可选） | Telegram 消息通知                                             |
 
 ### 配置说明
 
@@ -83,13 +84,20 @@ module.exports = {
 };
 ```
 
-> [!NOTE]
-> **关于 `PROXY_URL` 环境变量**
->
-> - `PROXY_URL` 值为代理地址，请求时拼接为 `{PROXY_URL}/{原始URL}`，例如 `PROXY_URL=https://proxy.example.com`。留空则不启用代理。
-> - 本仓库的 GitHub Actions 已内置代理地址（Secrets），Fork 后该变量不可用。
-> - **本地**：在 `src/.env` 中写入 `PROXY_URL=https://proxy.example.com`，或编辑 `src/config.js` 的 `proxy.url`。
-> - **GitHub Actions**：在 Settings → Secrets and variables → Actions → Repository secrets 中添加 `PROXY_URL`。
+<details>
+<summary>环境变量说明</summary>
+
+说明：
+
+- `PROXY_URL`：请求时拼接为 `{PROXY_URL}/{原始URL}`，确保你的代理 URL 满足此格式，留空则不启用。
+- `TG_BOT_TOKEN` 和 `TG_CHAT_ID`：非必须，填写后脚本 05 会在每日检测完成后发送通知。
+
+配置方式：
+
+- **本地**：写入 `src/.env`，或编辑 `src/config.js`
+- **GitHub Actions**：在 Settings → Secrets and variables → Actions → Repository secrets 中，Fork 后需自行添加
+
+</details>
 
 ## 自动更新
 

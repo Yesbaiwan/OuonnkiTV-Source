@@ -12,6 +12,8 @@ package-lock.json
 Thumbs.db
 
 # AI
-.claude/
 .cursor/
 .trae/
+.claude/
+.pi/
+.zcode/

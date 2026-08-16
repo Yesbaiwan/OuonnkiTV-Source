@@ -38,6 +38,16 @@ const axiosInstance = axios.create({
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 const clearLine = () => process.stdout.write('\r\x1b[K');
+const fmtDate = () =>
+  new Date().toLocaleString('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
 /**
  * 代理回退辅助函数
@@ -158,10 +168,9 @@ async function runWithLimit(tasks, limit) {
 // ==================== 阶段 1：多关键词搜索 ====================
 
 async function checkSearch(api, keywords, name) {
-  // 按顺序尝试每个关键词，命中即返回第一个视频
+  // 按顺序尝试每个关键词（调用方已过滤空值），命中即返回第一个视频
   for (let i = 0; i < keywords.length; i++) {
     const kw = keywords[i];
-    if (!kw) continue;
     for (let retry = 1; retry <= config.search.maxRetry; retry++) {
       try {
         const url = proxyUrl(`${api}?ac=list&wd=${encodeURIComponent(kw)}&pg=1`, config.proxy.search);
@@ -188,8 +197,8 @@ async function checkSearch(api, keywords, name) {
         if (retry < config.search.maxRetry) await delay(config.search.retryDelay);
       }
     }
-    // 当前关键词失败且还有剩余关键词时，明确记录换词重试
-    const next = keywords.slice(i + 1).find((k) => k);
+    // 还有剩余关键词时，明确记录换词重试
+    const next = keywords[i + 1];
     if (next) log(`换下一个关键词 "${next}" 继续搜索`, name);
     await delay(200);
   }
@@ -470,12 +479,19 @@ async function testSegmentSpeed(segmentUrl) {
 
 // ==================== 完整检测一个源 ====================
 
+// 收尾结果：写入总耗时并合并覆盖字段（成败路径共用），可选记录日志
+function finishResult(result, overrides, logMsg, sourceName) {
+  result.totalTime = Date.now() - result._tStart;
+  Object.assign(result, overrides);
+  if (logMsg) log(logMsg, sourceName);
+  return result;
+}
+
 async function testSource(source) {
   const keywords = source.isAdult ? config.search.adultKeywords : config.search.keywords;
   const searchKeywords = Array.isArray(keywords) ? keywords.filter((k) => k) : [keywords].filter((k) => k);
   log(`开始测试`, source.name);
 
-  const tStart = Date.now();
   const result = {
     id: source.id,
     name: source.name,
@@ -490,6 +506,7 @@ async function testSource(source) {
     usedProxy: null,
     errorDetail: null,
     totalTime: null,
+    _tStart: Date.now(),
   };
 
   // ---- 阶段 1：多关键词搜索 ----
@@ -497,45 +514,50 @@ async function testSource(source) {
   result.searchDuration = searchResult.duration;
   result.usedKeyword = searchResult.keyword;
   if (searchResult.status !== SEARCH_STATUS.SUCCESS) {
-    result.status = SOURCE_STATUS.SEARCH_FAILED;
-    result.errorDetail = `所有关键词搜索均失败 (关键词: ${searchKeywords.join(', ')})`;
-    result.totalTime = Date.now() - tStart;
-    log(`搜索失败 (${result.errorDetail})`, source.name);
-    return result;
+    const msg = `所有关键词搜索均失败 (关键词: ${searchKeywords.join(', ')})`;
+    return finishResult(
+      result,
+      { status: SOURCE_STATUS.SEARCH_FAILED, errorDetail: msg },
+      `搜索失败: ${msg}`,
+      source.name
+    );
   }
   log(`搜索成功: "${searchResult.keyword}" → ${searchResult.firstVideo?.vod_name || '?'}`, source.name);
 
   // ---- 阶段 2：获取详情 ----
   const detailResult = await getPlayInfo(source.api, searchResult.firstVideo.vod_id);
   if (!detailResult.success) {
-    result.status = SOURCE_STATUS.DETAIL_FAILED;
-    result.errorDetail = detailResult.reason;
-    result.totalTime = Date.now() - tStart;
-    log(`详情失败: ${detailResult.reason}`, source.name);
-    return result;
+    return finishResult(
+      result,
+      { status: SOURCE_STATUS.DETAIL_FAILED, errorDetail: detailResult.reason },
+      `详情失败: ${detailResult.reason}`,
+      source.name
+    );
   }
   log(`详情获取成功: ${detailResult.video.vod_name}`, source.name);
 
   // ---- 阶段 3：解析 M3U8 URL ----
   const episodes = extractM3U8Url(detailResult.video.vod_play_url, detailResult.video.vod_play_from);
   if (!episodes) {
-    result.status = SOURCE_STATUS.PARSE_FAILED;
-    result.errorDetail = '从 vod_play_url 中未解析出有效 HTTP 链接';
-    result.totalTime = Date.now() - tStart;
-    log(`解析失败: ${result.errorDetail}`, source.name);
-    return result;
+    const msg = '从 vod_play_url 中未解析出有效 HTTP 链接';
+    return finishResult(
+      result,
+      { status: SOURCE_STATUS.PARSE_FAILED, errorDetail: msg },
+      `解析失败: ${msg}`,
+      source.name
+    );
   }
   log(`解析到 ${episodes.length} 个播放链接`, source.name);
 
   // ---- 阶段 4：验证 M3U8 并获取分片 ----
   const m3u8Segment = await verifyM3U8AndGetSegment(episodes[0].url);
   if (!m3u8Segment.success || !m3u8Segment.segmentUrl) {
-    result.status = SOURCE_STATUS.M3U8_INVALID;
-    result.errorDetail = m3u8Segment.reason;
-    result.usedProxy = m3u8Segment.usedProxy ?? null;
-    result.totalTime = Date.now() - tStart;
-    log(`M3U8 验证失败: ${m3u8Segment.reason}`, source.name);
-    return result;
+    return finishResult(
+      result,
+      { status: SOURCE_STATUS.M3U8_INVALID, errorDetail: m3u8Segment.reason, usedProxy: m3u8Segment.usedProxy ?? null },
+      `M3U8 验证失败: ${m3u8Segment.reason}`,
+      source.name
+    );
   }
   log(`M3U8 验证通过`, source.name);
   if (m3u8Segment.hasEncryption) log(`(M3U8 有 AES-128 加密标记)`, source.name);
@@ -545,12 +567,16 @@ async function testSource(source) {
   const segResult = await verifySegment(m3u8Segment.segmentUrl, m3u8Info);
   result.segmentType = segResult.segType;
   if (!segResult.success) {
-    result.status = SOURCE_STATUS.SEGMENT_INVALID;
-    result.errorDetail = `分片内容无效: ${segResult.segType}`;
-    result.usedProxy = segResult.usedProxy ?? null;
-    result.totalTime = Date.now() - tStart;
-    log(`分片无效: ${segResult.segType}`, source.name);
-    return result;
+    return finishResult(
+      result,
+      {
+        status: SOURCE_STATUS.SEGMENT_INVALID,
+        errorDetail: `分片内容无效: ${segResult.segType}`,
+        usedProxy: segResult.usedProxy ?? null,
+      },
+      `分片无效: ${segResult.segType}`,
+      source.name
+    );
   }
   log(`分片内容验证通过: ${segResult.segType}`, source.name);
 
@@ -569,9 +595,7 @@ async function testSource(source) {
   // 任一步骤（M3U8 / 分片 / 测速）走过代理即记为 true
   result.usedProxy = speedResult?.usedProxy || segResult.usedProxy || m3u8Segment.usedProxy || false;
 
-  result.totalTime = Date.now() - tStart;
-  result.status = SOURCE_STATUS.AVAILABLE;
-  return result;
+  return finishResult(result, { status: SOURCE_STATUS.AVAILABLE });
 }
 
 // ==================== 显示结果 ====================
@@ -614,8 +638,9 @@ function displayResults(results) {
     const totalTime = withTime.reduce((s, r) => s + r.totalTime, 0);
     const avgTime = totalTime / withTime.length;
     const times = withTime.map((r) => r.totalTime).sort((a, b) => a - b);
-    const availTimes =
-      avail > 0 ? results.filter((r) => r.status === SOURCE_STATUS.AVAILABLE).map((r) => r.totalTime) : [];
+    const availTimes = withTime
+      .filter((r) => r.status === SOURCE_STATUS.AVAILABLE)
+      .map((r) => r.totalTime);
     console.log(
       `[时间] 单个源平均 ${(avgTime / 1000).toFixed(1)}s | 最快 ${(times[0] / 1000).toFixed(1)}s | 最慢 ${(times[times.length - 1] / 1000).toFixed(1)}s`
     );
@@ -638,7 +663,7 @@ function displayResults(results) {
 
 // ==================== 保存结果 ====================
 
-function saveResults(results, duration) {
+function saveResults(results, duration, startDate) {
   const compatibleResults = results.map((r) => ({
     id: r.id,
     name: r.name,
@@ -652,15 +677,8 @@ function saveResults(results, duration) {
   }));
 
   const data = {
-    date: new Date().toLocaleString('zh-CN', {
-      timeZone: 'Asia/Shanghai',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    }),
+    startDate,
+    endDate: fmtDate(),
     playSpeedTestEnabled: config.playSpeedTest.enable,
     keywords: { normal: config.search.keywords, adult: config.search.adultKeywords },
     // 不写入代理地址，避免提交到公开仓库泄露
@@ -690,6 +708,7 @@ async function main() {
   const sources = loadSources();
   console.log(`[信息] 已加载 ${sources.length} 个视频源\n`);
 
+  const startDate = fmtDate();
   const totalCount = sources.length;
   let completedCount = 0;
   const startTime = Date.now();
@@ -716,7 +735,7 @@ async function main() {
 
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);
   displayResults(results);
-  saveResults(results, duration);
+  saveResults(results, duration, startDate);
   saveLog();
   console.log(`\n[完成] 耗时 ${duration}s`);
 }

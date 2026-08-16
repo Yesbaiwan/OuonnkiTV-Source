@@ -36,6 +36,8 @@ jobs:
         run: node start.js
         env:
           PROXY_URL: ${{ secrets.PROXY_URL }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
 
       # 5️⃣ 提交并推送生成的文件
       - name: Commit and push changes

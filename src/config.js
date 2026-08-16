@@ -77,4 +77,16 @@ module.exports = {
     duration: 5000,
     concurrent: 6,
   },
+
+  // 通知配置（脚本 05_notify.js）
+  // enable: 是否启用通知
+  // botToken: 环境变量 TG_BOT_TOKEN（Telegram Bot Token）
+  // chatId: 环境变量 TG_CHAT_ID（接收通知的聊天 ID）
+  // 注意: enable 为 true 且 botToken/chatId 都有值时才会发送通知；
+  // 直连失败自动回退 proxy.url 前缀代理；发送失败不阻塞数据更新流程
+  telegram: {
+    enable: true,
+    botToken: process.env.TG_BOT_TOKEN || '',
+    chatId: process.env.TG_CHAT_ID || '',
+  },
 };

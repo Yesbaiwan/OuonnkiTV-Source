@@ -7,6 +7,7 @@ const scripts = [
   '02_process_lunatv_config.js',
   '03_check_video_sources.js',
   '04_convert_ouonnkitv.js',
+  '05_notify.js',
 ];
 
 const scriptsDir = path.join(__dirname, 'src');
@@ -43,6 +44,7 @@ function printConfig() {
     ['重试间隔', `${s.retryDelay}ms`],
     ['跳过SSL验证', yn(h.skipSslVerification)],
     ['记录日志到文件', yn(config.log.toFile)],
+    ['Telegram 通知', config.telegram.enable ? yn(config.telegram.botToken && config.telegram.chatId) : '关闭'],
     ['播放测速', t.enable ? '开启' : '关闭'],
   ];
 
