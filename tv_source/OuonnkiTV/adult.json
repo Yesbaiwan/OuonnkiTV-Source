@@ -7,20 +7,6 @@
     "isEnabled": true
   },
   {
-    "id": "lbapiby-com",
-    "name": "AIvin",
-    "url": "http://lbapiby.com/api.php/provide/vod",
-    "detailUrl": "http://lbapiby.com",
-    "isEnabled": true
-  },
-  {
-    "id": "155zy2-com",
-    "name": "155-资源",
-    "url": "https://155api.com/api.php/provide/vod",
-    "detailUrl": "https://155zy2.com",
-    "isEnabled": true
-  },
-  {
     "id": "apiyutu-com",
     "name": "玉兔资源",
     "url": "https://apiyutu.com/api.php/provide/vod",
@@ -112,13 +98,6 @@
     "isEnabled": true
   },
   {
-    "id": "heiliaozy-cc",
-    "name": "黑料资源",
-    "url": "https://www.heiliaozyapi.com/api.php/provide/vod",
-    "detailUrl": "https://heiliaozy.cc",
-    "isEnabled": true
-  },
-  {
     "id": "thzy8-me",
     "name": "桃花资源",
     "url": "https://thzy1.me/api.php/provide/vod",
@@ -133,31 +112,10 @@
     "isEnabled": true
   },
   {
-    "id": "ckzy-me",
-    "name": "CK-资源",
-    "url": "https://ckzy.me/api.php/provide/vod",
-    "detailUrl": "https://ckzy.me",
-    "isEnabled": true
-  },
-  {
-    "id": "souavzyw-com",
-    "name": "souavZY",
-    "url": "https://api.souavzyw.net/api.php/provide/vod",
-    "detailUrl": "https://api.souavzyw.net",
-    "isEnabled": true
-  },
-  {
     "id": "www-xxibaozyw-com",
     "name": "细胞资源",
     "url": "https://www.xxibaozyw.com/api.php/provide/vod",
     "detailUrl": "https://www.xxibaozyw.com",
-    "isEnabled": true
-  },
-  {
-    "id": "xiangjiaozyw-com",
-    "name": "香蕉资源",
-    "url": "https://www.xiangjiaozyw.com/api.php/provide/vod",
-    "detailUrl": "https://www.xiangjiaozyw.com",
     "isEnabled": true
   },
   {
@@ -168,24 +126,10 @@
     "isEnabled": true
   },
   {
-    "id": "www-pgxdy-com",
-    "name": "黄AVZY",
-    "url": "https://www.pgxdy.com/api/json.php",
-    "detailUrl": "https://www.pgxdy.com",
-    "isEnabled": true
-  },
-  {
     "id": "www-kxgav-com",
     "name": "白嫖资源",
     "url": "https://www.kxgav.com/api/json.php",
     "detailUrl": "https://www.kxgav.com",
-    "isEnabled": true
-  },
-  {
-    "id": "xingba111-com",
-    "name": "杏吧资源",
-    "url": "https://xingba222.com/api.php/provide/vod",
-    "detailUrl": "https://xingba111.com",
     "isEnabled": true
   }
 ]
