@@ -7,34 +7,6 @@
     "isEnabled": true
   },
   {
-    "id": "www-huyaapi-com",
-    "name": "虎牙资源",
-    "url": "https://www.huyaapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.huyaapi.com",
-    "isEnabled": true
-  },
-  {
-    "id": "jszyapi-com",
-    "name": "极速资源",
-    "url": "https://jszyapi.com/api.php/provide/vod",
-    "detailUrl": "https://jszyapi.com",
-    "isEnabled": true
-  },
-  {
-    "id": "www-haohuazy-com",
-    "name": "豪华资源",
-    "url": "https://hhzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.haohuazy.com",
-    "isEnabled": true
-  },
-  {
-    "id": "api-guangsuapi-com",
-    "name": "光速资源",
-    "url": "https://api.guangsuapi.com/api.php/provide/vod",
-    "detailUrl": "https://api.guangsuapi.com",
-    "isEnabled": true
-  },
-  {
     "id": "xinlangapi-com",
     "name": "新浪资源",
     "url": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
@@ -49,10 +21,38 @@
     "isEnabled": true
   },
   {
+    "id": "api-guangsuapi-com",
+    "name": "光速资源",
+    "url": "https://api.guangsuapi.com/api.php/provide/vod",
+    "detailUrl": "https://api.guangsuapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "jszyapi-com",
+    "name": "极速资源",
+    "url": "https://jszyapi.com/api.php/provide/vod",
+    "detailUrl": "https://jszyapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "www-huyaapi-com",
+    "name": "虎牙资源",
+    "url": "https://www.huyaapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.huyaapi.com",
+    "isEnabled": true
+  },
+  {
     "id": "1080zyk4-com",
     "name": "优质资源",
     "url": "https://api.yzzy-api.com/inc/apijson.php",
     "detailUrl": "https://1080zyk4.com",
+    "isEnabled": true
+  },
+  {
+    "id": "www-haohuazy-com",
+    "name": "豪华资源",
+    "url": "https://hhzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.haohuazy.com",
     "isEnabled": true
   },
   {
@@ -70,24 +70,17 @@
     "isEnabled": true
   },
   {
-    "id": "zuidazy-co",
-    "name": "最大点播",
-    "url": "https://zuidazy.me/api.php/provide/vod",
-    "detailUrl": "https://zuidazy.co",
-    "isEnabled": true
-  },
-  {
-    "id": "www-moduzy-net",
-    "name": "魔都资源",
-    "url": "https://www.mdzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.moduzy.net",
-    "isEnabled": true
-  },
-  {
     "id": "zuida-xyz",
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
     "detailUrl": "https://zuida.xyz",
+    "isEnabled": true
+  },
+  {
+    "id": "zuidazy-co",
+    "name": "最大点播",
+    "url": "https://zuidazy.me/api.php/provide/vod",
+    "detailUrl": "https://zuidazy.co",
     "isEnabled": true
   },
   {
@@ -98,10 +91,17 @@
     "isEnabled": true
   },
   {
-    "id": "www-maoyanzy-com",
-    "name": "猫眼资源",
-    "url": "https://api.maoyanapi.top/api.php/provide/vod",
-    "detailUrl": "https://www.maoyanzy.com",
+    "id": "ffzyapi-com",
+    "name": "非凡资源",
+    "url": "https://api.ffzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://cj.ffzyapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "api-ukuapi88-com",
+    "name": "U酷影视",
+    "url": "https://api.ukuapi88.com/api.php/provide/vod",
+    "detailUrl": "https://www.ukuzy.com",
     "isEnabled": true
   }
 ]
