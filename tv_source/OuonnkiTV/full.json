@@ -105,13 +105,6 @@
     "isEnabled": true
   },
   {
-    "id": "www-haohuazy-com",
-    "name": "豪华资源",
-    "url": "https://hhzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.haohuazy.com",
-    "isEnabled": true
-  },
-  {
     "id": "lzizy-net",
     "name": "量子影视",
     "url": "https://cj.lziapi.com/api.php/provide/vod",
@@ -228,6 +221,13 @@
     "name": "奶香资源",
     "url": "https://Naixxzy.com/api.php/provide/vod",
     "detailUrl": "https://Naixxzy.com",
+    "isEnabled": true
+  },
+  {
+    "id": "slapibf-com",
+    "name": "森林资源",
+    "url": "https://beiyong.slapibf.com/api.php/provide/vod",
+    "detailUrl": "https://slapibf.com",
     "isEnabled": true
   },
   {

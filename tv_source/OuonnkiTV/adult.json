@@ -84,6 +84,13 @@
     "isEnabled": true
   },
   {
+    "id": "slapibf-com",
+    "name": "森林资源",
+    "url": "https://beiyong.slapibf.com/api.php/provide/vod",
+    "detailUrl": "https://slapibf.com",
+    "isEnabled": true
+  },
+  {
     "id": "apilj-com",
     "name": "辣椒资源",
     "url": "https://apilj.com/api.php/provide/vod",
