@@ -105,6 +105,13 @@
     "isEnabled": true
   },
   {
+    "id": "www-haohuazy-com",
+    "name": "豪华资源",
+    "url": "https://hhzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.haohuazy.com",
+    "isEnabled": true
+  },
+  {
     "id": "lzizy-net",
     "name": "量子影视",
     "url": "https://cj.lziapi.com/api.php/provide/vod",
