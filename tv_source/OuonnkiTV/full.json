@@ -1,19 +1,5 @@
 [
   {
-    "id": "iqiyizyapi-com",
-    "name": "爱奇艺",
-    "url": "https://iqiyizyapi.com/api.php/provide/vod",
-    "detailUrl": "https://iqiyizyapi.com",
-    "isEnabled": true
-  },
-  {
-    "id": "ikunzy-com",
-    "name": "iKun资源",
-    "url": "https://ikunzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://ikunzy.com",
-    "isEnabled": true
-  },
-  {
     "id": "dyttzyapi-com",
     "name": "电影天堂",
     "url": "http://caiji.dyttzyapi.com/api.php/provide/vod",
@@ -39,6 +25,13 @@
     "name": "极速资源",
     "url": "https://jszyapi.com/api.php/provide/vod",
     "detailUrl": "https://jszyapi.com",
+    "isEnabled": true
+  },
+  {
+    "id": "www-moduzy-net",
+    "name": "魔都资源",
+    "url": "https://www.mdzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.moduzy.net",
     "isEnabled": true
   },
   {
@@ -207,13 +200,6 @@
     "name": "大奶子",
     "url": "https://apidanaizi.com/api.php/provide/vod",
     "detailUrl": "https://apidanaizi.com",
-    "isEnabled": true
-  },
-  {
-    "id": "jkunzyapi-com",
-    "name": "jkun资源",
-    "url": "https://jkunzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://jkunzyapi.com",
     "isEnabled": true
   },
   {
