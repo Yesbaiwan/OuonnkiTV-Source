@@ -7,13 +7,6 @@
     "isEnabled": true
   },
   {
-    "id": "lbapiby-com",
-    "name": "AIvin",
-    "url": "http://lbapiby.com/api.php/provide/vod",
-    "detailUrl": "http://lbapiby.com",
-    "isEnabled": true
-  },
-  {
     "id": "155zy2-com",
     "name": "155-资源",
     "url": "https://155api.com/api.php/provide/vod",
@@ -144,6 +137,13 @@
     "name": "CK-资源",
     "url": "https://ckzy.me/api.php/provide/vod",
     "detailUrl": "https://ckzy.me",
+    "isEnabled": true
+  },
+  {
+    "id": "souavzyw-com",
+    "name": "souavZY",
+    "url": "https://api.souavzyw.net/api.php/provide/vod",
+    "detailUrl": "https://api.souavzyw.net",
     "isEnabled": true
   },
   {
