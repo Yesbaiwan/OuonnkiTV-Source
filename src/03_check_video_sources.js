@@ -33,6 +33,7 @@ const SOURCE_STATUS = {
 };
 
 const axiosInstance = axios.create({
+  timeout: config.http.timeout,
   httpsAgent: new https.Agent({ rejectUnauthorized: !config.http.skipSslVerification }),
 });
 
