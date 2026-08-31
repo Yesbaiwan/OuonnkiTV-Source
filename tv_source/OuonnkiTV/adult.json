@@ -14,10 +14,24 @@
     "isEnabled": true
   },
   {
+    "id": "apiyutu-com",
+    "name": "玉兔资源",
+    "url": "https://apiyutu.com/api.php/provide/vod",
+    "detailUrl": "https://apiyutu.com",
+    "isEnabled": true
+  },
+  {
     "id": "fhapi9-com",
     "name": "番号资源",
     "url": "http://fhapi9.com/api.php/provide/vod",
     "detailUrl": "http://fhapi9.com",
+    "isEnabled": true
+  },
+  {
+    "id": "apilsbzy1-com",
+    "name": "老色逼",
+    "url": "https://apilsbzy1.com/api.php/provide/vod",
+    "detailUrl": "https://apilsbzy1.com",
     "isEnabled": true
   },
   {
@@ -67,13 +81,6 @@
     "name": "森林资源",
     "url": "https://beiyong.slapibf.com/api.php/provide/vod",
     "detailUrl": "https://slapibf.com",
-    "isEnabled": true
-  },
-  {
-    "id": "apilj-com",
-    "name": "辣椒资源",
-    "url": "https://apilj.com/api.php/provide/vod",
-    "detailUrl": "https://apilj.com",
     "isEnabled": true
   },
   {
