@@ -91,13 +91,6 @@
     "isEnabled": true
   },
   {
-    "id": "shayuapi-com",
-    "name": "鲨鱼资源",
-    "url": "https://shayuapi.com/api.php/provide/vod",
-    "detailUrl": "https://shayuapi.com",
-    "isEnabled": true
-  },
-  {
     "id": "doudouzy-com",
     "name": "豆豆资源",
     "url": "https://api.douapi.cc/api.php/provide/vod",
