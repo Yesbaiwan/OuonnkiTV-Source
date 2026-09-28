@@ -25,17 +25,22 @@ function padEnd(str, width) {
 }
 
 function printConfig() {
-  const p = config.proxy;
   const h = config.http;
   const s = config.search;
   const t = config.playSpeedTest;
   const W = 18;
 
+  const modeLabel = (m) =>
+    ({ proxy: '走代理', direct: '直连', fallback: '直连优先,失败回退代理' })[m] || m;
+  const proxyModeText = (mode) =>
+    config.proxyUrl ? modeLabel(mode) : `${modeLabel(mode)}（未设代理,实际直连）`;
+
   const items = [
-    ['代理地址', p.url || '未设置'],
-    ['下载使用代理', yn(p.url && p.download)],
-    ['搜索使用代理', yn(p.url && p.search)],
-    ['测速使用代理', yn(p.url && p.play)],
+    ['代理地址', config.proxyUrl || '未设置'],
+    ['下载代理策略', proxyModeText(config.download.proxyMode)],
+    ['搜索代理策略', proxyModeText(config.search.proxyMode)],
+    ['测速代理策略', proxyModeText(config.playSpeedTest.proxyMode)],
+    ['通知代理策略', proxyModeText(config.telegram.proxyMode)],
     ['搜索关键词', s.keywords.join(', ')],
     ['成人搜索关键词', s.adultKeywords.join(', ')],
     ['请求超时', `${h.timeout}ms`],
@@ -44,7 +49,10 @@ function printConfig() {
     ['重试间隔', `${s.retryDelay}ms`],
     ['跳过SSL验证', yn(h.skipSslVerification)],
     ['记录日志到文件', yn(config.log.toFile)],
-    ['Telegram 通知', config.telegram.enable ? yn(config.telegram.botToken && config.telegram.chatId) : '关闭'],
+    [
+      'Telegram 通知',
+      config.telegram.enable ? yn(config.telegram.botToken && config.telegram.chatId) : '关闭',
+    ],
     ['播放测速', t.enable ? '开启' : '关闭'],
   ];
 

@@ -4,15 +4,23 @@
  * 读取 LunaTV-check-result.json 的检测统计和 OuonnkiTV 各版本源数量，
  * 通过 Telegram Bot API 发送每日检测报告。
  * 凭据从环境变量 TG_BOT_TOKEN / TG_CHAT_ID 读取（src/.env），
- * 未配置时自动跳过；直连失败自动回退 proxy.url 前缀代理；发送失败不阻塞数据更新主流程。
+ * 未配置时自动跳过；代理策略由 config.telegram.proxyMode 决定（默认 'fallback'：先直连，失败回退代理）；
+ * 发送失败不阻塞数据更新主流程。
  */
 
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const config = require('./config.js');
+const { applyProxy, tryWithProxy } = require('./proxy.js');
 
-const checkResultFile = path.join(__dirname, '..', 'tv_source', 'LunaTV', 'LunaTV-check-result.json');
+const checkResultFile = path.join(
+  __dirname,
+  '..',
+  'tv_source',
+  'LunaTV',
+  'LunaTV-check-result.json',
+);
 const outputDir = path.join(__dirname, '..', 'tv_source', 'OuonnkiTV');
 
 // 各版本输出文件（与 04_convert_ouonnkitv.js 的产出对应）
@@ -49,18 +57,17 @@ function buildMessage(check) {
   return lines.join('\n');
 }
 
-// 发送一条 Telegram 消息
+// 发送一条 Telegram 消息（按 telegram.proxyMode 依次尝试，代理未配置则只直连）
 async function sendTelegram(text) {
   const url = `https://api.telegram.org/bot${config.telegram.botToken}/sendMessage`;
   const payload = { chat_id: config.telegram.chatId, text };
 
-  try {
-    await axios.post(url, payload, { timeout: 5000 });
-  } catch (err) {
-    // 直连失败时回退 proxy.url 前缀代理
-    if (!config.proxy.url) throw err;
-    await axios.post(`${config.proxy.url}/${url}`, payload, { timeout: 15000 });
-  }
+  // 直连只试 1 次即回退（directRetries: 0）；超时统一用 config.http.timeout
+  await tryWithProxy(
+    config.telegram.proxyMode,
+    (useProxy) => axios.post(applyProxy(url, useProxy), payload, { timeout: config.http.timeout }),
+    { directRetries: 0 },
+  );
 }
 
 (async () => {

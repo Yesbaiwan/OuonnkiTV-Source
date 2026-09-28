@@ -15,6 +15,7 @@ const https = require('https');
 const Table = require('cli-table3');
 const axios = require('axios');
 const config = require('./config.js');
+const { applyProxy, tryWithProxy } = require('./proxy.js');
 
 // ==================== 常量 ====================
 
@@ -50,43 +51,16 @@ const fmtDate = () =>
   });
 
 /**
- * 代理回退辅助函数
- *
- * 设计：
- *   - 如果 config.proxy.play = true → 直接用代理，不回退
- *   - 如果 config.proxy.play = false 且配置了代理 → 先直连(重试1次)，失败回退代理
- *   - 如果没有配置代理（url 为空）→ 直连，不回退
- *
- * @param {function(useProxy: boolean): Promise} requestFn - 实际请求函数，接收 useProxy 参数
- * @param {string} label - 日志标签
- * @returns {Promise<object>} 请求结果，附加 usedProxy 字段标记本次是否走了代理
+ * 生成 tryWithProxy 的失败日志回调
+ * @param {string} label - 日志标签（'M3U8' / '分片' / '测速'）
  */
-async function withProxyFallback(requestFn, label = '') {
-  // 场景1: 配置了用代理 → 直接用，不回退
-  if (config.proxy.play) {
-    return { ...(await requestFn(true)), usedProxy: true };
-  }
-
-  // 场景2: 配置了不用代理，但有代理可用 → 先直连(重试1次)，失败回退代理
-  if (config.proxy.url) {
-    let result = await requestFn(false);
-    if (result.success) return { ...result, usedProxy: false };
-    log(`${label} 直连失败(${result.error || '?'})，重试中...`);
-    result = await requestFn(false);
-    if (result.success) return { ...result, usedProxy: false };
-    log(`${label} 直连重试仍失败，回退代理`);
-    return { ...(await requestFn(true)), usedProxy: true };
-  }
-
-  // 场景3: 没有代理可用 → 直连
-  return { ...(await requestFn(false)), usedProxy: false };
-}
-
-const proxyUrl = (url, use) => (use && config.proxy.url ? `${config.proxy.url}/${url}` : url);
-
-// 请求超时：走代理或没配代理时放宽到 2 倍（上限 10s）；直连试探用默认超时（失败还可回退代理）
-const requestTimeout = (useProxy) =>
-  useProxy || !config.proxy.url ? Math.min(config.http.timeout * 2, 10000) : config.http.timeout;
+const proxyLogOpts = (label) => ({
+  onFail: (err, useProxy, nextUseProxy) =>
+    log(
+      `${label} ${useProxy ? '代理' : '直连'}失败(${err.code || err.message})` +
+        (nextUseProxy === undefined ? '' : nextUseProxy ? '，回退代理' : '，重试中...'),
+    ),
+});
 
 // ==================== 日志 ====================
 
@@ -168,58 +142,90 @@ async function runWithLimit(tasks, limit) {
 // ==================== 阶段 1：多关键词搜索 ====================
 
 async function checkSearch(api, keywords, name) {
-  // 按顺序尝试每个关键词（调用方已过滤空值），命中即返回第一个视频
-  for (let i = 0; i < keywords.length; i++) {
-    const kw = keywords[i];
-    for (let retry = 1; retry <= config.search.maxRetry; retry++) {
-      try {
-        const url = proxyUrl(`${api}?ac=list&wd=${encodeURIComponent(kw)}&pg=1`, config.proxy.search);
-        const start = Date.now();
-        const res = await axiosInstance.get(url, {
-          timeout: config.http.timeout,
-          headers: config.http.headers,
-        });
-        const duration = Date.now() - start;
-        const list = res.data?.list || [];
-        if (list.length > 0) {
-          return {
-            status: SEARCH_STATUS.SUCCESS,
-            duration,
-            firstVideo: list[0],
-            keyword: kw,
-            resultCount: list.length,
-          };
+  // 单轮尝试：按顺序试每个关键词（调用方已过滤空值），命中即返回第一个视频；全轮失败抛错
+  const sweep = async (useProxy) => {
+    for (let i = 0; i < keywords.length; i++) {
+      const kw = keywords[i];
+      for (let retry = 1; retry <= config.search.maxRetry; retry++) {
+        try {
+          // ac=videolist 与上游 OuonnkiTV 的搜索/详情参数保持一致（ac=list 在个别源上不被支持）
+          const url = applyProxy(`${api}?ac=videolist&wd=${encodeURIComponent(kw)}&pg=1`, useProxy);
+          const start = Date.now();
+          const res = await axiosInstance.get(url, {
+            timeout: config.http.timeout,
+            headers: config.http.headers,
+          });
+          const list = res.data?.list || [];
+          if (list.length > 0) {
+            return {
+              status: SEARCH_STATUS.SUCCESS,
+              duration: Date.now() - start,
+              firstVideo: list[0],
+              keyword: kw,
+            };
+          }
+          log(`关键词 "${kw}" 无搜索结果`, name);
+          break;
+        } catch (err) {
+          log(
+            `搜索失败 (关键词 "${kw}", 重试${retry}/${config.search.maxRetry}): ${err.message}`,
+            name,
+          );
+          if (retry < config.search.maxRetry) await delay(config.search.retryDelay);
         }
-        log(`关键词 "${kw}" 无搜索结果`, name);
-        break;
-      } catch (err) {
-        log(`搜索失败 (关键词 "${kw}", 重试${retry}/${config.search.maxRetry}): ${err.message}`, name);
-        if (retry < config.search.maxRetry) await delay(config.search.retryDelay);
       }
+      // 还有剩余关键词时，明确记录换词重试
+      const next = keywords[i + 1];
+      if (next) log(`换下一个关键词 "${next}" 继续搜索`, name);
+      await delay(200);
     }
-    // 还有剩余关键词时，明确记录换词重试
-    const next = keywords[i + 1];
-    if (next) log(`换下一个关键词 "${next}" 继续搜索`, name);
-    await delay(200);
-  }
+    throw new Error('所有关键词均无结果');
+  };
 
-  return { status: SEARCH_STATUS.FAILED, duration: null, firstVideo: null, keyword: keywords[0] || '' };
+  // 'fallback' 为整轮语义：直连把所有关键词跑完均失败，才换代理再来一轮
+  // （每轮内部已逐关键词记日志，这里不再挂 onFail，避免与 testSource 的收尾日志重复）
+  try {
+    const { result } = await tryWithProxy(config.search.proxyMode, sweep);
+    return result;
+  } catch {
+    return {
+      status: SEARCH_STATUS.FAILED,
+      duration: null,
+      firstVideo: null,
+      keyword: keywords[0] || '',
+    };
+  }
 }
 
 // ==================== 阶段 2：获取详情 + 解析 M3U8 URL ====================
 
 async function getPlayInfo(api, vodId) {
   try {
-    const url = proxyUrl(`${api}?ac=detail&ids=${vodId}`, config.proxy.search);
-    const start = Date.now();
-    const res = await axiosInstance.get(url, { timeout: config.http.timeout, headers: config.http.headers });
-    const duration = Date.now() - start;
-    const video = res.data?.list?.[0];
-    if (!video) return { success: false, reason: 'detail_empty' };
-    if (!video.vod_play_url) return { success: false, reason: 'no_vod_play_url' };
-    return { success: true, duration, video };
+    // 与搜索同一 proxyMode（搜索/详情同属源接口访问）
+    const { result } = await tryWithProxy(
+      config.search.proxyMode,
+      async (useProxy) => {
+        const url = applyProxy(`${api}?ac=detail&ids=${vodId}`, useProxy);
+        const start = Date.now();
+        const res = await axiosInstance.get(url, {
+          timeout: config.http.timeout,
+          headers: config.http.headers,
+        });
+        const video = res.data?.list?.[0];
+        // 响应正常但内容缺失属于源数据问题，标记 noRetry，不换代理重复请求
+        if (!video) throw Object.assign(new Error('detail_empty'), { noRetry: true });
+        if (!video.vod_play_url)
+          throw Object.assign(new Error('no_vod_play_url'), { noRetry: true });
+        return { success: true, duration: Date.now() - start, video };
+      },
+      proxyLogOpts('详情'),
+    );
+    return result;
   } catch (err) {
-    return { success: false, reason: `detail_error: ${err.code || err.message}` };
+    return {
+      success: false,
+      reason: err.noRetry ? err.message : `detail_error: ${err.code || err.message}`,
+    };
   }
 }
 
@@ -250,28 +256,32 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
   if (depth > 3) return { success: false, reason: 'max_depth' };
 
   const fetchM3U8 = async (useProxy) => {
-    const testUrl = proxyUrl(m3u8Url, useProxy);
-    const timeout = requestTimeout(useProxy);
-    try {
-      const res = await axiosInstance({
-        method: 'get',
-        url: testUrl,
-        responseType: 'text',
-        timeout,
-        headers: config.http.headers,
-      });
-      return { success: true, data: res.data };
-    } catch (err) {
-      return { success: false, error: err.code || err.message };
-    }
+    const res = await axiosInstance({
+      method: 'get',
+      url: applyProxy(m3u8Url, useProxy),
+      responseType: 'text',
+      timeout: config.http.timeout,
+      headers: config.http.headers,
+    });
+    return res.data;
   };
 
-  const m3u8Result = await withProxyFallback(fetchM3U8, 'M3U8');
-  if (!m3u8Result.success)
-    return { success: false, reason: `m3u8_error: ${m3u8Result.error}`, usedProxy: m3u8Result.usedProxy };
+  let body, usedProxy;
+  try {
+    ({ result: body, usedProxy } = await tryWithProxy(
+      config.playSpeedTest.proxyMode,
+      fetchM3U8,
+      proxyLogOpts('M3U8'),
+    ));
+  } catch (err) {
+    return {
+      success: false,
+      reason: `m3u8_error: ${err.code || err.message}`,
+      usedProxy: err.usedProxy,
+    };
+  }
 
-  const body = m3u8Result.data;
-  if (!body.startsWith('#EXTM3U')) return { success: false, reason: 'not_m3u8', usedProxy: m3u8Result.usedProxy };
+  if (!body.startsWith('#EXTM3U')) return { success: false, reason: 'not_m3u8', usedProxy };
 
   const lines = body.split('\n');
   const tags = [];
@@ -288,7 +298,7 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
 
   // Master Playlist → 递归追踪第一个子流
   if (tags.includes('stream_inf') && !tags.includes('extinf')) {
-    if (refs.length === 0) return { success: false, reason: 'master_no_children', usedProxy: m3u8Result.usedProxy };
+    if (refs.length === 0) return { success: false, reason: 'master_no_children', usedProxy };
     const childUrl = resolveM3U8Url(m3u8Url, refs[0]);
     const childResult = await verifyM3U8AndGetSegment(childUrl, depth + 1);
     return {
@@ -296,7 +306,7 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
       reason: childResult.reason,
       segmentUrl: childResult.segmentUrl,
       hasEncryption: childResult.hasEncryption,
-      usedProxy: childResult.usedProxy ?? m3u8Result.usedProxy,
+      usedProxy: childResult.usedProxy ?? usedProxy,
     };
   }
 
@@ -308,11 +318,11 @@ async function verifyM3U8AndGetSegment(m3u8Url, depth = 0) {
       reason: hasEncryption ? 'media_playlist_encrypted' : 'media_playlist',
       segmentUrl,
       hasEncryption,
-      usedProxy: m3u8Result.usedProxy,
+      usedProxy,
     };
   }
 
-  return { success: false, reason: 'unknown_m3u8_format', usedProxy: m3u8Result.usedProxy };
+  return { success: false, reason: 'unknown_m3u8_format', usedProxy };
 }
 
 // ==================== 阶段 4：验证分片内容 ====================
@@ -365,7 +375,10 @@ function classifySegment(chunk, hasEncryption) {
     } else if (header.startsWith('{') || header.startsWith('[')) {
       segType = 'JSON';
       error = 'JSON';
-    } else if (len < 50000 && (firstBytesHex === SEG_MAGIC.PNG || firstBytesHex.startsWith(SEG_MAGIC.JPEG))) {
+    } else if (
+      len < 50000 &&
+      (firstBytesHex === SEG_MAGIC.PNG || firstBytesHex.startsWith(SEG_MAGIC.JPEG))
+    ) {
       segType = firstBytesHex === SEG_MAGIC.PNG ? 'PNG' : 'JPEG';
       error = '纯图片';
     } else if (len > 100000) segType = `unknown_but_large(${firstBytesHex})`;
@@ -380,101 +393,107 @@ function classifySegment(chunk, hasEncryption) {
 
 async function verifySegment(segmentUrl, m3u8Info = {}) {
   const fetchChunk = async (useProxy) => {
-    const testUrl = proxyUrl(segmentUrl, useProxy);
-    const timeout = requestTimeout(useProxy);
-    try {
-      const res = await axiosInstance({
-        method: 'get',
-        url: testUrl,
-        responseType: 'stream',
-        timeout,
-        headers: { ...config.http.headers, Range: 'bytes=0-131072' },
+    const res = await axiosInstance({
+      method: 'get',
+      url: applyProxy(segmentUrl, useProxy),
+      responseType: 'stream',
+      timeout: config.http.timeout,
+      headers: { ...config.http.headers, Range: 'bytes=0-131072' },
+    });
+    const chunk = await new Promise((resolve, reject) => {
+      let data = Buffer.alloc(0);
+      const stream = res.data;
+      stream.on('data', (d) => {
+        data = Buffer.concat([data, d]);
+        if (data.length >= 131072) {
+          stream.destroy();
+          resolve(data);
+        }
       });
-      const chunk = await new Promise((resolve, reject) => {
-        let data = Buffer.alloc(0);
-        const stream = res.data;
-        stream.on('data', (d) => {
-          data = Buffer.concat([data, d]);
-          if (data.length >= 131072) {
-            stream.destroy();
-            resolve(data);
-          }
-        });
-        stream.on('end', () => resolve(data));
-        stream.on('error', (err) => reject(err));
-      });
-      return { success: true, data: chunk, status: res.status };
-    } catch (err) {
-      return { success: false, error: err.code || err.message };
-    }
+      stream.on('end', () => resolve(data));
+      stream.on('error', (err) => reject(err));
+    });
+    return { chunk, status: res.status };
   };
 
-  const result = await withProxyFallback(fetchChunk, '分片');
-  if (!result.success) return { success: false, segType: 'error', error: result.error, usedProxy: result.usedProxy };
+  let chunk, httpStatus, usedProxy;
+  try {
+    ({
+      result: { chunk, status: httpStatus },
+      usedProxy,
+    } = await tryWithProxy(config.playSpeedTest.proxyMode, fetchChunk, proxyLogOpts('分片')));
+  } catch (err) {
+    return {
+      success: false,
+      segType: 'error',
+      error: err.code || err.message,
+      usedProxy: err.usedProxy,
+    };
+  }
 
-  const classified = classifySegment(result.data, m3u8Info.hasEncryption);
+  const classified = classifySegment(chunk, m3u8Info.hasEncryption);
   return {
     ...classified,
-    bytesRead: result.data.length,
-    httpStatus: result.status,
-    usedProxy: result.usedProxy,
+    bytesRead: chunk.length,
+    httpStatus,
+    usedProxy,
   };
 }
 
 // ==================== 阶段 5：分片测速 ====================
 
 async function testSegmentSpeed(segmentUrl) {
+  // 抛错风格的尝试：请求建立失败或下载流中断都会被 tryWithProxy 捕获并按序列回退
   const doSpeedTest = async (useProxy) => {
-    const testUrl = proxyUrl(segmentUrl, useProxy);
     const startTime = Date.now();
     let downloadedBytes = 0;
-    const speedOf = (elapsed) => ({
+    const speedOf = () => ({
       success: true,
-      duration: elapsed,
-      speedBytesPerSec: elapsed > 0 ? downloadedBytes / (elapsed / 1000) : 0,
+      duration: Date.now() - startTime,
+      speedBytesPerSec: downloadedBytes / ((Date.now() - startTime) / 1000),
       bytesTotal: downloadedBytes,
     });
-    try {
-      const res = await axiosInstance({
-        method: 'get',
-        url: testUrl,
-        responseType: 'stream',
-        timeout: requestTimeout(useProxy),
-        headers: config.http.headers,
+    const res = await axiosInstance({
+      method: 'get',
+      url: applyProxy(segmentUrl, useProxy),
+      responseType: 'stream',
+      timeout: config.http.timeout,
+      headers: config.http.headers,
+    });
+    return new Promise((resolve, reject) => {
+      const stream = res.data;
+      stream.on('data', (chunk) => (downloadedBytes += chunk.length));
+      const timeout = setTimeout(() => {
+        stream.destroy();
+        resolve(speedOf());
+      }, config.playSpeedTest.duration);
+      stream.on('end', () => {
+        clearTimeout(timeout);
+        resolve(speedOf());
       });
-      return new Promise((resolve) => {
-        const stream = res.data;
-        stream.on('data', (chunk) => (downloadedBytes += chunk.length));
-        const timeout = setTimeout(() => {
-          stream.destroy();
-          resolve(speedOf(Date.now() - startTime));
-        }, config.playSpeedTest.duration);
-        stream.on('end', () => {
-          clearTimeout(timeout);
-          resolve(speedOf(Date.now() - startTime));
-        });
-        stream.on('error', (err) => {
-          clearTimeout(timeout);
-          resolve({
-            success: false,
-            duration: Date.now() - startTime,
-            error: err.message,
-            speedBytesPerSec: 0,
-            bytesTotal: downloadedBytes,
-          });
-        });
+      stream.on('error', (err) => {
+        clearTimeout(timeout);
+        reject(err);
       });
-    } catch (err) {
-      return {
-        success: false,
-        duration: Date.now() - startTime,
-        error: err.code || err.message,
-        speedBytesPerSec: 0,
-        bytesTotal: 0,
-      };
-    }
+    });
   };
-  return withProxyFallback(doSpeedTest, '测速');
+
+  try {
+    const { result, usedProxy } = await tryWithProxy(
+      config.playSpeedTest.proxyMode,
+      doSpeedTest,
+      proxyLogOpts('测速'),
+    );
+    return { ...result, usedProxy };
+  } catch (err) {
+    return {
+      success: false,
+      error: err.code || err.message,
+      speedBytesPerSec: 0,
+      bytesTotal: 0,
+      usedProxy: err.usedProxy,
+    };
+  }
 }
 
 // ==================== 完整检测一个源 ====================
@@ -489,7 +508,9 @@ function finishResult(result, overrides, logMsg, sourceName) {
 
 async function testSource(source) {
   const keywords = source.isAdult ? config.search.adultKeywords : config.search.keywords;
-  const searchKeywords = Array.isArray(keywords) ? keywords.filter((k) => k) : [keywords].filter((k) => k);
+  const searchKeywords = Array.isArray(keywords)
+    ? keywords.filter((k) => k)
+    : [keywords].filter((k) => k);
   log(`开始测试`, source.name);
 
   const result = {
@@ -519,10 +540,13 @@ async function testSource(source) {
       result,
       { status: SOURCE_STATUS.SEARCH_FAILED, errorDetail: msg },
       `搜索失败: ${msg}`,
-      source.name
+      source.name,
     );
   }
-  log(`搜索成功: "${searchResult.keyword}" → ${searchResult.firstVideo?.vod_name || '?'}`, source.name);
+  log(
+    `搜索成功: "${searchResult.keyword}" → ${searchResult.firstVideo?.vod_name || '?'}`,
+    source.name,
+  );
 
   // ---- 阶段 2：获取详情 ----
   const detailResult = await getPlayInfo(source.api, searchResult.firstVideo.vod_id);
@@ -531,20 +555,23 @@ async function testSource(source) {
       result,
       { status: SOURCE_STATUS.DETAIL_FAILED, errorDetail: detailResult.reason },
       `详情失败: ${detailResult.reason}`,
-      source.name
+      source.name,
     );
   }
   log(`详情获取成功: ${detailResult.video.vod_name}`, source.name);
 
   // ---- 阶段 3：解析 M3U8 URL ----
-  const episodes = extractM3U8Url(detailResult.video.vod_play_url, detailResult.video.vod_play_from);
+  const episodes = extractM3U8Url(
+    detailResult.video.vod_play_url,
+    detailResult.video.vod_play_from,
+  );
   if (!episodes) {
     const msg = '从 vod_play_url 中未解析出有效 HTTP 链接';
     return finishResult(
       result,
       { status: SOURCE_STATUS.PARSE_FAILED, errorDetail: msg },
       `解析失败: ${msg}`,
-      source.name
+      source.name,
     );
   }
   log(`解析到 ${episodes.length} 个播放链接`, source.name);
@@ -554,9 +581,13 @@ async function testSource(source) {
   if (!m3u8Segment.success || !m3u8Segment.segmentUrl) {
     return finishResult(
       result,
-      { status: SOURCE_STATUS.M3U8_INVALID, errorDetail: m3u8Segment.reason, usedProxy: m3u8Segment.usedProxy ?? null },
+      {
+        status: SOURCE_STATUS.M3U8_INVALID,
+        errorDetail: m3u8Segment.reason,
+        usedProxy: m3u8Segment.usedProxy ?? null,
+      },
       `M3U8 验证失败: ${m3u8Segment.reason}`,
-      source.name
+      source.name,
     );
   }
   log(`M3U8 验证通过`, source.name);
@@ -575,7 +606,7 @@ async function testSource(source) {
         usedProxy: segResult.usedProxy ?? null,
       },
       `分片无效: ${segResult.segType}`,
-      source.name
+      source.name,
     );
   }
   log(`分片内容验证通过: ${segResult.segType}`, source.name);
@@ -589,11 +620,12 @@ async function testSource(source) {
       speedResult.success
         ? `测速完成: ${(speedResult.speedBytesPerSec / 1024).toFixed(1)} KB/s`
         : `测速失败: ${speedResult.error}`,
-      source.name
+      source.name,
     );
   }
   // 任一步骤（M3U8 / 分片 / 测速）走过代理即记为 true
-  result.usedProxy = speedResult?.usedProxy || segResult.usedProxy || m3u8Segment.usedProxy || false;
+  result.usedProxy =
+    speedResult?.usedProxy || segResult.usedProxy || m3u8Segment.usedProxy || false;
 
   return finishResult(result, { status: SOURCE_STATUS.AVAILABLE });
 }
@@ -642,22 +674,24 @@ function displayResults(results) {
       .filter((r) => r.status === SOURCE_STATUS.AVAILABLE)
       .map((r) => r.totalTime);
     console.log(
-      `[时间] 单个源平均 ${(avgTime / 1000).toFixed(1)}s | 最快 ${(times[0] / 1000).toFixed(1)}s | 最慢 ${(times[times.length - 1] / 1000).toFixed(1)}s`
+      `[时间] 单个源平均 ${(avgTime / 1000).toFixed(1)}s | 最快 ${(times[0] / 1000).toFixed(1)}s | 最慢 ${(times[times.length - 1] / 1000).toFixed(1)}s`,
     );
     if (availTimes.length > 0)
       console.log(
-        `[时间] 可用源平均 ${(availTimes.reduce((s, t) => s + t, 0) / availTimes.length / 1000).toFixed(1)}s/个`
+        `[时间] 可用源平均 ${(availTimes.reduce((s, t) => s + t, 0) / availTimes.length / 1000).toFixed(1)}s/个`,
       );
   }
 
   // 失败原因分布
   const failBreakdown = {};
   for (const r of results) {
-    if (r.status !== SOURCE_STATUS.AVAILABLE) failBreakdown[r.status] = (failBreakdown[r.status] || 0) + 1;
+    if (r.status !== SOURCE_STATUS.AVAILABLE)
+      failBreakdown[r.status] = (failBreakdown[r.status] || 0) + 1;
   }
   if (Object.keys(failBreakdown).length > 0) {
     console.log('\n失败原因分布:');
-    for (const [status, count] of Object.entries(failBreakdown)) console.log(`  ${status}: ${count} 个`);
+    for (const [status, count] of Object.entries(failBreakdown))
+      console.log(`  ${status}: ${count} 个`);
   }
 }
 
@@ -672,7 +706,11 @@ function saveResults(results, duration, startDate) {
     isAdult: r.isAdult,
     status: r.status,
     search: { duration: r.searchDuration || null, usedKeyword: r.usedKeyword },
-    play: { avgSpeed: r.speedBytesPerSec || null, segmentType: r.segmentType, usedProxy: r.usedProxy ?? null },
+    play: {
+      avgSpeed: r.speedBytesPerSec || null,
+      segmentType: r.segmentType,
+      usedProxy: r.usedProxy ?? null,
+    },
     errorDetail: r.errorDetail,
   }));
 
@@ -681,10 +719,13 @@ function saveResults(results, duration, startDate) {
     endDate: fmtDate(),
     playSpeedTestEnabled: config.playSpeedTest.enable,
     keywords: { normal: config.search.keywords, adult: config.search.adultKeywords },
-    // 不写入代理地址，避免提交到公开仓库泄露
-    useProxy: { search: config.proxy.search, play: config.proxy.play },
+    // 不写入代理地址，避免提交到公开仓库泄露；proxyMode 为字符串
+    useProxy: { search: config.search.proxyMode, play: config.playSpeedTest.proxyMode },
     duration: `${duration}s`,
-    stats: { total: results.length, available: results.filter((r) => r.status === SOURCE_STATUS.AVAILABLE).length },
+    stats: {
+      total: results.length,
+      available: results.filter((r) => r.status === SOURCE_STATUS.AVAILABLE).length,
+    },
     results: compatibleResults,
   };
 
@@ -712,7 +753,9 @@ async function main() {
   const totalCount = sources.length;
   let completedCount = 0;
   const startTime = Date.now();
-  const concurrent = config.playSpeedTest.enable ? config.playSpeedTest.concurrent : config.search.concurrent;
+  const concurrent = config.playSpeedTest.enable
+    ? config.playSpeedTest.concurrent
+    : config.search.concurrent;
 
   const results = await runWithLimit(
     sources.map((s) => async () => {
@@ -726,11 +769,11 @@ async function main() {
           ? ` ${(r.speedBytesPerSec / 1024).toFixed(0)}KB/s`
           : '';
       process.stdout.write(
-        `[${bar}] ${pct}% (${completedCount}/${totalCount}) ${r.status === SOURCE_STATUS.AVAILABLE ? '✓' : '✗'} ${r.name}${speedInfo}`
+        `[${bar}] ${pct}% (${completedCount}/${totalCount}) ${r.status === SOURCE_STATUS.AVAILABLE ? '✓' : '✗'} ${r.name}${speedInfo}`,
       );
       return r;
     }),
-    concurrent
+    concurrent,
   );
 
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);
