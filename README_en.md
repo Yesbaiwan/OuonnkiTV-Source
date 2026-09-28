@@ -31,13 +31,13 @@ Execute all processing steps in one go: Download → Process → Check → Conve
 
 Step-by-step execution requires running each script in the following order:
 
-| Script                       | Function                        | Output                                                        |
-| ---------------------------- | ------------------------------- | ------------------------------------------------------------- |
-| 01_download_lunatv_config.js | Download LunaTV original config | LunaTV-config.json                                            |
-| 02_process_lunatv_config.js  | Clean configuration data        | LunaTV-processed.json                                         |
-| 03_check_video_sources.js    | Check source availability       | LunaTV-check-result.json                                      |
-| 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format     | raw.json, full.json, full-noadult.json, lite.json, adult.json |
-| 05_notify.js                 | Send Telegram notification (opt)| Telegram message notification                                  |
+| Script                       | Function                         | Output                                                        |
+| ---------------------------- | -------------------------------- | ------------------------------------------------------------- |
+| 01_download_lunatv_config.js | Download LunaTV original config  | LunaTV-config.json                                            |
+| 02_process_lunatv_config.js  | Clean configuration data         | LunaTV-processed.json                                         |
+| 03_check_video_sources.js    | Check source availability        | LunaTV-check-result.json                                      |
+| 04_convert_ouonnkitv.js      | Convert to OuonnkiTV format      | raw.json, full.json, full-noadult.json, lite.json, adult.json |
+| 05_notify.js                 | Send Telegram notification (opt) | Telegram message notification                                 |
 
 ### Configuration Guide
 
@@ -57,20 +57,19 @@ module.exports = {
     toFile: true,               // Whether to record detailed logs to file
   },
 
-  // Proxy config
-  //   url: Proxy address, priority: PROXY_URL env var > default value here
-  //   download/search=true → always use proxy
-  //   play=false → try direct first (with 1 retry), fallback to proxy on failure
-  //   Note: only takes effect when url is set; all requests go direct when url is empty
-  proxy: {
-    url: process.env.PROXY_URL || '',
-    download: true,
-    search: true,
-    play: false,
+  // Proxy address (prefix style, requests are made as {proxyUrl}/{originalURL})
+  // Reads PROXY_URL from .env first; when empty, everything goes direct.
+  // proxyMode: 'proxy' use proxy | 'direct' go direct | 'fallback' try direct (with retries), fall back to proxy
+  proxyUrl: process.env.PROXY_URL || '',
+
+  // Download LunaTV-config.json
+  download: {
+    proxyMode: 'fallback',
   },
 
   // Search detection config
   search: {
+    proxyMode: 'fallback',
     concurrent: 20,             // Concurrency for search-only mode
     maxRetry: 1,                // Retry count per keyword (multiple keywords already act as retries)
     retryDelay: 1000,           // Retry interval (milliseconds)
@@ -80,9 +79,18 @@ module.exports = {
 
   // Playback speed test config
   playSpeedTest: {
+    proxyMode: 'fallback',
     enable: true,               // Whether to enable playback speed test (false means search check only)
     duration: 5000,             // Duration of each speed test (milliseconds)
     concurrent: 6,              // Total concurrency in search + speed test mode
+  },
+
+  // Notification config (script 05)
+  telegram: {
+    proxyMode: 'fallback',
+    enable: true,               // Whether to enable notifications
+    botToken: process.env.TG_BOT_TOKEN || '',
+    chatId: process.env.TG_CHAT_ID || '',
   },
 };
 ```

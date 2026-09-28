@@ -55,18 +55,18 @@ module.exports = {
   },
 
   // 代理地址（前缀拼接型，请求时拼为 {proxyUrl}/{原始URL}）
-  //   优先级：环境变量 PROXY_URL > 此处默认值
-  //   为空时所有功能一律直连，各功能的 proxyMode 均不生效
+  // 优先读取 .env 中的 PROXY_URL；未配置时为空，表示直连。
+  // proxyMode：'proxy' 走代理 | 'direct' 直连 | 'fallback' 先直连（重试），失败回退代理
   proxyUrl: process.env.PROXY_URL || '',
 
-  // 下载配置（脚本 01，源: GitHub raw）
+  // 下载 LunaTV-config.json
   download: {
-    proxyMode: 'fallback',      // 代理策略
+    proxyMode: 'fallback',
   },
 
   // 搜索检测配置
   search: {
-    proxyMode: 'fallback',      // 搜索/详情阶段的代理策略（'fallback' 为整轮语义: 直连全轮失败才换代理再试一轮）
+    proxyMode: 'fallback',
     concurrent: 20,             // 仅搜索模式时的并发数
     maxRetry: 1,                // 每个关键词失败重试次数（多关键词本身相当于重试）
     retryDelay: 1000,           // 重试间隔（毫秒）
@@ -76,25 +76,21 @@ module.exports = {
 
   // 播放测速配置
   playSpeedTest: {
-    proxyMode: 'fallback',      // M3U8/分片/测速阶段的代理策略
+    proxyMode: 'fallback',
     enable: true,               // 是否启用播放测速（false 时仅搜索检测）
     duration: 5000,             // 每次测速持续时间（毫秒）
     concurrent: 6,              // 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
   },
 
-  // Telegram 通知配置（脚本 05）
+  // 通知配置（脚本 05）
   telegram: {
-    proxyMode: 'fallback',      // 发送通知的代理策略
+    proxyMode: 'fallback',
     enable: true,               // 是否启用通知
+    botToken: process.env.TG_BOT_TOKEN || '',
+    chatId: process.env.TG_CHAT_ID || '',
   },
 };
 ```
-
-`proxyMode` 三种取值（每个功能独立配置）：
-
-- `'proxy'`：始终走代理
-- `'direct'`：始终直连
-- `'fallback'`：先直连（含重试），失败后自动回退代理
 
 <details>
 <summary>环境变量说明</summary>
