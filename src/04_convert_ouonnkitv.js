@@ -1,8 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const Table = require('cli-table3');
+const config = require('./config.js');
 
-const checkResultFile = path.join(__dirname, '..', 'tv_source', 'LunaTV', 'LunaTV-check-result.json');
+const checkResultFile = path.join(
+  __dirname,
+  '..',
+  'tv_source',
+  'LunaTV',
+  'LunaTV-check-result.json',
+);
 const outputDir = path.join(__dirname, '..', 'tv_source', 'OuonnkiTV');
 const LITE_LIMIT = 15;
 
@@ -12,8 +19,19 @@ function displayWidth(str) {
   return w;
 }
 
+// detailUrl 必须填完整 API 地址：上游 OuonnkiTV 拿它当详情接口基地址（detailUrl 有值时不再回退 url），
+// 填官网首页会导致上游请求打不到 API（搜索正常但拿不到剧集）
+// timeout：上游默认 3s 超时，实测 52% 的可用源搜索耗时 >3s（lab/item5-6.js），按检测标准放宽到 5s，
+// 上游导入时按源保留该字段（实测导入生效，lab 存储 ouonnki-tv-api-store 可见）
 function toOutput(r) {
-  return { id: r.id, name: r.name, url: r.api, detailUrl: r.detail || r.api, isEnabled: true };
+  return {
+    id: r.id,
+    name: r.name,
+    url: r.api,
+    detailUrl: r.api,
+    timeout: config.http.timeout,
+    isEnabled: true,
+  };
 }
 
 function saveJson(filename, records) {
@@ -39,7 +57,9 @@ function bySpeed(a, b) {
       process.exit(1);
     }
 
-    const { results = [], playSpeedTestEnabled } = JSON.parse(fs.readFileSync(checkResultFile, 'utf8'));
+    const { results = [], playSpeedTestEnabled } = JSON.parse(
+      fs.readFileSync(checkResultFile, 'utf8'),
+    );
     const mode = playSpeedTestEnabled ? '搜索+测速' : '仅搜索';
     console.log(`模式: ${mode}\n`);
 
@@ -57,7 +77,10 @@ function bySpeed(a, b) {
     ];
 
     const nameWidth = rows.reduce((m, [n]) => Math.max(m, displayWidth(n)), displayWidth('文件'));
-    const countWidth = rows.reduce((m, [, c]) => Math.max(m, displayWidth(`${c} 个`)), displayWidth('数量'));
+    const countWidth = rows.reduce(
+      (m, [, c]) => Math.max(m, displayWidth(`${c} 个`)),
+      displayWidth('数量'),
+    );
     // cli-table3 每列左右各有1字符内边距，colWidths 要包含这2个字符
     const colWidths = [nameWidth + 2, countWidth + 2];
 
