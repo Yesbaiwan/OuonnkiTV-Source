@@ -148,7 +148,7 @@ async function checkSearch(api, keywords, name) {
       const kw = keywords[i];
       for (let retry = 1; retry <= config.search.maxRetry; retry++) {
         try {
-          // ac=videolist 与上游 OuonnkiTV 的搜索/详情参数保持一致（ac=list 在个别源上不被支持）
+          // ac=videolist 与 OuonnkiTV 搜索参数一致
           const url = applyProxy(`${api}?ac=videolist&wd=${encodeURIComponent(kw)}&pg=1`, useProxy);
           const start = Date.now();
           const res = await axiosInstance.get(url, {
@@ -205,7 +205,8 @@ async function getPlayInfo(api, vodId) {
     const { result } = await tryWithProxy(
       config.search.proxyMode,
       async (useProxy) => {
-        const url = applyProxy(`${api}?ac=detail&ids=${vodId}`, useProxy);
+        // ac=videolist 与 OuonnkiTV 详情参数一致
+        const url = applyProxy(`${api}?ac=videolist&ids=${vodId}`, useProxy);
         const start = Date.now();
         const res = await axiosInstance.get(url, {
           timeout: config.http.timeout,

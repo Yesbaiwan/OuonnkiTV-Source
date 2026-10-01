@@ -19,10 +19,8 @@ function displayWidth(str) {
   return w;
 }
 
-// detailUrl 必须填完整 API 地址：上游 OuonnkiTV 拿它当详情接口基地址（detailUrl 有值时不再回退 url），
-// 填官网首页会导致上游请求打不到 API（搜索正常但拿不到剧集）
-// timeout：上游默认 3s 超时，实测 52% 的可用源搜索耗时 >3s（lab/item5-6.js），按检测标准放宽到 5s，
-// 上游导入时按源保留该字段（实测导入生效，lab 存储 ouonnki-tv-api-store 可见）
+// 部分播放源实际使用 /api.json 等非标准端点，可用但 OuonnkiTV 尚未支持（只认 /api.php/provide/vod 形态），
+// 待其适配后跟进；OuonnkiTV 项目方可通过 issue 或邮箱联系：yesbaiwan@gmail.com
 function toOutput(r) {
   return {
     id: r.id,
