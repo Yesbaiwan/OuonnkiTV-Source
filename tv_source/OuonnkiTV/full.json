@@ -64,6 +64,14 @@
     "isEnabled": true
   },
   {
+    "id": "bfzy-tv",
+    "name": "暴风资源",
+    "url": "https://bfzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "zuida-xyz",
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
@@ -72,26 +80,10 @@
     "isEnabled": true
   },
   {
-    "id": "wujinzy-me",
-    "name": "无尽资源",
-    "url": "https://api.wujinapi.me/api.php/provide/vod",
-    "detailUrl": "https://api.wujinapi.me/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "xinlangapi-com",
     "name": "新浪资源",
     "url": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
     "detailUrl": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "www-subozy-com",
-    "name": "速播资源",
-    "url": "https://subocaiji.com/api.php/provide/vod",
-    "detailUrl": "https://subocaiji.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -316,6 +308,14 @@
     "name": "黑料资源",
     "url": "https://www.heiliaozyapi.com/api.php/provide/vod",
     "detailUrl": "https://www.heiliaozyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "thzy8-me",
+    "name": "桃花资源",
+    "url": "https://thzy1.me/api.php/provide/vod",
+    "detailUrl": "https://thzy1.me/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },

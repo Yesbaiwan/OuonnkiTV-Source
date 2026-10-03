@@ -136,6 +136,14 @@
     "isEnabled": true
   },
   {
+    "id": "thzy8-me",
+    "name": "桃花资源",
+    "url": "https://thzy1.me/api.php/provide/vod",
+    "detailUrl": "https://thzy1.me/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "www-jingpinx-com",
     "name": "精品资源",
     "url": "https://www.jingpinx.com/api.php/provide/vod",
