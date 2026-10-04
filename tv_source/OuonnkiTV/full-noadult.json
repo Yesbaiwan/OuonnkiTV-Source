@@ -24,14 +24,6 @@
     "isEnabled": true
   },
   {
-    "id": "www-maoyanzy-com",
-    "name": "猫眼资源",
-    "url": "https://api.maoyanapi.top/api.php/provide/vod",
-    "detailUrl": "https://api.maoyanapi.top/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "cj-lzcaiji-com",
     "name": "量子资源",
     "url": "https://cj.lzcaiji.com/api.php/provide/vod",
@@ -76,6 +68,14 @@
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
     "detailUrl": "https://api.zuidapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "wujinzy-me",
+    "name": "无尽资源",
+    "url": "https://api.wujinapi.me/api.php/provide/vod",
+    "detailUrl": "https://api.wujinapi.me/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
