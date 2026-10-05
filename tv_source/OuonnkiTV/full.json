@@ -24,6 +24,14 @@
     "isEnabled": true
   },
   {
+    "id": "www-maoyanzy-com",
+    "name": "猫眼资源",
+    "url": "https://api.maoyanapi.top/api.php/provide/vod",
+    "detailUrl": "https://api.maoyanapi.top/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "cj-lzcaiji-com",
     "name": "量子资源",
     "url": "https://cj.lzcaiji.com/api.php/provide/vod",
@@ -276,14 +284,6 @@
     "name": "辣椒资源",
     "url": "https://apilj.com/api.php/provide/vod",
     "detailUrl": "https://apilj.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "shayuapi-com",
-    "name": "鲨鱼资源",
-    "url": "https://shayuapi.com/api.php/provide/vod",
-    "detailUrl": "https://shayuapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
