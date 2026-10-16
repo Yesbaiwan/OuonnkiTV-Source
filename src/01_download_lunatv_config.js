@@ -14,7 +14,8 @@ const requestConfig = {
   responseType: 'text',
   timeout: config.http.timeout,
   headers: config.http.headers,
-  httpsAgent: new https.Agent({ rejectUnauthorized: !config.http.skipSslVerification }),
+  // 该脚本固定从可信的 GitHub raw 地址下载配置，始终校验证书，不受 skipSslVerification 影响
+  httpsAgent: new https.Agent({ rejectUnauthorized: true }),
 };
 
 (async () => {
