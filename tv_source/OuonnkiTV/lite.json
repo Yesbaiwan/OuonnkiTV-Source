@@ -1,33 +1,9 @@
 [
   {
-    "id": "www-hongniuzy-com",
-    "name": "红牛资源",
-    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "api-guangsuapi-com",
     "name": "光速资源",
     "url": "https://api.guangsuapi.com/api.php/provide/vod",
     "detailUrl": "https://api.guangsuapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "www-haohuazy-com",
-    "name": "豪华资源",
-    "url": "https://hhzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://hhzyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "www-huyaapi-com",
-    "name": "虎牙资源",
-    "url": "https://www.huyaapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.huyaapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -40,10 +16,34 @@
     "isEnabled": true
   },
   {
+    "id": "www-haohuazy-com",
+    "name": "豪华资源",
+    "url": "https://hhzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://hhzyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-hongniuzy-com",
+    "name": "红牛资源",
+    "url": "https://www.hongniuzy2.com/api.php/provide/vod",
+    "detailUrl": "https://www.hongniuzy2.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "xinlangapi-com",
     "name": "新浪资源",
     "url": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
     "detailUrl": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-huyaapi-com",
+    "name": "虎牙资源",
+    "url": "https://www.huyaapi.com/api.php/provide/vod",
+    "detailUrl": "https://www.huyaapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -64,42 +64,26 @@
     "isEnabled": true
   },
   {
-    "id": "iqiyizyapi-com",
-    "name": "爱奇艺",
-    "url": "https://iqiyizyapi.com/api.php/provide/vod",
-    "detailUrl": "https://iqiyizyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "zuidazy-co",
-    "name": "最大点播",
-    "url": "https://zuidazy.me/api.php/provide/vod",
-    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "caiji-moduapi-cc",
-    "name": "魔都动漫",
-    "url": "https://caiji.moduapi.cc/api.php/provide/vod",
-    "detailUrl": "https://caiji.moduapi.cc/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "www-moduzy-net",
-    "name": "魔都资源",
-    "url": "https://www.mdzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.mdzyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "ikunzy-com",
     "name": "iKun资源",
     "url": "https://ikunzyapi.com/api.php/provide/vod",
     "detailUrl": "https://ikunzyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-ryzyw-com",
+    "name": "如意资源",
+    "url": "https://cj.rycjapi.com/api.php/provide/vod",
+    "detailUrl": "https://cj.rycjapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "iqiyizyapi-com",
+    "name": "爱奇艺",
+    "url": "https://iqiyizyapi.com/api.php/provide/vod",
+    "detailUrl": "https://iqiyizyapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -112,10 +96,26 @@
     "isEnabled": true
   },
   {
+    "id": "zuidazy-co",
+    "name": "最大点播",
+    "url": "https://zuidazy.me/api.php/provide/vod",
+    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "wujinzy-com",
     "name": "无尽影视",
     "url": "https://api.wujinapi.com/api.php/provide/vod",
     "detailUrl": "https://api.wujinapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "dyttzyapi-com",
+    "name": "电影天堂",
+    "url": "http://caiji.dyttzyapi.com/api.php/provide/vod",
+    "detailUrl": "http://caiji.dyttzyapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   }
