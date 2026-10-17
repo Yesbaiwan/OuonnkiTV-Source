@@ -2,11 +2,11 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 module.exports = {
-  // 全局 HTTP 请求配置（搜索、详情、测速、下载共用）
+  // 全局 HTTP 请求配置（01/03/04/05 共用；headers 仅 01/03 使用）
   http: {
-    // 是否跳过 SSL 证书验证
+    // 是否跳过 SSL 证书验证（仅 03 视频源检测生效，含其中的搜索/详情/M3U8/分片/测速请求；01 下载时始终校验）
     skipSslVerification: false,
-    // 请求超时时间（毫秒）——全项目所有网络请求（搜索/详情/下载/通知/测速）统一的响应超时
+    // 请求超时时间（毫秒）——所有网络请求统一的响应超时（04 中作为字段写入输出文件）
     timeout: 5000,
     // 公共请求头
     headers: {
@@ -52,7 +52,7 @@ module.exports = {
   },
 
   // 播放测速配置
-  // enable: 是否启用播放测速（false 时仅做搜索检测）
+  // enable: 是否启用播放测速（false 时仅跳过测速，详情/M3U8/分片验证照常执行）
   // duration: 每次测速持续时间（毫秒）
   // concurrent: 搜索+测速模式下的总并发数（enable=true 时覆盖 search.concurrent）
   playSpeedTest: {
