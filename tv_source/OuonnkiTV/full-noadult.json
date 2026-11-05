@@ -144,14 +144,6 @@
     "isEnabled": true
   },
   {
-    "id": "lzizy-net",
-    "name": "量子影视",
-    "url": "https://cj.lziapi.com/api.php/provide/vod",
-    "detailUrl": "https://cj.lziapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "zuidazy-co",
     "name": "最大点播",
     "url": "https://zuidazy.me/api.php/provide/vod",
