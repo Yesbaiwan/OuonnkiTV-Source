@@ -152,14 +152,6 @@
     "isEnabled": true
   },
   {
-    "id": "souavzyw-com",
-    "name": "souavZY",
-    "url": "https://api.souavzyw.net/api.php/provide/vod",
-    "detailUrl": "https://api.souavzyw.net/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "xingba111-com",
     "name": "杏吧资源",
     "url": "https://xingba222.com/api.php/provide/vod",
