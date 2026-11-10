@@ -120,14 +120,6 @@
     "isEnabled": true
   },
   {
-    "id": "heiliaozy-cc",
-    "name": "黑料资源",
-    "url": "https://www.heiliaozyapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.heiliaozyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "thzy8-me",
     "name": "桃花资源",
     "url": "https://thzy1.me/api.php/provide/vod",
@@ -148,6 +140,14 @@
     "name": "CK-资源",
     "url": "https://ckzy.me/api.php/provide/vod",
     "detailUrl": "https://ckzy.me/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "souavzyw-com",
+    "name": "souavZY",
+    "url": "https://api.souavzyw.net/api.php/provide/vod",
+    "detailUrl": "https://api.souavzyw.net/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
