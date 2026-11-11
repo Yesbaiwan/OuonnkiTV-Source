@@ -64,6 +64,14 @@
     "isEnabled": true
   },
   {
+    "id": "bfzy-tv",
+    "name": "暴风资源",
+    "url": "https://bfzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "zuida-xyz",
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
@@ -100,14 +108,6 @@
     "name": "U酷影视",
     "url": "https://api.ukuapi88.com/api.php/provide/vod",
     "detailUrl": "https://api.ukuapi88.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "api-guangsuapi-com",
-    "name": "光速资源",
-    "url": "https://api.guangsuapi.com/api.php/provide/vod",
-    "detailUrl": "https://api.guangsuapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -172,14 +172,6 @@
     "name": "优质资源",
     "url": "https://api.yzzy-api.com/inc/apijson.php",
     "detailUrl": "https://api.yzzy-api.com/inc/apijson.php",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "www-huyaapi-com",
-    "name": "虎牙资源",
-    "url": "https://www.huyaapi.com/api.php/provide/vod",
-    "detailUrl": "https://www.huyaapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   }
