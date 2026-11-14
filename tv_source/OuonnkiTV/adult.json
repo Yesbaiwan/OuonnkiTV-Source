@@ -40,6 +40,14 @@
     "isEnabled": true
   },
   {
+    "id": "xiaojizy-live",
+    "name": "小鸡资源",
+    "url": "https://api.xiaojizy.live/provide/vod",
+    "detailUrl": "https://api.xiaojizy.live/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "hsckzy-xyz",
     "name": "黄色仓库",
     "url": "https://hsckzy.xyz/api.php/provide/vod",
@@ -140,14 +148,6 @@
     "name": "CK-资源",
     "url": "https://ckzy.me/api.php/provide/vod",
     "detailUrl": "https://ckzy.me/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "souavzyw-com",
-    "name": "souavZY",
-    "url": "https://api.souavzyw.net/api.php/provide/vod",
-    "detailUrl": "https://api.souavzyw.net/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
