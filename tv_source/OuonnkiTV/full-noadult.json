@@ -56,18 +56,10 @@
     "isEnabled": true
   },
   {
-    "id": "ffzyapi-com",
-    "name": "非凡资源",
-    "url": "https://api.ffzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://api.ffzyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "bfzy-tv",
-    "name": "暴风资源",
-    "url": "https://bfzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
+    "id": "zuida-xyz",
+    "name": "最大资源",
+    "url": "https://api.zuidapi.com/api.php/provide/vod",
+    "detailUrl": "https://api.zuidapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
@@ -128,6 +120,14 @@
     "isEnabled": true
   },
   {
+    "id": "www-ryzyw-com",
+    "name": "如意资源",
+    "url": "https://cj.rycjapi.com/api.php/provide/vod",
+    "detailUrl": "https://cj.rycjapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "www-haohuazy-com",
     "name": "豪华资源",
     "url": "https://hhzyapi.com/api.php/provide/vod",
@@ -140,6 +140,14 @@
     "name": "量子影视",
     "url": "https://cj.lziapi.com/api.php/provide/vod",
     "detailUrl": "https://cj.lziapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "zuidazy-co",
+    "name": "最大点播",
+    "url": "https://zuidazy.me/api.php/provide/vod",
+    "detailUrl": "https://zuidazy.me/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
