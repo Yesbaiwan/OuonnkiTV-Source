@@ -1,5 +1,13 @@
 [
   {
+    "id": "iqiyizyapi-com",
+    "name": "爱奇艺",
+    "url": "https://iqiyizyapi.com/api.php/provide/vod",
+    "detailUrl": "https://iqiyizyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "ikunzy-com",
     "name": "iKun资源",
     "url": "https://ikunzyapi.com/api.php/provide/vod",
@@ -40,6 +48,14 @@
     "isEnabled": true
   },
   {
+    "id": "bfzy-tv",
+    "name": "暴风资源",
+    "url": "https://bfzyapi.com/api.php/provide/vod",
+    "detailUrl": "https://bfzyapi.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "zuida-xyz",
     "name": "最大资源",
     "url": "https://api.zuidapi.com/api.php/provide/vod",
@@ -56,6 +72,14 @@
     "isEnabled": true
   },
   {
+    "id": "api-ukuapi88-com",
+    "name": "U酷影视",
+    "url": "https://api.ukuapi88.com/api.php/provide/vod",
+    "detailUrl": "https://api.ukuapi88.com/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "www-hongniuzy-com",
     "name": "红牛资源",
     "url": "https://www.hongniuzy2.com/api.php/provide/vod",
@@ -68,6 +92,14 @@
     "name": "魔都动漫",
     "url": "https://caiji.moduapi.cc/api.php/provide/vod",
     "detailUrl": "https://caiji.moduapi.cc/api.php/provide/vod",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-ryzyw-com",
+    "name": "如意资源",
+    "url": "https://cj.rycjapi.com/api.php/provide/vod",
+    "detailUrl": "https://cj.rycjapi.com/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
