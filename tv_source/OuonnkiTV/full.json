@@ -40,14 +40,6 @@
     "isEnabled": true
   },
   {
-    "id": "ffzyapi-com",
-    "name": "非凡资源",
-    "url": "https://api.ffzyapi.com/api.php/provide/vod",
-    "detailUrl": "https://api.ffzyapi.com/api.php/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
     "id": "bfzy-tv",
     "name": "暴风资源",
     "url": "https://bfzyapi.com/api.php/provide/vod",
@@ -180,14 +172,6 @@
     "name": "小鸡资源",
     "url": "https://api.xiaojizy.live/provide/vod",
     "detailUrl": "https://api.xiaojizy.live/provide/vod",
-    "timeout": 5000,
-    "isEnabled": true
-  },
-  {
-    "id": "hsckzy-xyz",
-    "name": "黄色仓库",
-    "url": "https://hsckzy.xyz/api.php/provide/vod",
-    "detailUrl": "https://hsckzy.xyz/api.php/provide/vod",
     "timeout": 5000,
     "isEnabled": true
   },
