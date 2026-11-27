@@ -160,6 +160,30 @@
     "isEnabled": true
   },
   {
+    "id": "www-msnii-com",
+    "name": "美少女",
+    "url": "https://www.msnii.com/api/json.php",
+    "detailUrl": "https://www.msnii.com/api/json.php",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-pgxdy-com",
+    "name": "黄AVZY",
+    "url": "https://www.pgxdy.com/api/json.php",
+    "detailUrl": "https://www.pgxdy.com/api/json.php",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
+    "id": "www-kxgav-com",
+    "name": "白嫖资源",
+    "url": "https://www.kxgav.com/api/json.php",
+    "detailUrl": "https://www.kxgav.com/api/json.php",
+    "timeout": 5000,
+    "isEnabled": true
+  },
+  {
     "id": "xingba111-com",
     "name": "杏吧资源",
     "url": "https://xingba222.com/api.php/provide/vod",
